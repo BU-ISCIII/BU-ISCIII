@@ -41,5 +41,6 @@ jobs:
           rsync -av --delete docs/ tmp_wiki/ --exclude .git
           cd tmp_wiki
           git add .
-          git commit -m "Update Wiki content" 
-          git push -f --set-upstream https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git master
+          git commit -m "Update Wiki content"
+          git remote add upstream https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
+          git push -f upstream master
