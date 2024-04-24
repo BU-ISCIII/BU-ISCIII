@@ -6,7 +6,7 @@ on:
     paths:
       - 'docs/**' # This includes all sub folders
     branches:
-      - master # Make sure this matches your actual main branch
+      - main # Make sure this matches your actual main branch
 
 env:
   USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }} # This is the repository secret
@@ -41,4 +41,4 @@ jobs:
           cd tmp_wiki
           git add .
           git commit -m "Update Wiki content" 
-          git push -f --set-upstream https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git master
+          git push -f --set-upstream https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git main
