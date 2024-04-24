@@ -66,9 +66,27 @@ The file `all_samples_virus_table.tsv` usually contains some duplicated reads an
 grep -v 'genome' all_samples_virus_table.tsv | grep -v 'phage' > all_samples_virus_table_filtered.tsv
 ```
 
-Then convert this table to `.xlsx` if this process is not included in the `RESULTS`'s `labglog`.
+Then convert this table to `.xlsx` if this process is not included in the `RESULTS`'s `lablog`.
 
 In this service we should check:
 
 - `01-PikaVirus-results/multiqc_report.html`: FastQC/fastp reports to assess the good/bad quality of the reads, the presence of adaptaers, etc...
 - `all_samples_virus_table.tsv`: Check that the species are the spected and that they contain enough coverage. Those virus covered to >50% at a depth of 10X, can be used as reference genome for `nf-core/viralrecon` for further analysis.
+
+Once all the service results are revised in the `scratch_tmp` folder, you can continue with the next BU-ISCIII tool: `finish` as explained [here](/link/to/tools/and/iskylims/TODO).
+
+When everything is propperly coppied into the SFTP folder, you can put the update in the `update_servicios` channel's _Team Standup Bot_, with the following template:
+
+- _**SRVXXXXXX - VIRAL-DISCOVERYXXX**_ :no_entry: = No empezado, parado o esperando   :running: = Corriendo   :mag: = En revisión   :clipboard: = Finalizado copiandose a SFTP   :white_check_mark: = Finalizado y copiado a sftp
+  - **Servicio**: Viral: Detection and characterization of viral genomes within metagenomic data (PikaVirus)
+  - **Número de muestras**: # Numero de muestras
+  - **Estado**: No empezado/Corriendo/En revisión/Finalizado copiandose a SFTP/Finalizado y copiado a sftp
+  - **Instrumento y longitud**: Ej.: NovaSeq (2x150)
+  - **Cantidad de lecturas**: Ej.: 0.8M - 91.2M
+  - **Calidad general**: Buena/Mala/Indicar incidencias específicas
+  - **Resultados generales**: Breve resumen de los resultados obtenidos a grandes rasgos, describiendo los resultados más relevantes del `all_samples_virus_table.tsv`.
+  - **Resultados por muestra**: _Indicar solo los resultados ANOMALOS_. Algunos ejemplos:
+    - La muestra XXX contiene X virus (si es que no se espera ese virus en esa muestra)
+    - La muestra XXX se ha secuenciado con mala calidad y ha perdido muchas lecturas en el preprocesamiento.
+    - La muestra XXX no tiene lecturas suficientes para realizar el análisis.
+
