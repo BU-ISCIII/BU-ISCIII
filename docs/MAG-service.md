@@ -2,9 +2,10 @@
 
 This is a brief tutorial on how to perform a MAG Service as a member of the ISCIII's Bioinformatics Unit!
 
-Usually, MAG is part of other services like [IRMA](lint/to/flu/service), [viralrecon](https://github.com/BU-ISCIII/BU-ISCIII/wiki/SARS-CoV-2-service), or [PikaVirus](/link/to/pikavirus/), so when performing a MAG service, it's likely that the service folder, resolution, and acronym are already created as part of these other services. 
+Usually, MAG is part of other services like [IRMA](lint/to/flu/service), [viralrecon](https://github.com/BU-ISCIII/BU-ISCIII/wiki/SARS-CoV-2-service), or [PikaVirus](/link/to/pikavirus/), so when performing a MAG service, it's likely that the service folder, resolution, and acronym are already created as part of these other services.
 
 The typical acronyms for a service that includes MAG analysis are:
+
 - GENOME** (for example: GENOMEFLU, GENOMERSV, GENOMEEV...)
 - VIRAL-DISCOVERY
 - SARSCOV2
@@ -36,6 +37,7 @@ Once the `new-service` is finished, you'll have a new folder in `services_and_co
 If we get into this folder, we'll find 6 folders: `ANALYSIS`, `DOC`, `RAW`, `REFERENCES`, `RESULTS` and `TMP` (as explained [here](https://github.com/BU-ISCIII/BU-ISCIII/wiki/bioinformatics#33-services_and_collaborations)). We should check, before going any further, that the number of files contained within the RAW folder is equal to the number of samples specified in [iskyLIMS](https://iskylims.isciii.es/) x 2, in the case that they are paired-end reads.
 
 If everything is OK, we can get into the ANALYSIS folder and we'll find the following items inside:
+
 - `lablog_mag`: an executable file that creates the 00-reads folder, moves inside, creates symbolic links to the reads and renames the `ANALYSIS0X_MET` folder
 - `samples_id.txt`: a `.txt` file containing all the sample names, one per line, so there will be as many lines as samples associated with our service.
 - `ANALYSIS0X_MAG`: Folder with the main MAG analysis files.
@@ -104,5 +106,6 @@ bash _02_unlink.sh
 ```
 
 Once all the process is finished, within the DATE_ANALYSIS0X_MAG folder, we'll have the following content:
+
 - DATE_mag/
 - 99-stats/multiqc_report.html: HTML report with the top5 species found in kraken2 among all samples.

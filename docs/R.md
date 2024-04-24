@@ -1,6 +1,6 @@
-This guidelines have beeing taken and modified from: http://adv-r.had.co.nz/Style.html
+# Object names
 
-## Object names
+> This guidelines have beeing taken and modified from: http://adv-r.had.co.nz/Style.html
 
 Variable and function names should be lowercase. Use an underscore (_) to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for names that are concise and meaningful (this is not easy!).
 

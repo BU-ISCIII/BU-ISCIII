@@ -1,4 +1,4 @@
-## How to accept a service in iSkyLims
+# How to accept a service in iSkyLims
 
 1. Enter [iSkyLims](https://iskylims.isciii.es/ "ISCIII's iSkyLims") and log with your username and password.
           ![image](https://github.com/BU-ISCIII/BU-ISCIII/assets/76519482/fbfed48d-c772-41f5-91dd-441ac33a7f56)

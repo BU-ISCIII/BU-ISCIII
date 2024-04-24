@@ -6,6 +6,7 @@ The SFTP manager is in this URL: [https://sftpbioinfo.isciii.es:6443/admin/sign-
 > This website will be recognized as Not secure.
 
 Sign in credentials:
+
 - Username: bioinfoadm
 - Password: YKWIM
 - Virtual site: bioinfo
@@ -15,8 +16,10 @@ Sign in credentials:
 # 2. Create a virtual folder in the SFTP manager
 
 1. Create the folder in `/data/bi/sftp/` with the command line `mkdir NewFolder`.
+
 > [!NOTE]
 > The criteria to name the folder is the laboratory of the scientist.
+
 2. Once in the SFTP manager, select `VFS` in the left panel
 3. Select `Add VFS` button
 

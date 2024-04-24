@@ -5,6 +5,7 @@ We have observed many times jobs failing with no errors in the code, but because
 HPC administrators do not know the reason for these errors. We are tracking them and our observations suggest that it may be related to java and python highly demanding processes.
 
 Example:
+
 ```
 [2018-07-31 17:52:49] Beginning TopHat run (v2.1.1)
 -----------------------------------------------
@@ -55,11 +56,12 @@ obelix16                linux-x64      20  7.79  252.2G    7.5G    8.0G   15.5M
 
 # 3. Extreme slowdowns of running jobs
 
-Sometimes the same job takes 6h of processing, others days. We are running statistics to try to discover what's happeining here, but most probably is related with #1 and #2. 
+Sometimes the same job takes 6h of processing, others days. We are running statistics to try to discover what's happeining here, but most probably is related with #1 and #2.
 
 Until now, we have discovered it may caused by a bottleneck in the NFS connection, and extremely high meta-data access. Remember that in our cluster, `/home` (personal libraries and scripts), `/opt` (basically all software, including python, java and R) and `/processing_Data/bioinformatics` (all input, throughput and output data) share the same NFS.
 
 This is a real example of the high meta-data access while taken some jobs were running at 12:06 of 31/07/2018, where we can see all drives mounted by NFS, tha all of them shar the same connection and that the meta-data traffic is nearly 45% of traffic:
+
 ```
 [mjuliam@asterix02 ~]$ df -h
 Filesystem            Size  Used Avail Use% Mounted on
@@ -114,8 +116,8 @@ fsstat       fsinfo       pathconf     commit
 1822359   0% 16        0% 8         0% 0         0% 
 ```
 
-According to [Singularity documentation](https://singularity.lbl.gov/about): 
-> On HPC systems a single image file optimizes the benefits of a shared parallel file system! There is a single metadata lookup for the image itself, and the subsequent IO is all directed to the storage servers themselves. Compare this to the massive amount of metadata IO that would be required if the container’s root file system was in a directory structure. It is not uncommon for large Python jobs to DDOS (distributed denial of service) a parallel meta-data server for minutes! 
+According to [Singularity documentation](https://singularity.lbl.gov/about):
+> On HPC systems a single image file optimizes the benefits of a shared parallel file system! There is a single metadata lookup for the image itself, and the subsequent IO is all directed to the storage servers themselves. Compare this to the massive amount of metadata IO that would be required if the container’s root file system was in a directory structure. It is not uncommon for large Python jobs to DDOS (distributed denial of service) a parallel meta-data server for minutes!
 
 So, using Singularity containers locally inside the computing nodes and working in the local `/scratch` with nextflow may help reducing the meta-data bottleneck and the overusage of `/opt` for every software, leaving the NFS connection only for reading input files and writing results.
 
@@ -125,6 +127,7 @@ Both solutions have to be impleneted and tested before exposing them to the HPC 
 
 HPC administrators do not know the reason for these issues.
 Example:
+
 ```
 Log:
 [2018-08-01 16:44:58] Reconstituting reference FASTA file from Bowtie index
@@ -139,7 +142,9 @@ Log:
 [2018-08-01 19:41:38] Mapping left_kept_reads to transcriptome Homo_sapiens.GRCh38.93 with Bowtie2
 date: Thu Aug  2 12:41:22 CEST 2018. Still running.
 ```
+
 Another slow but without stops:
+
 ```
 [2018-08-01 15:51:39] Beginning TopHat run (v2.1.1)
 -----------------------------------------------    
@@ -187,6 +192,7 @@ Building a SMALL index
 ```
 
 Documentation:
+
 * [How to Display NFS Server and Client Statistics](https://docs.oracle.com/cd/E19253-01/816-4555/netmonitor-12/index.html)
 * [Parallel distributed file systems](https://wr.informatik.uni-hamburg.de/_media/research/talks/2016/2016-03-03-parallel_distributed_file_systems.pdf)
 * [Diagnosing Parallel I/O Bottlenecks in HPC Applications](https://sdm.lbl.gov/students/sc17-harrington-summary.pdf)
@@ -214,15 +220,16 @@ Most of `qsub` parameters do not work properly or do not work at all. We should 
 HPC admins should also fix the ones giving problems, and create dedicate queues.
 
 # 8. Java heap size ("Fixed")
+
 He observado algo que podríamos llamar curioso respecto a la máquina virtual de java. No lo pongo como incidencia porque no es exactamente algo que haya que "solucionar" sólo una observación por si algún otro usuario lo experimenta o da problemas en algún momento.
 
-Con la nueva configuración de la memoria ram por defecto cada job sólo puede usar 12,5 gb de ram como me indicásteis en la resolución de la incidencia para la configuración del parámetro h_vmem del sge. Es memoria RAM de sobra para los jobs individuales en la mayoría de los casos por lo que parece un valor correcto. 
+Con la nueva configuración de la memoria ram por defecto cada job sólo puede usar 12,5 gb de ram como me indicásteis en la resolución de la incidencia para la configuración del parámetro h_vmem del sge. Es memoria RAM de sobra para los jobs individuales en la mayoría de los casos por lo que parece un valor correcto.
 
-Sin embargo, en el caso de la máquina virtual de java parece ser que por defecto java calcula en función de la memoria RAM física del nodo (1/4th de la memoria física según javadoc, pero varía un poco según la versión y hay discusiones en los foros asíque lo tomo como orientativo), por lo que calcula estos valores de RAM necesarios para crear la máquina virtual: 
-    uintx ErgoHeapSizeLimit                         = 0               {product}           
-    uintx HeapSizePerGCThread                       = 87241520        {product}           
-    uintx InitialHeapSize                          := 2147483648      {product}           
-    uintx LargePageHeapSizeThreshold                = 134217728       {product}           
+Sin embargo, en el caso de la máquina virtual de java parece ser que por defecto java calcula en función de la memoria RAM física del nodo (1/4th de la memoria física según javadoc, pero varía un poco según la versión y hay discusiones en los foros asíque lo tomo como orientativo), por lo que calcula estos valores de RAM necesarios para crear la máquina virtual:
+    uintx ErgoHeapSizeLimit                         = 0               {product}
+    uintx HeapSizePerGCThread                       = 87241520        {product}
+    uintx InitialHeapSize                          := 2147483648      {product}
+    uintx LargePageHeapSizeThreshold                = 134217728       {product}
     uintx MaxHeapSize                              := 32038191104     {product}  
 
 Un mínimo de 2 gb y un máximo de 32gb. De forma que parece ser que necesita tener disponible el valor máximo para crearse la máquina virtual, de forma que si intentas crear una máquina virtual con los valores por defecto escribiendo java sin más en la terminal de un nodo obtengo el siguiente error:
@@ -232,7 +239,6 @@ Could not reserve enough space for object heap
 Error: Could not create the Java Virtual Machine.
 Error: A fatal exception has occurred. Program will exit.
 
-La solución es sencilla se tiene que iniciar la máquina de java con la opción -Xmx con un valor menor a 10g para que funcione, o darle como valor a qsub -l h_vmem=>32g siempre que se utilice java. 
+La solución es sencilla se tiene que iniciar la máquina de java con la opción -Xmx con un valor menor a 10g para que funcione, o darle como valor a qsub -l h_vmem=>32g siempre que se utilice java.
 
-Lo que no sé es si convendría cambiar los parámetros por defecto de java para que se ajuste al tamaño configurado en las colas del sge. 
-
+Lo que no sé es si convendría cambiar los parámetros por defecto de java para que se ajuste al tamaño configurado en las colas del sge.

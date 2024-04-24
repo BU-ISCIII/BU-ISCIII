@@ -23,7 +23,7 @@ mkdir logs
 
 echo "srun --partition short_idx --cpus-per-task 1 --mem 35000M --time 01:00:00 --output logs/LINEAGE_VARIANTS.%j.log Rscript ../get_mutations_outbreak_info.R --lineage_list Lineages_Mutations.xlsx --output_folder ${PWD} &" > _01_run_get_mutations.sh
 ```
- 
+
 2. Copy the excell file with the list of lineages from which obtain the variants to the $(date '+%Y%m%d')_variants folder.
 
 ### 3. Run the pipeline
@@ -37,7 +37,7 @@ bash _01_run_get_mutations.sh
 
 :warning: If for any reason it gives an authentication error from outbreak.info, open R in the terminal and authenticate with GISAID credentials as indiated in their manual:
 
-https://outbreak-info.github.io/R-outbreak-info/
+<https://outbreak-info.github.io/R-outbreak-info/>
 
 ## Do it in barbarroja
 
@@ -66,7 +66,7 @@ mkdir logs
 
 echo "nohup Rscript ../get_mutations_outbreak_info.R --lineage_list Lineages_Mutations.xlsx --output_folder ${PWD} > logs/VARIANTS.log 2>&1 &" > _01_run_get_mutations.sh
 ```
- 
+
 2. Copy the excell file with the list of lineages from which obtain the variants to the $(date '+%Y%m%d')_variants folder.
 
 ### 4. Run the pipeline
@@ -94,7 +94,7 @@ sudo apt install --no-install-recommends r-base
 
 :warning: I had to give 777 permissions to `/usr/local/lib/R/site-library/`
 
-### 2. Install devtools:
+### 2. Install devtools
 
 System libraries
 

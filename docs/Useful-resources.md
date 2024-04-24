@@ -1,1 +1,0 @@
-In this section we include useful resources you may want to check at some point during your daily work.

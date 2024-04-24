@@ -1,4 +1,5 @@
 # How to perform the Assembly Service
+
 Welcome to this (as) brief (as possible) tutorial on how to perform an Assembly Service as a member of the ISCIII's Bioinformatics Unit!
 
 First of all, take the service and click on _**Add resolution**_ in [iskyLIMS](https://iskylims.isciii.es/) after loggin in with your user and password. For this to happen, you need to specify the estimated delivery date, your user and a service acronym. In order to know which acronym to use for this new resolution, log into your WS user and execute the following commands:
@@ -7,11 +8,13 @@ First of all, take the service and click on _**Add resolution**_ in [iskyLIMS](h
 cd /data/bi/services_and_colaborations/CNM/bacteriology
 ll -tr
 ```
-Once these commands have been executed, you'll get a list of all the folders (each one related to one service) contained within the `services_and_colaborations` folder, sorted by time in a reverse order. Therefore, you'll see in the last place the last service that was delivered. Have a look at the last service that contains the word `ASSEMBLY` in its name, and take note of the number linked to this `ASSEMBLY` term. 
+
+Once these commands have been executed, you'll get a list of all the folders (each one related to one service) contained within the `services_and_colaborations` folder, sorted by time in a reverse order. Therefore, you'll see in the last place the last service that was delivered. Have a look at the last service that contains the word `ASSEMBLY` in its name, and take note of the number linked to this `ASSEMBLY` term.
 
 For the new service, your service acronym will be this number + 1. For example, if the last folder after executing `ll -tr` is `SRVCNM1120_20240418_ASSEMBLY482_lherrera_S`, the service acronym for your new service will be _**ASSEMBLY483**_. Specify this in the form that appears after clicking on _Add resolution_, and click on **_Accept_**.
 
 Now, considering you've already created a buisciii-tools conda environment and installed the tools (this will be necessary eventually) in your local PC, log into your HPC user:
+
 ```
 ssh -X -p 32122 youruser@portutatis.isciii.es
 ```
@@ -28,7 +31,9 @@ Now, let's execute the first BU-ISCIII tool: `new-service`, where you'll need to
 ```
 bu-isciii new-service SRVCNMXXX.X
 ```
+
 Once `new-service` is executed, you'll be asked:
+
 * `Do you want to skip folder creation?`: Unless it is not the first resolution associated with the service, answer **NO**, because the folder corresponding to the service has not yet been created in the `services_and_collaborations` folder.
 * Next, specify `assembly_annot`, since this is the service we're running.
 
@@ -37,6 +42,7 @@ Once the `new-service` tool is finished, you'll have a new folder in `services_a
 If we get into this folder, we'll find 6 folders: `ANALYSIS`, `DOC`, `RAW`, `REFERENCES`, `RESULTS` and `TMP`. We should check, before going any further, that the number of files contained within the `RAW` folder is equal to the number of samples specified in [iskyLIMS](https://iskylims.isciii.es/) x 2, since these are paired-end reads.
 
 If everything is OK, we can get into the `ANALYSIS` folder and we'll find the following items inside:
+
 * `lablog_assembly`: an executable file that checks whether our reads are paired-end or single-end and creates the 00-reads folder which will contain all the reads.
 * `samples_id.txt`: a `.txt` file containing all the sample names, one per line, so there will be as many lines as samples associated with our service.
 
@@ -53,6 +59,7 @@ bu-isciii scratch SRVCNMXXX.X
 ```
 
 Once `scratch` is executed, you'll be asked:
+
 * `Direction of the service`: in this case, we want to copy our files from service to scratch, so we have to select the `service_to_scratch` option.
 
 Once this function is finished, we should go into the `scratch_tmp` folder and the specific folder associated with our service:
@@ -62,6 +69,7 @@ cd /data/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/ANALYSIS/
 ```
 
 Once we're inside, we can execute our next executable file: `lablog`, which will create symbolic links to our raw reads and the `samples_id.txt` file, apart from asking us the following information:
+
 * `Indicate the preferred assembly mode: short, long or hybrid`.
 * `Do you want to save trimmed reads?`: Unless the researcher asks us to keep the trimmed reads, we can reply `NO`.
 * `Is Gram - or +?`: Since the researcher tells us the organism, we can check online whether this bacterium is Gram - or +.
@@ -84,6 +92,7 @@ squeue -u youruser
 ```
 
 Once the process is finished, within the `DATE_ANALYSIS01_ASSEMBLY` folder, we'll have the following content:
+
 * `01-processing`: all files associated with the quality control analysis performed by `fastp` and `fastqc`.
 * `02-taxonomy_contamination`: a group of folders, with one folder containing the kmerfinder results for each sample.
 * `03-assembly`: a folder containing the results from `quast` and `unicycler`.

@@ -1,9 +1,10 @@
 # Index
- - [Introduction](#Introduction)
- - [Setup](#Setup)
- - [Our working methodology](#Our-working-methodology)
- - [Best practice or how you should do it](#Best-practices---or-how-you-should-do-it)
- - [Extra documentation](#Extra-documentation)
+
+- [Introduction](#introduction)
+- [Setup](#setup)
+- [Our working methodology](#our-working-methodology)
+- [Best practice or how you should do it](#best-practices---or-how-you-should-do-it)
+- [Extra documentation](#extra-documentation)
 
 # Introduction
 
@@ -23,13 +24,15 @@ Github is an open-source web-based repository hosting service for version contro
 
 GitFlow is a branching model for Git, created by Vincent Driessen. It has attracted a lot of attention because it is very well suited to collaboration and scaling the development team.
 
-# Setup
+## Setup
+
 In order to start working with Github and git-flow, you will just need to:
-* Create a free account at [Github](https://github.com/) and navigate to our [repositories](https://github.com/BU-ISCIII). 
-* Install Git in your computer if you already do not have it. You can learn how to do it [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-* [Install git-flow](https://github.com/nvie/gitflow/wiki/Installation)
-* Set up your rsa ssh authentication like explained in this [link](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
-* Configure your ssh client user name <your_name> and email <your_email> as the ones used in our github account typing these lines in your terminal:
+
+- Create a free account at [Github](https://github.com/) and navigate to our [repositories](https://github.com/BU-ISCIII).
+- Install Git in your computer if you already do not have it. You can learn how to do it [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+- [Install git-flow](https://github.com/nvie/gitflow/wiki/Installation)
+- Set up your rsa ssh authentication like explained in this [link](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
+- Configure your ssh client user name <your_name> and email <your_email> as the ones used in our github account typing these lines in your terminal:
 
 `git config user.email "<your_email>"`
 
@@ -41,13 +44,13 @@ Finally, ask an admin to make you a collaborator of the BU-ISCIII repository and
 
 Pay attention now — here is the main thing to remember about Git if you want the rest of your learning process to go smoothly. Git has four main states that your files can reside in: committed, modified, and staged:
 
-* Untracked means that the file is not been tracked by git.
+- Untracked means that the file is not been tracked by git.
 
-* Unmodified means that the data is safely stored in your local database.
+- Unmodified means that the data is safely stored in your local database.
 
-* Modified means that you have changed the file but have not committed it to your database yet.
+- Modified means that you have changed the file but have not committed it to your database yet.
 
-* Staged means that you have marked a modified file in its current version to go into your next commit snapshot.
+- Staged means that you have marked a modified file in its current version to go into your next commit snapshot.
 
 ![](https://git-scm.com/book/en/v2/images/lifecycle.png)
 
@@ -102,12 +105,12 @@ Some people refer to Git’s branching model as its “killer feature,” and it
 We will use git's powerful branching model for our software development. As we'll explain in nex section, our projects will contain at least one master and one develop branches, but new branches will be used for features development.
 
 # Our working methodology
+
 ## Introduction
 
-The objective of this guide is to make everyone capable of interacting in the same and documented way with the repository. We work on Git following the git-flow branching workflow while managing the repositories through Github web server. There are multiple other ways of achieving the same, but this one excels in making collaboration and scaling the development team as easy as possible. 
+The objective of this guide is to make everyone capable of interacting in the same and documented way with the repository. We work on Git following the git-flow branching workflow while managing the repositories through Github web server. There are multiple other ways of achieving the same, but this one excels in making collaboration and scaling the development team as easy as possible.
 
 In case you find yourself working in an scenario which is not considered in this guide, feel free to find your own way out of there, document the best practices and improve the methodology by adding the fix to it. By doing this, not only you and everyone else will know how to react under the same circumstances, but they will do it in the same way, making it very easy to track everyone's work.
-
 
 ## Understanding git-flow branching scheme
 
@@ -147,7 +150,6 @@ It is time to create a hotfix branch. These branches are forked not from develop
 
 As you can see, with the git-flow branching scheme it is very easy to collaborate in the development, document and maintain projects, even if the development team suffers major changes.
 
-
 ## Using Github to manage our repositories
 
 GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere, and allows you to graphically interact and manage your repositories. Thanks to the multiple integrative options it has, it makes pretty easy to do lots of extra functions on it, like document your projects.
@@ -158,7 +160,6 @@ Unluckily, most of these previously mentioned functionalities are not well suite
 
 To document the project, you can use the Github web editor to write your README file in Mardown, and the wiki pages as this one to elaborate a bit more the usage guide of the software.
 
-
 ## Git in the command line
 
 Git is an example of a distributed version control system (DVCS) commonly used for open source and commercial software development. DVCSs allow full access to every file, branch, and iteration of a project, and allows every user access to a full and self-contained history of all changes. Unlike once popular centralized version control systems, DVCSs like Git don’t need a constant connection to a central repository. Developers can work anywhere and collaborate asynchronously from any time zone.
@@ -167,8 +168,7 @@ Without version control, team members are subject to redundant tasks, slower tim
 
 Of course, you are free to use all the git commands if you are already used to instead using the git-flow wrapper and Github managing tools, but please keep in mind that more people will work in the project and so, the same workflow and branching scheme must be used by everyone.
 
-Learning how to properly use git in the command line would also be great at long term for an experimented user, as it will give the user a deeper control of what they are doing and how to fix future issues which may not be already considered in this guide. 
-
+Learning how to properly use git in the command line would also be great at long term for an experimented user, as it will give the user a deeper control of what they are doing and how to fix future issues which may not be already considered in this guide.
 
 ## Combining all the previous in one workflow
 
@@ -201,7 +201,7 @@ Assign master to master the role and develop to the develop role, build the skel
 
 In case you want to work in an already existing (or the one you just created in the previous section):
 
-1.  Navigate to the project repository inside [BU-ISCII](https://github.com/BU-ISCIII/) and get the ssh URL.
+1. Navigate to the project repository inside [BU-ISCII](https://github.com/BU-ISCIII/) and get the ssh URL.
 
 2. Open a terminal, move to the directory where you want to create the local copy of the repository and type
 
@@ -215,32 +215,29 @@ where <project_ssh-URL> is the ssh URL you just got in point 1.
 
 where <project_name> is the name of the project you just copied to your local machine.
 
-
 ## Update your local repository
 
 `git pull`
 
-
 ## Checking existing branches
+
 To see what branches are available and in which one you are working right now, type
 
 `git branch`
 
-
 ## Working on an existing branch
+
 To work in the branch <your_branch> just run
 
 `git checkout <your_branch>`
 
-
 ## Uploading a new branch created locally to github
+
 When you create a new branch locally, a normal push won't upload it to the main repository. To solve this issue, navigate to your local git branch folder and try:
 
 ```
 git push -u origin `git rev-parse --abbrev-ref HEAD`
 ```
-
-
 
 ## Working on the develop branch
 
@@ -252,11 +249,9 @@ If you are in one of the few cases where you should work on develop, just move t
 
 `git checkout develop`
 
-
 ## Working on the master branch
 
 NEVER. DO. IT! Please.
-
 
 ## Start a new feature
 
@@ -264,13 +259,11 @@ To start a new feature branch called <your_feature>, type
 
 `git flow feature start <your_feature>`
 
-
 ## Start a new hotfix
 
-To start a new hotfix branch called <your_hotfix>, type 
+To start a new hotfix branch called <your_hotfix>, type
 
 `git flow hotfix start <your_hotfix>`
-
 
 ## Make Github aware of the newly created branch
 
@@ -278,7 +271,6 @@ To start a new hotfix branch called <your_hotfix>, type
 git push -u origin `git rev-parse --abbrev-ref HEAD`
 
 ```
-
 
 ## Creating new files/folders
 
@@ -294,13 +286,11 @@ and the files will be tracked and ready to be added in the main repository in th
 
 `git status`
 
-
 ## Deleting a file
 
 To delete a file called <your_file>, just delete it in your local copy of the repository using the command
 
 `git rm <your_file>`
-
 
 ## Moving a file
 
@@ -309,7 +299,6 @@ In order to move files from <file_from> to <file_to>, just use this
 `git mv <file_from> <file_to>`
 
 This command can be used with regexps if you are moving multiple files, but ALWAYS test what the regexp is catching before you execute it.
-
 
 ## Create a commit
 
@@ -344,6 +333,7 @@ how to use pull request together with Trac instead.
 - Separate bug fixes from feature changes. Bugfixes may need to be backported to the stable branch, according to Supported versions.
 
 - If your commit closes a ticket in the ticket tracker, begin your commit message with the text “Fixed #xxxxx”, where “xxxxx” is the number of the ticket your commit fixes. Example: “Fixed #123 – Added whizbang feature.”. We’ve rigged Trac so that any commit message in that format will automatically close the referenced ticket and post a comment to it with the full commit message.
+
 ## Update changes (push)
 
 NEVER, EVER, make a push without checking that all your files are correctly tracked or if you made any changes after your last commit. To avoid any mistakes with this, run
@@ -358,20 +348,17 @@ when was your last commit and if there is any file modified after that date. Onc
 
 `git push`
 
-
 ## Close a feature
 
 Closing a feature will remove the branch after merging it with develop, so do it only once the feature is fully functional after the last commit.
 
 `git flow feature finish <your_feature>`
 
-
 ## Close a hotfix
 
 Closing a hotfix will remove the branch after merging it  with both master and develop. Do it when the bug is fixed after the last commit.
 
 `git flow hotfix finish <your_hotfix>`
-
 
 ## Release a new stable version
 
@@ -388,6 +375,7 @@ Version tags to the main repository have to be manually pushed:
 `git push --tags`
 
 ## Download submodule
+
 ```
 git submodule init
 git submodule update
@@ -395,6 +383,7 @@ git submodule add git@github.com:<user>/submodule_dir.git submodule_dir
 ```
 
 ## Update submodule
+
 ```
 cd submodule_dir
 git pull
@@ -404,6 +393,7 @@ git commit -m "Pulled down update to submodule_dir"
 ```
 
 ## Check files with merge conflicts
+
 ```
 git diff --name-only --diff-filter=U
 ```
@@ -414,19 +404,18 @@ Here you can find useful links in case you want to learn more about Git, Github 
 
 ## Git
 
-* [Pro Git Book](https://git-scm.com/book/en/v2)
+- [Pro Git Book](https://git-scm.com/book/en/v2)
 
 ## git-flow
 
-* [Original post by its creator](http://nvie.com/posts/a-successful-git-branching-model/)
-* [Easy tutorial](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
-* [Even simpler tutorial](https://jeffkreeftmeijer.com/git-flow/)
+- [Original post by its creator](http://nvie.com/posts/a-successful-git-branching-model/)
+- [Easy tutorial](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
+- [Even simpler tutorial](https://jeffkreeftmeijer.com/git-flow/)
 
 ## Github
 
-* [Official guides](https://guides.github.com/)
+- [Official guides](https://guides.github.com/)
 
-## Git is fun!
+## Git is fun
 
 ![http://www.htzcomic.com/2018/12/25/git/](http://www.htzcomic.com/comics/2018-12-25-1223.png)
-
