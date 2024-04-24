@@ -9,7 +9,7 @@ on:
       - main # Make sure this matches your actual main branch
 
 env:
-  USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }} # This is the repository secret
+  USER_TOKEN: ${{ secrets.WIKI_TOKEN }} # This is the repository secret
   OWNER: ${{ github.event.repository.owner.name }} # This is the repository owner
   REPOSITORY_NAME: ${{ github.event.repository.name }} # This is the repository name
 
