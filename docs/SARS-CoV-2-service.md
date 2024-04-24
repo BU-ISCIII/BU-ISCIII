@@ -1,32 +1,90 @@
-# Viralrecon SARS CoV 2 service description
+# Viralrecon general service description:
 
-1. Create the service using `buiscii-tools` and move it to `scratch_tmp`.
-2. Go to `ANALYSIS`:
-   1. Create `samples_ref.txt` (if needed, replace `NC_XXXXXX` and `Human` with the reference and host requested):
+Once the service has been [accepted in iSkyLIMS](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Service-choosing) and we have a Resolution ID (SRVCNMXXX.X), we can use the buisciii-tools to initialize the service itself.
 
-      ```bash
-      1. sed 's/$/\tNC_045512.2\tHuman/' samples_id.txt > samples_ref.txt
-      ```
+Log in with your HPC user.
 
-3. Run `bash lablog`. This should create a `_01_run` for each reference (in most cases, only 1).
-4. Execute `Module load Nextflow singularity`
-    * **Note:** As with any viralrecon analysis, make sure to use the latest [pangolin](https://github.com/cov-lineages/pangolin/releases) and [Nextclade](https://github.com/nextstrain/nextclade_data/blob/release/CHANGELOG.md) database and software versions. You may find the latter in the [Galaxy's singularity depot](https://depot.galaxyproject.org/singularity/)
-5. Run `bash _01_run_NC_XXXXXX_viralrecon.sh`. To execute the second, wait for the first to finish.
-6. While the first process is running, you can go to `_0X_MAG` and run `bash lablog` to generate the kraken tables.
-   1. Once this process is complete, enter `99-stats/` and load the MultiQC module `Module load MultiQC` and run `lablog bash lablog`.
+Load the buisciii-tools environment.
 
-Once the `viralrecon` processes are completed, generate results by executing the remaining scripts in `ANALYSIS_0X_/`:
+    $ conda activate buisciii-tools
 
-1. To run `_02_create_run_percentage_Ns.sh` and `_03_run_percentage_Ns.sh`, you will need to activate the proper environment with `conda activate python3`. It's recommended to run `module purge` beforehand.
-2. Sequentially run `bash _02_create_run_percentage_Ns.sh`, `bash _03_run_percentage_Ns.sh`, and `bash _04_create_stats_table.sh`.
-3. To run `_05_create_stats_assembly.sh`, execute `module load R/4.2.1`; You may need to configure the R environment if it's your first time:
-   1. Create the file `/home/user/.Renviron` containing the following text: `R_LIBS_USER=/data/bi/pipelines/R-lib/`.
+Create the service and the needed folder structure. Select the **Viralrecon** template.
 
-After this, results can be grouped in the `RESULTS` folder automatically following these steps:
+    $ bu-isciii new-service SRVCNMXXX.X
+    > Viralrecon
 
-1. Run lablog `bash viralrecon_results`.
-2. Activate the appropriate conda environment with `conda activate viralrecon_report`.
-3. Go to `DATE-entrega0X` and run the commands `bash _01_generate_excel_files.sh` and `bash _02_clean_folders.sh`.
+> Note: If the resolution ID is not specified, it will be requested via the prompt.
+
+If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, move inside the newly created folder at `/data/bi/services_and_colaborations/CNM/virology/`. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
+
+Move to `/ANALYSIS`. Configure the `samples_ref.txt` file according to the service requirements (samples, reference genomes, hosts, etc.). Check the lablog and execute it.
+
+    $ bash lablog_viralrecon
+
+Este script consulta al usuario a través del prompt el tipo de análisis que va a llevarse a cabo (AMPLICONS o METAGENOMICS), establece los archivos de configuración de la carpeta `../DOC` conforme a esta decisión y crea una carpeta por cada hospedador que haya sido especificado en `samples_ref.txt` (normalmente solo 1).
+
+This script prompts the user for the type of analysis to be performed (AMPLICONS or METAGENOMICS), sets up the configuration files in the `../DOC` folder and creates a folder for each host specified in samples_ref.txt (usually only 1).
+
+> Note: In case the service has special requirements, additional configurations may be necessary.
+
+Edit the folder name `YYMMDD_ANALYSIS_0X_MAG` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_MAG`.
+
+Copy the contents of the service folders to scratch. To do this, run the **scratch** tool from buisciii-tools.
+
+    $ bu-isciii scratch --direction service_to_scratch SRVCNMXXX.X
+
+Once finished, move to the newly copied service folder in scratch (its mounted path in scratch_tmp) `/data/bi/scratch_tmp/bi/`. Access the `/ANALYSIS` folder and at this point, you will need to launch the pipeline once for each host successively. Access the folder of the first existing host (e.g., `YYYYMMDD_ANALYSIS01_METAGENOMIC_HUMAN`).
+
+Check the lablog and execute it.
+
+    $ bash lablog
+
+This script generates different scripts that must be executed in an orderly manner according to their numbering. In first place, it generates a script for each reference, with the name `_01_run_<reference1>.sh.` If there is more than one reference, then there would be several files whose name begins with \_01_run. Execute these scripts first.
+
+> Note: remember to load the necessary modules and environments specified in the lablog, for the correct execution of this script and the following ones.
+
+    $ bash _01_run_<reference1>.sh
+
+Running this script will spawn the pipeline in the SLURM process queue. You can monitor the pipeline progress by checking the newly generated log file.
+
+    $ tail -f <reference>_date_viralrecon.log
+
+Simultaneously, in another window, you can monitor the processes in the slurm queue for your user as follows:
+
+    $ watch squeue -u <youruser>
+
+Once the pipelines have been executed for all references, you can continue with the orderly execution of the following scripts (\_02, \_03, etc.). This will generate files collecting the results of the analyses performed.
+
+> Note: It is not always necessary to execute all the scripts. \_05_create_stats_assembly.sh will only be necessary in cases where de novo assembly has been carried out.
+
+Once finished, repeat the process if there are any other host.
+
+Meantime, you can access the `YYMMDD_ANALYSIS_0X_MAG` folder and execute the process following its [manual](https://github.com/BU-ISCIII/BU-ISCIII/wiki/MAG-service).
+
+If the pipeline has **successfully finished**, move to the `../RESULTS` folder.
+
+Check the lablog and execute it.
+
+    $ bash viralrecon_results
+
+Access the newly created folder and execute the scripts in order.
+
+If everything is correct and the necessary files and links have been generated, you can proceed with the service completion. To do this, execute the finish module of buisciii-tools.
+
+    $ bu-isciii finish SRVCNMXXX.X
+
+This module will do several things. First, it cleans up the folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space. Then it copies all the service files back to its `/data/bi/services_and_colaborations/CNM/virology/` folder, and also copies the content of this service to the researcher's sftp repository.
+
+In order to complete the delivery of results to the researcher, you need to run the bioinfo-doc module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/bioinfo_doc/` folder.
+
+    $ bu-isciii bioinfo-doc SRVCNMXXX.X
+
+This module will be executed twice. First time select the service_info option, and the next time select the delivery option. There is the option to add delivery notes (by prompt or by providing a file) during its execution.
+
+Lastly, remember to remove all the files related to this service from `scratch_tmp`:
+
+    $ bu-isciii scratch SRVCNMXXX.X
+    > remove_scratch
 
 ### Common errors while running the service
 
