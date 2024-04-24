@@ -94,3 +94,20 @@ In this service we should check:
   - If a sample has a lot of `unclasified` species, check that `Taxonomy/kraken2/<sample_name>/taxonomy.krona.html` contains a lot of `No hits` in the report. This might be explained by two different reasons:
     1. The organisms present in the sample are not present in the database used for nf-core/mag pipeline.
     2. The is a lot of the so called `Space junk` (a.k.a. basura espacial), which means that the sequencing process was not so good...
+
+Once all the service results are revised in the `scratch_tmp` folder, you can continue with the next BU-ISCIII tool: `finish` as explained [here](/link/to/tools/and/iskylims/TODO).
+
+When everything is propperly coppied into the SFTP folder, you can put the update in the `update_servicios` channel's _Team Standup Bot_, with the following template:
+
+- _**SRVXXXXXX - ACRONYMXX**_ :no_entry: = No empezado, parado o esperando   :running: = Corriendo   :mag: = En revisión   :clipboard: = Finalizado copiandose a SFTP   :white_check_mark: = Finalizado y copiado a sftp
+  - **Servicio**: Taxonomic based Identification and classification of organisms in complex communities (MAG)
+  - **Número de muestras**: # Numero de muestras
+  - **Estado**: No empezado/Corriendo/En revisión/Finalizado copiandose a SFTP/Finalizado y copiado a sftp
+  - **Instrumento y longitud**: Ej.: NovaSeq (2x150)
+  - **Cantidad de lecturas**: Ej.: 0.8M - 91.2M
+  - **Calidad general**: Buena/Mala/Indicar incidencias específicas
+  - **Resultados generales**: Breve resumen de los resultados obtenidos a grandes rasgos, describiendo los resultados más relevantes del `99-stats/multiqc_report.html`.
+  - **Resultados por muestra**: _Indicar solo los resultados ANOMALOS_. Algunos ejemplos:
+    - La muestra XXX contiene X virus (si es que no se espera ese virus en esa muestra)
+    - La muestra XXX se ha secuenciado con mala calidad y ha perdido muchas lecturas en el preprocesamiento.
+    - La muestra XXX no tiene lecturas suficientes para realizar el análisis.
