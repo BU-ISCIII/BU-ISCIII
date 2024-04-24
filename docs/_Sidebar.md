@@ -22,11 +22,14 @@
    7. [[Service reports]]
    6. [[Update policy (DB and software)]]
    8. [How to: guides for BU-ISCIII members](Howto_guides_for_BUISCIII_members)
+      - [[How to manage services in iSKyLims]]
       - [[Service choosing]]
       - [[Assembly service]] 
       - [[SARS-CoV-2 service]]
       - [[RSV‐Service]]
+      - [[ExomeEB‐ExomeTrio‐WGSTrio]]
       - [[Lineage specific variants]]
+      - [[MAG service]]
     
 - [[Github and development]]
     - [[Github- gitflow]]
