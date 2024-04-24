@@ -2,7 +2,7 @@
 
 This is a brief tutorial on how to perform a MAG Service as a member of the ISCIII's Bioinformatics Unit! MAG is a associated with _Taxonomic based Identification and classification of organisms in complex communities_ service from service catalog, but usually, MAG is part of other services like [IRMA](lint/to/flu/service), [viralrecon](https://github.com/BU-ISCIII/BU-ISCIII/wiki/SARS-CoV-2-service), or [PikaVirus](/link/to/pikavirus/).
 
-nf-core/mag is a bioinformatics best-practise analysis pipeline for assembly, binning and annotation of metagenomes. This service aims to perform taxonomic classification of reads using k-mer method with Kraken2 to identify which viruses/bacteria (and fungi/plants if the PlusPF/PlusPFP database is used) are present. This will allow us to identify contaminations if the species in the sample are known, or to get an idea of the species present in a metagenomic sample. It is worth noting that this usage of the nf-core/mag pipeline does not allow for strain/subtype identification, so it only provides a general idea of the sample composition.
+[nf-core/mag](https://github.com/nf-core/mag) is a bioinformatics best-practise analysis pipeline for assembly, binning and annotation of metagenomes. This service aims to perform taxonomic classification of reads using k-mer method with Kraken2 to identify which viruses/bacteria (and fungi/plants if the PlusPF/PlusPFP database is used) are present. This will allow us to identify contaminations if the species in the sample are known, or to get an idea of the species present in a metagenomic sample. It is worth noting that this usage of the nf-core/mag pipeline does not allow for strain/subtype identification, so it only provides a general idea of the sample composition.
 
 Let's get started with the service. When performing a MAG service, it's likely that the service folder, resolution, and acronym are already created as part of these other services. Typical acronyms for a service that includes MAG analysis are:
 
@@ -37,7 +37,7 @@ bash lablog_mag
 > [!WARNING]
 > If MAG is not the only analysis in your service, don't forget to run the other `lablogs` before the next steps.
 
-After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch` as explaibned [here](/link/to/tools/and/iskylims/TODO)
+After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch` as explained [here](/link/to/tools/and/iskylims/TODO)
 
 Once this function is finished, we should go into the `scratch_tmp` folder and the specific `ANALYSIS` folder associated with our service. Once we're inside, we will see the following folders/files:
 
