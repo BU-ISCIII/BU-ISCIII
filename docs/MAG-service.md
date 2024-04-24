@@ -111,3 +111,5 @@ When everything is propperly coppied into the SFTP folder, you can put the updat
     - La muestra XXX contiene X virus (si es que no se espera ese virus en esa muestra)
     - La muestra XXX se ha secuenciado con mala calidad y ha perdido muchas lecturas en el preprocesamiento.
     - La muestra XXX no tiene lecturas suficientes para realizar el análisis.
+
+When the revisors give the OK to the service results, you can finish the service with the next BU-ISCIII tool: `delivery` as explained [here](/link/to/tools/and/iskylims/TODO).
