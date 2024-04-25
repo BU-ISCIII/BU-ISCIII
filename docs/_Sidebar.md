@@ -19,11 +19,10 @@
    2. [[Service portfolio]]
    3. [[Service documentation]]
    4. [[Execution guidelines]]
-        - [[Viralrecon execution]]
    5. [[Delivery methods]]
    6. [[Service reports]]
    7. [[Update policy (DB and software)]]
-   8. [How to: guides for BU-ISCIII members](Howto_guides_for_BUISCIII_members)
+   8. [How to: guides for BU-ISCIII members](Howto-guides-for-BUISCIII-members)
       - [[How to manage services in iSKyLims]]
       - [[Service choosing]]
       - [[Assembly service]]
@@ -32,7 +31,6 @@
       - [[ExomeEB‐ExomeTrio‐WGSTrio]]
       - [[Lineage specific variants]]
       - [[MAG service]]
-
 - [[Github and development]]
   - [[Github- gitflow]]
   - [[ZSH and OH-MY-ZSH]]
