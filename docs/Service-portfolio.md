@@ -56,9 +56,9 @@ Genomic Data Analysis:
       **Service Notes Description** 
       When requesting a service in iskylims, researchers are required to provide pertinent details, including the type of NGS data intended for analysis. Please be specific when requesting the mRNA-seq service by indicating something like: 'mRNAseq for genes'.
   
-      **comparatives.txt**
+      **[comparatives.txt](./assets/input_datasets/rnaseq/comparatives.txt)** 
   
-      The `comparatives.txt` file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
+      The `comparatives.txt`([link to access](./assets/input_datasets/rnaseq/comparatives.txt)) file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
   
       1. Incremental index representing each comparison.
       2. Baseline group/s.
@@ -73,9 +73,9 @@ Genomic Data Analysis:
       4 Treatment1-Treatment2       Control1-Control2
       ```
   
-      **clinical_data.txt**
+      **[clinical_data.txt](./assets/input_datasets/rnaseq/clinical_data.txt)**
   
-      The `clinical_data.txt` file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
+      The `clinical_data.txt` ([link to access](./assets/input_datasets/rnaseq/clinical_data.txt)) file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
   
     - **Name:** Sample name.
     - **Group:** Group to which the sample belongs.
@@ -98,9 +98,9 @@ Genomic Data Analysis:
       **Service Notes Description**
       When requesting a service in iskylims, researchers are required to provide pertinent details, including the type of NGS data intended for analysis. Please be specific when requesting the mRNA-seq service by indicating something like: 'mRNAseq for transcripts'.
 
-      **comparatives.txt**
+      **[comparatives.txt](./assets/input_datasets/rnaseq/comparatives.txt)** 
 
-      The `comparatives.txt` file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
+      The `comparatives.txt` ([link to access](./assets/input_datasets/rnaseq/comparatives.txt)) file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
 
       1. Incremental index representing each comparison.
       2. Baseline group/s.
@@ -115,9 +115,9 @@ Genomic Data Analysis:
       4 Treatment1-Treatment2       Control1-Control2
       ```
 
-      **clinical_data.txt**
+      **[clinical_data.txt](./assets/input_datasets/rnaseq/clinical_data.txt)**
 
-      The `clinical_data.txt` file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
+      The `clinical_data.txt` ([link to access](./assets/input_datasets/rnaseq/clinical_data.txt)) file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
 
     - **Name:** Sample name.
     - **Group:** Group to which the sample belongs.
