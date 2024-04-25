@@ -1,4 +1,6 @@
-# 1. I/O erros
+# Issues
+
+## 1. I/O erros
 
 We have observed many times jobs failing with no errors in the code, but because I/O errors. These jobs generate a binary `core.*` file up to 20Gb in size inside the job working directory.
 
@@ -6,7 +8,7 @@ HPC administrators do not know the reason for these errors. We are tracking them
 
 Example:
 
-```
+```shell
 [2018-07-31 17:52:49] Beginning TopHat run (v2.1.1)
 -----------------------------------------------
 [2018-07-31 17:52:49] Checking for Bowtie
@@ -23,7 +25,7 @@ Traceback (most recent call last):
 IOError: [Errno 5] Input/output error
 ```
 
-# 2. HPC long response times
+## 2. HPC long response times
 
 Sometimes the whole cluster (both access nodes and computing nodes) gets frozen, and the response times in the terminal can delay several minutes the ouput of a simple `ls` command. This may be slowing down running jobs too, but we still need to benchmark them in order to have reliable data about the issue.
 
@@ -31,7 +33,7 @@ HPC administrators do not know the reason for these issues.
 
 This may be caused by bottlenecking while accessing hard drives, and a possible solution would be using file system designetd to work in this kind of scenarios and not a general one. In the following example, taken on 11/09/2018, we can see how this affects our work. With less than 5% on average of computational capacity in use in each node, and even a smaller proportion of RAM in use, operating was impossible. Most of jobs in execution where reading/writing from/into "/processing_Data/bioinformatics/research", and during execution time it took even a minute to navigate inside its subfolders, list files or edit a line in the terminal:
 
-```
+```shell
 [mjuliam@asterix02 ~]$ qhost 
 HOSTNAME                ARCH         NCPU  LOAD  MEMTOT  MEMUSE  SWAPTO  SWAPUS
 -------------------------------------------------------------------------------
@@ -54,7 +56,7 @@ obelix15                linux-x64      20  4.93  252.2G    6.6G    8.0G   16.0M
 obelix16                linux-x64      20  7.79  252.2G    7.5G    8.0G   15.5M
 ```
 
-# 3. Extreme slowdowns of running jobs
+## 3. Extreme slowdowns of running jobs
 
 Sometimes the same job takes 6h of processing, others days. We are running statistics to try to discover what's happeining here, but most probably is related with #1 and #2.
 
@@ -62,7 +64,7 @@ Until now, we have discovered it may caused by a bottleneck in the NFS connectio
 
 This is a real example of the high meta-data access while taken some jobs were running at 12:06 of 31/07/2018, where we can see all drives mounted by NFS, tha all of them shar the same connection and that the meta-data traffic is nearly 45% of traffic:
 
-```
+```shell
 [mjuliam@asterix02 ~]$ df -h
 Filesystem            Size  Used Avail Use% Mounted on
 /dev/mapper/rootvg-root_lv
@@ -128,7 +130,7 @@ Both solutions have to be impleneted and tested before exposing them to the HPC 
 HPC administrators do not know the reason for these issues.
 Example:
 
-```
+```shell
 Log:
 [2018-08-01 16:44:58] Reconstituting reference FASTA file from Bowtie index
   Executing: /opt/bowtie/bowtie2-2.2.5/bowtie2-inspect ../../REFERENCES/Homo_sapiens.GRCh38.dna.toplevel.fa > C-EXP-2/tmp/Homo_sapiens.GRCh38.dna.toplevel.fa.fa
@@ -145,7 +147,7 @@ date: Thu Aug  2 12:41:22 CEST 2018. Still running.
 
 Another slow but without stops:
 
-```
+```shell
 [2018-08-01 15:51:39] Beginning TopHat run (v2.1.1)
 -----------------------------------------------    
 [2018-08-01 15:51:39] Checking for Bowtie          
@@ -201,25 +203,15 @@ Documentation:
 * [Managing Cluster Software Packages](http://www.admin-magazine.com/HPC/Articles/Managing-Cluster-Software-Packages)
 * [Setting Up an HPC Cluster](http://www.admin-magazine.com/HPC/Articles/real_world_hpc_setting_up_an_hpc_cluster)
 
-# 4. Old libraries
+## 4. Storage
 
-Centos 6 sucks, we need to update at least to Centos 7. We cannot keep working with system libraries from the 90s...
+We keep running out of disk space in `/data/bi`. We need to optimise the archiving proccess and set a storage expansion scheme for the next years based on our data size historical evolution.
 
-# 5. Storage
-
-We keep running out of disk space in `/processing_Data/bioinformatics`. We need to optimise the archiving proccess and set a storage expansion scheme for the next years based on our data size historical evolution.
-
-# 6. Fastq files in a dedicate storage
+## 5. Fastq files in a dedicate storage
 
 We should have a dedicated storage folder for raw fastq files, so we can avoid copying the input files from the sequencing cabin to `/processing_Data/bioinformatics` for every service (doubling the space used by those files in the cluster).
 
-# 7. SGE parameters do not work
-
-Most of `qsub` parameters do not work properly or do not work at all. We should test them all and make a list of good practices so we can successfully control the resources our jobs use.
-
-HPC admins should also fix the ones giving problems, and create dedicate queues.
-
-# 8. Java heap size ("Fixed")
+## 6. Java heap size ("Fixed")
 
 He observado algo que podríamos llamar curioso respecto a la máquina virtual de java. No lo pongo como incidencia porque no es exactamente algo que haya que "solucionar" sólo una observación por si algún otro usuario lo experimenta o da problemas en algún momento.
 
