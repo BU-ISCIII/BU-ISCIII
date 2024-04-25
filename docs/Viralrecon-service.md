@@ -1,4 +1,4 @@
-# Viralrecon general service description:
+# Viralrecon service description:
 
 Once the service has been [accepted in iSkyLIMS](https://github.com/BU-ISCIII/BU-ISCIII/wiki/How-to-manage-services-in-iSkyLims) and we have a Resolution ID (SRVCNMXXX.X), we can use the buisciii-tools to initialize the service itself.
 
@@ -31,7 +31,7 @@ Copy the contents of the service folders to scratch. To do this, run the **scrat
 
     $ bu-isciii scratch --direction service_to_scratch SRVCNMXXX.X
 
-Once finished, move to the newly copied service folder in scratch (its mounted path in scratch_tmp) `/data/bi/scratch_tmp/bi/`. Access the `/ANALYSIS` folder and at this point, you will need to launch the pipeline once for each host successively. Access the folder of the first existing host (e.g., `YYYYMMDD_ANALYSIS01_METAGENOMIC_HUMAN`).
+Once finished, move to the newly copied service folder in scratch (its mounted path in scratch_tmp) `/data/bi/scratch_tmp/bi/`. Access the `ANALYSIS` folder and at this point, you will need to launch the pipeline once for each host successively. Access the folder of the first existing host (e.g., `YYYYMMDD_ANALYSIS01_METAGENOMIC_HUMAN`).
 
 Check the lablog and execute it.
 
@@ -92,7 +92,7 @@ If the pipeline has **successfully finished**, move to the `../RESULTS` folder.
 
 Check the lablog and execute it.
 
-    $ bash viralrecon_results
+    $ bash lablog_viralrecon_results
 
 Access the newly created folder and execute the scripts in order.
 
