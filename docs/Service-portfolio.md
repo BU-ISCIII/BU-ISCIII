@@ -61,8 +61,8 @@ Genomic Data Analysis:
       The `comparatives.txt`([link to access](./assets/input_datasets/rnaseq/comparatives.txt)) file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
   
       1. Incremental index representing each comparison.
-      2. Baseline group/s.
-      3. Group against which the baseline group/s in the first column is compared.
+      2. Treatment group/s.
+      3. Control group.
   
       Example:
   
@@ -79,11 +79,12 @@ Genomic Data Analysis:
   
     - **Name:** Sample name.
     - **Group:** Group to which the sample belongs.
+    - **Batch** Label that groups samples according to their batch.
   
       Example:
   
       ```Bash
-         Name    Group
+         Name    Group  Batch
       ```
   
     </details>
@@ -103,8 +104,8 @@ Genomic Data Analysis:
       The `comparatives.txt` ([link to access](./assets/input_datasets/rnaseq/comparatives.txt)) file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
 
       1. Incremental index representing each comparison.
-      2. Baseline group/s.
-      3. Group against which the baseline group/s in the first column is compared.
+      2. Treatment group/s.
+      3. Control group.
 
       Example:
 
@@ -121,11 +122,12 @@ Genomic Data Analysis:
 
     - **Name:** Sample name.
     - **Group:** Group to which the sample belongs.
+    - **Batch** Label that groups samples according to their batch.
 
       Example:
 
       ```Bash
-         Name    Group
+         Name    Group  Batch
       ```
     </details>
 
