@@ -28,6 +28,7 @@
       - [[Viralrecon service]]
       - [ExomeEB ExomeTrio WGSTrio service](./ExomeEB-ExomeTrio-WGSTrio.md)
       - [[MAG service]]
+      - [[IRMA service]](./IRMA-service.md)
       - [[PlasmidID service]]
       - [cg/wgMLST service](./cgMLST-wgMLST-service.md)
       - [Lineage specific variants from outbreak-info](./Lineage-specific-variants_from_outbreak-info.md)
