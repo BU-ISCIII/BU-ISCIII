@@ -1,0 +1,4 @@
+1	Treatment	Control
+2	Treatment       Control
+3	Treatment       Control
+4	Treatment1-Treatment2       Control1-Control2
