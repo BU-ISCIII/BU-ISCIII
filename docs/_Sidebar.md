@@ -26,7 +26,8 @@
       - [[How to manage services in iSkyLims]]
       - [[Assembly service]]
       - [[Viralrecon service]]
-      - [ExomeEB ExomeTrio WGSTrio service](./ExomeEB-ExomeTrio-WGSTrio.md)
+      - [[RSV‐Service]]
+      - [[ExomeEB‐ExomeTrio‐WGSTrio]](./ExomeEB-ExomeTrio-WGSTrio.md)
       - [[MAG service]]
       - [[IRMA service]](./IRMA-service.md)
       - [[PlasmidID service]]
