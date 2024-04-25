@@ -67,3 +67,24 @@ bu-isciii bioinfo-doc SRVCNMXXX.X
 bu-isciii bioinfo-doc SRVCNMXXX.X
 # select delivery
 ```
+
+### mRNAseq report template (TEAM STANDUP)
+
+nce you have finished the analysis and analyzed the results you need to report to the rest of the members. Use this template to do it:
+SRVCNM1012_20231211_RNASEQ26_mcoiras_S :white_check_mark:
+
+**SRVXXXYYYY_YYYYMMDD_PLASMIDIDZZZ_researcher_S**
+
+- Servicio: [service name]
+- Carrera: [WGS run name / WGS project name]
+- Muestras: [number of samples analyzed in the service]
+- Solicitante: [name of the person who requested the service]
+- Laboratorio: [laboratory alias of the requester]
+- Estado: [status of the service]
+- Cantidad de lecturas: [the median amount of reads]
+- Calidad de las lecturas: [quality of reads]
+- Especie identificada (revisión kmerfinder): p.e Neisseria gonorrhoeae
+- Revisión general de plásmidos identificados:
+- Incidencias muestras individuales (todo lo anterior + Quast):
+  - P.e mal ensamblado
+  - muestras sin plásmidos identificados
