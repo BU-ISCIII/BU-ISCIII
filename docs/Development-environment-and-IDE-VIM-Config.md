@@ -2,7 +2,7 @@
 
 Vim, short for Vi IMproved, is a configurable text editor often used as a Python development environment. Vim proponents commonly cite the numerous plugins, Vimscript and logical command language as major Vim strengths.
 
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/vim-the-editor.jpg)
+![vim](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/vim-the-editor.jpg)
 
 Vim's philosophy is that developers are more productive when they avoid taking their hands off the keyboard. Code should flow naturally from the developer's thoughts through the keyboard and onto the screen. Using a mouse or other peripheral is a detriment to the rate at which a developer's thoughts become code.
 
@@ -36,7 +36,7 @@ TIP: vim is a very powerful tool that can be overwhelming at first impression. M
 
 Also in your home folder is a folder called **.vim**. In it, there are several sub-directories which hold plugins for Vim. The basic directory structure is similar to that shown below.
 
-```
+```shell
 .vim
   |____after    # for overrides to system-level vim
   |____autoload # a directory for some plugins
