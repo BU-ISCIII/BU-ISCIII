@@ -77,10 +77,10 @@ Genomic Data Analysis:
   After quantification, differntial expression analysis is carried out with [fishpond](https://www.bioconductor.org/packages/release/bioc/html/fishpond.html).
   Below are the files that researchers need to provide when requesting the RNA-seq service.
   - Differential miRNA expression (DEM) (TODO mirnaseq)
+  - Gene expression changes over a series of time points (TODO timeseries_rnaseq)
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
   After quantification, differntial expression analysis is carried out with ad-hoc software/scripts.
   Below are the files that researchers need to provide when requesting the RNA-seq service.
-  - Gene expression changes over a series of time points (TODO timeseries_rnaseq)
 - Metagenomics and targeted metagenomics
   - Taxonomic based Identification and classification of organisms in complex communities (TODO mag_met)
   - _De novo_ assembly contigs' alignment to database [BLAST](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/blast_nt)(TODO blast_nt)
