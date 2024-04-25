@@ -31,7 +31,7 @@ Genomic Data Analysis:
   - Differential Gene Expression (DEG) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
   After quantification, differntial expression analysis is carried out with [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
-  Below are the files that researchers need to provide when requesting the RNA-seq service.
+  Below are the files that **researchers NEED to provide** when requesting the RNA-seq service.
   <details markdown="1">
   <summary>Required information for service request</summary>
     **Service Notes Description**
