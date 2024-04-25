@@ -145,3 +145,18 @@ Lastly, remember to remove all the files related to this service from `scratch_t
 ```
 bu-isciii scratch SRVCNMXXX.X > remove_scratch
 ```
+
+### ASSEMBLY REPORT TEMPLATE (TEAM STANDUP)
+
+Once you have finished the analysis and analyzed the results you need to report to the rest of the members. Use this template to do it:
+SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S :white_check_mark: 
+
+**SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S**
+* Número de muestras: [number of samples analyzed in the service]
+* Organismo indicado: [organism provided by the researcher when requesting the service]
+* Estado: [status of the service]
+* Instrumento y longitud: [instrument used for sequencing and lenght of the reads]
+* Cantidad de lecturas: [the median amount of reads]
+* Calidad de las lecturas (revisión fastQC): [quality of reads (good, bad, etc)]
+* Especie identificada (revisión kmerfinder): [organism reported in general by kmerfinder]
+* Incidencias muestras individuales (todo lo anterior + quast): [any information, extracted from kmerfinder and quast reports, that the researcher should be informed about]
