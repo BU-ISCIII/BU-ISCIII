@@ -26,25 +26,22 @@
       - [[How to manage services in iSkyLims]]
       - [[Assembly service]]
       - [[Viralrecon service]]
-      - [[RSV‐Service]]
-      - [[ExomeEB‐ExomeTrio‐WGSTrio]](./ExomeEB-ExomeTrio-WGSTrio.md)
+      - [[ExomeEB ExomeTrio WGSTrio service]]
       - [[MAG service]]
       - [[IRMA service]](./IRMA-service.md)
       - [[PlasmidID service]]
-      - [cg/wgMLST service](./cgMLST-wgMLST-service.md)
-      - [Lineage specific variants from outbreak-info](./Lineage-specific-variants_from_outbreak-info.md)
-      - [mRNA-seq service](./mRNAseq-service.md)
-      - [Pikavirus service](./PikaVirus-service.md)
+      - [[cgMLST wgMLST service]]
+      - [[mRNA-seq service]]
+      - [[Pikavirus service]]
+      - [[Lineage specific variants from outbreakinfo]]
 - [[Github and development]]
   - [[Github gitflow]]
   - [[ZSH and OH-MY-ZSH]]
-  - [[Development environment and IDE: VIM Config]]
-  - [[Tmux]]
+  - [[Development environment and IDE VIM Config]]
   - [[Code style]]
     - [[Python]]
     - [[R]]
     - [[Bash]]
-- [[Useful resources]]
-  - [[Statistics]]
-    - [[ROG and PR Curves]]
+- Useful resources
+  - [[ROG and PR Curves]]
 - [[FAQs]]

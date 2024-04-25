@@ -1,11 +1,10 @@
-Please follow these coding standards when writing code for BU-ISCIII.
+# General guidelines
 
-## General guidelines
-### File names
+## File names
 
 File names should be meaningful, written in lowercase characters only and end in .R. Both minus (-) and underscore (_) are good options to separate words within a file name, choosing whatever makes more sense. Never use dot (.), and never ever use whitespace ( ) for that purpose.
 
-```
+```Bash
 # Good
 fit-models.R
 utility_functions.R
@@ -18,7 +17,7 @@ T3rr1bl3 N4m1ng.r
 
 If files need to be run in sequence, prefix them with numbers and underscore (_):
 
-```
+```Bash
 0_download.R
 1_parse.R
 2_explore.R
@@ -27,7 +26,6 @@ If files need to be run in sequence, prefix them with numbers and underscore (_)
 ## General Code Style
 
 While you should follow the code style that's already there for files that you're modifying, the following are required for any new code.
-
 
 ### Indentation
 
@@ -41,12 +39,14 @@ Maximum line length is 80 characters.
 
 If you have to write strings that are longer than 80 characters, this should be done with an embedded newline if possible. Literal strings that have to be longer than 80 chars and can't sensibly be split are okay, but it's strongly preferred to find a way to make it shorter.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 long_string_1="I am an exceptionalllllllllllly looooooooooooooooooooooooooooooooooooooooong string."
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 cat <<END;
 I am an exceptionalllllllllllly 
@@ -54,7 +54,8 @@ looooooooooooooooooooooooooooooooooooooooong string.
 END
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 long_string_2="I am an exceptionalllllllllllly 
  looooooooooooooooooooooooooooooooooooooooong string."
@@ -68,44 +69,51 @@ Meaningful self-documenting names should be used. If the variable name does not 
 
 Variable names must be words in lowcase separated with underscore, no camelCase.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 local TitleCase=""
 local camelCase=""
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 local snake_case=""
 ```
 
-Uppercase strings are reserved for global variables. 
+Uppercase strings are reserved for global variables.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 local UPPERCASE=""
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 UPPERCASE=""
 ```
 
 Variable names should not clobber command names, such as `dir` or `pwd`.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 local pwd=""
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 local pwd_read_in=""
 ```
 
 Variable names for loop indexes should be named similarly to any variable you're looping through.
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 for zone in ${zones}; do
   something_with "${zone}"
@@ -116,7 +124,8 @@ done
 
 All caps, separated with underscores, declared at the top of the file. Constants and anything exported to the environment should be capitalized.
 
-##### _Constant:_
+#### _Constant:_
+
 ```shell
 PATH_TO_FILES='/some/path'
 ```
@@ -127,14 +136,16 @@ PATH_TO_FILES='/some/path'
 
 Lower-case, with underscores to separate words. Parentheses are required after the function name. The opening brace should appear on the same line as the function name.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 function my_bad_func {
   ...
 }
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 function my_good_func() {
   ...
