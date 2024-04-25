@@ -11,3 +11,5 @@ Vim, short for Vi IMproved, is a configurable text editor often used as a Python
 ## tmux
 
 tmux is a terminal multiplexer: it enables a number of terminals to be created, accessed, and controlled from a single screen. It may be detached from a screen and continue running in the background, then later reattached. And even much more if you decide to play with its configuration or add some addons.
+
+You can start using all this elements using the BU-ISCIII config files. Installing them is the easiest following the instructions in the repository [dotfiles](https://github.com/BU-ISCIII/dotfiles).
