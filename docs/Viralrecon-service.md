@@ -91,3 +91,20 @@ Lastly, remember to remove all the files related to this service from `scratch_t
 Make sure that `samples_ref` file does not contain any spaces as it's read as a tab-separated file. You can use `cat -A samples_ref.txt` to ensure this (`\t` is shown as `^I` in this case).
 
 When there's a mix of full-numerical and strings in sample IDs (e.g. `87439.fastq.gz` and `SARS_01.fastq.gz`) the pipeline may crush in `MULTIQC` step. This is caused because there's a bug with MultiQC ([MultiQC issue](https://github.com/nf-core/viralrecon/issues/345)) that can be temporarily fixed by adding any non-numerical character to the sample IDs. Nevertheless, you can follow the instructions in [this tutorial](https://drive.google.com/drive/u/0/folders/1-GafpZR2HVlecNaAsXIslK3aecHplD4z) to properly correct this error.
+
+
+
+## Viralrecon report template
+
+**_Viralrecon_**
+
+**_SRVCNMXXX - SERVICE_ALIAS_**
+
+[Service description and references used]
+
+* **Número de muestras**: XX
+* **Estado**: Finalizado y copiado al sftp
+* **Instrumento y longitud**: Nextseq (2x150)
+* **Cantidad de lecturas**: XXM - XXM
+* **Calidad general**: Buena
+* **Incidencia muestras individuales**:
