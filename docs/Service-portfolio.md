@@ -35,10 +35,10 @@ Genomic Data Analysis:
   <details markdown="1">
   <summary>Required information for service request</summary>
     **Service Notes Description**
-    I this field (when requesting service in *iskylims*), the researcher needs to provide relevant information such as which type of NGS data is going to be analyzed. Options include:
+    In this field (when requesting service in *iskylims*), the researcher needs to provide relevant information such as which type of NGS data is going to be analyzed. Options include:
 
       Genes (mRNA)
-      Transcriptsn
+      Transcripts
 
     **comparatives.txt**
 
