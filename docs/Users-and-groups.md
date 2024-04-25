@@ -29,5 +29,5 @@ If you want to fix permissions in a folder, you can use:
 ```Bash
 chown -R user_name:bi path-folder/
 find path-folder/ -type d -exec chmod 775 {} \;
-find path-folder/ -type d -exec chmod 664 {} \;
+find path-folder/ -type f -exec chmod 664 {} \;
 ```
