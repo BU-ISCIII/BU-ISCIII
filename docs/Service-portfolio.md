@@ -67,15 +67,15 @@ Genomic Data Analysis:
     For the correct performance of the pipeline, it is necessary to provide some input documents:
 
 
-    * **PRIMERS BED FILE**.
+    * **Primers bed file**.
     In case of amplicon-based method, we need to provide a BED file with primer coordinates for the mapping step.
 
 
-    * **PRIMERS FASTA FILE**.
+    * **Primers fasta file**.
     Additionally, a fasta file will be necessary if de novo assembly is requested.
 
 
-    * **[VIRALRECON_INPUT.xlsx](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/assets/input_datasets/viralrecon/viralrecon_input.xlsx)**
+    * **[viralrecon_input.xlsx](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/assets/input_datasets/viralrecon/viralrecon_input.xlsx)**
 
       This document contains 3 different columns:
 
