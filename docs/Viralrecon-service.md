@@ -59,6 +59,18 @@ Once the pipelines have been executed for all references, you can continue with 
 
 Once finished, repeat the process if there are any other host.
 
+---
+
+On completion of the pipeline, it is strongly recommended to review different files to check that it all worked properly. Among others, the 3 essential ones are the following:
+
+* `./<reference>_yyyymmdd_viralrecon_mapping/multiqc/multiqc_report.html`. Multiqc report provides a general overview of the data (variant calling metrics, sequencing quality, trimming info, coverage distribution, etc.).
+
+* `./mapping_illumina_yyyymmdd.tab`. This file gathers relevant information about the mapping of the sequences with respect to the references.
+
+* `./<reference>_yyyymmdd_viralrecon_mapping/variants/ivar/variants_long_table.csv`. This file contains information about the annotation of the identified variants for all samples with respect to each reference.
+
+---
+
 Meantime, you can access the `YYMMDD_ANALYSIS_0X_MAG` folder and execute the process following its [manual](https://github.com/BU-ISCIII/BU-ISCIII/wiki/MAG-service).
 
 If the pipeline has **successfully finished**, move to the `../RESULTS` folder.
