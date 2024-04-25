@@ -28,7 +28,7 @@
       - [[Viralrecon service]]
       - [[ExomeEB ExomeTrio WGSTrio service]]
       - [[MAG service]]
-      - [[IRMA service]](./IRMA-service.md)
+      - [[IRMA service]]
       - [[PlasmidID service]]
       - [[cgMLST wgMLST service]]
       - [[mRNA-seq service]]
