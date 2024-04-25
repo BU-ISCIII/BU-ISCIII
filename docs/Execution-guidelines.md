@@ -24,7 +24,7 @@ cat ../samples_id.txt | xargs -I % echo "ln -s ../../RAW/%_*R2*.fastq.gz" %_R2.f
 
 Imagine samples_id.txt looks like this:
 
-```
+```shell
 sample1
 sample2
 sample3
