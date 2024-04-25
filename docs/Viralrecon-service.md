@@ -1,6 +1,6 @@
 # Viralrecon general service description:
 
-Once the service has been [accepted in iSkyLIMS](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Service-choosing) and we have a Resolution ID (SRVCNMXXX.X), we can use the buisciii-tools to initialize the service itself.
+Once the service has been [accepted in iSkyLIMS](https://github.com/BU-ISCIII/BU-ISCIII/wiki/How-to-manage-services-in-iSkyLims) and we have a Resolution ID (SRVCNMXXX.X), we can use the buisciii-tools to initialize the service itself.
 
 Log in with your HPC user.
 
