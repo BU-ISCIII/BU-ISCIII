@@ -31,6 +31,7 @@
       - [[PlasmidID service]]
       - [cg/wgMLST service](#cgMLST-wgMLST-service)
       - [[Lineage specific variants]]
+      - [mRNA-seq service](./mRNAseq-service.md)
 - [[Github and development]]
   - [[Github gitflow]]
   - [[ZSH and OH-MY-ZSH]]
