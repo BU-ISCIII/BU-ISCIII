@@ -26,11 +26,11 @@
       - [[How to manage services in iSkyLims]]
       - [[Assembly service]]
       - [[Viralrecon service]]
-      - [[ExomeEB ExomeTrio WGSTrio service]]
+      - [ExomeEB ExomeTrio WGSTrio service](./ExomeEB-ExomeTrio-WGSTrio.md)
       - [[MAG service]]
       - [[PlasmidID service]]
-      - [cg/wgMLST service](#cgMLST-wgMLST-service)
-      - [[Lineage specific variants]]
+      - [cg/wgMLST service](./cgMLST-wgMLST-service.md)
+      - [Lineage specific variants from outbreak-info](./Lineage-specific-variants_from_outbreak-info.md)
       - [mRNA-seq service](./mRNAseq-service.md)
 - [[Github and development]]
   - [[Github gitflow]]
