@@ -28,10 +28,11 @@ Genomic Data Analysis:
 
     PlasmidID is a computational pipeline that maps Illumina reads over plasmid database sequences. The k-mer filtered, most covered sequences are clustered by identity to avoid redundancy and the longest are used as scaffold for plasmid reconstruction. Reads are assembled and annotated by automatic and specific annotation. All information generated from mapping, assembly, annotation and local alignment analyses is gathered and accurately represented in a circular image which allow user to determine plasmidic composition in any bacterial sample.
 
-    Below are the files that **researchers NEED to provide** when requesting the RNA-seq service.
+    Below are the files that **researchers NEED to provide** when requesting the plasmidID service.
 
     <details markdown="1">
     <summary>Required information for service request</summary>
+
     - As default annotation databases we use:
       - AMR resistance genes: Card database
       - Virulence genes: VirulenceFinder database
