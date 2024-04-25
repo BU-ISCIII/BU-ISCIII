@@ -58,37 +58,39 @@ Genomic Data Analysis:
 
   - Bacteria: Core genome or whole genome Multi-Locus Sequence Typing analysis (cg/wgMLST) (TODO wgmlst_chewbbaca)
   - Viral: Genomic reconstruction, variant calling and _de novo_ assembly ([viralrecon](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/viralrecon))
-    - Viralrecon is a bioinformatics analysis pipeline used to perform assembly and intrahost/low-frequency variant calling for viral samples. The pipeline supports both Illumina and Nanopore sequencing data. For Illumina short-reads the pipeline is able to analyse metagenomics data typically obtained from shotgun sequencing (e.g. directly from clinical samples) and enrichment-based library preparation methods (e.g. amplicon-based: ARTIC SARS-CoV-2 enrichment protocol; or probe-capture-based). For Nanopore data the pipeline only supports amplicon-based analysis obtained from primer sets created and maintained by the ARTIC Network. Some examples of viruses analyzed with this pipeline are SARS-CoV-2, mumps virus, monkeypox virus, West Nile virus, etc.
+    
+    Viralrecon is a bioinformatics analysis pipeline used to perform assembly and intrahost/low-frequency variant calling for viral samples. The pipeline supports both Illumina and Nanopore sequencing data. For Illumina short-reads the pipeline is able to analyse metagenomics data typically obtained from shotgun sequencing (e.g. directly from clinical samples) and enrichment-based library preparation methods (e.g. amplicon-based: ARTIC SARS-CoV-2 enrichment protocol; or probe-capture-based). For Nanopore data the pipeline only supports amplicon-based analysis obtained from primer sets created and maintained by the ARTIC Network. Some examples of viruses analyzed with this pipeline are SARS-CoV-2, mumps virus, monkeypox virus, West Nile virus, etc.
 
-    - <details>
-      <summary>Required information for service request</summary>
-      <br>
-      For the correct performance of the pipeline, it is necessary to provide some input documents:
+    <details>
+    <summary>Required information for service request</summary>
+    <br>
+    For the correct performance of the pipeline, it is necessary to provide some input documents:
 
-      ---
+    ---
 
-      * **PRIMERS BED FILE**.
-      In case of amplicon-based method, we need to provide a BED file with primer coordinates for the mapping step.
-
-
-      * **PRIMERS FASTA FILE**.
-      Additionally, a fasta file will be necessary if de novo assembly is requested.
+    * **PRIMERS BED FILE**.
+    In case of amplicon-based method, we need to provide a BED file with primer coordinates for the mapping step.
 
 
-      * **VIRALRECON_INPUT.xlsx**
+    * **PRIMERS FASTA FILE**.
+    Additionally, a fasta file will be necessary if de novo assembly is requested.
 
-        This document contains 3 different columns:
 
-        - SampleID: Identifier assigned to each sample to be analyzed.
-        - Reference: Reference genome (or sequence) to be used to perform the analysis of each sample in the pipeline.
-        - Host: Specifies the host organism from which the sequenced sample was obtained.
+    * **VIRALRECON_INPUT.xlsx**
 
-        Notes:
-        - At least one row for every sample must be included in the document.
-        - If a sample is required to be analyzed against different references (individually), one row for each one is required.
-        - For multifasta documents (e.g. fragmented genomes or custom documents) containing several references, their name should be specified in the Reference column.
-      ---
-      </details>
+      This document contains 3 different columns:
+
+      - SampleID: Identifier assigned to each sample to be analyzed.
+      - Reference: Reference genome (or sequence) to be used to perform the analysis of each sample in the pipeline.
+      - Host: Specifies the host organism from which the sequenced sample was obtained.
+
+      Notes:
+      - At least one row for every sample must be included in the document.
+      - If a sample is required to be analyzed against different references (individually), one row for each one is required.
+      - For multifasta documents (e.g. fragmented genomes or custom documents) containing several references, their name should be specified in the Reference column.
+    ---
+    </details>
+    
   - Viral Flu: Influenza fragment reconstruction and variant detection ([IRMA](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/IRMA))
 - mRNAseq: Transcriptome sequencing  ([mrnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
   - Differential Gene Expression (DEG) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
