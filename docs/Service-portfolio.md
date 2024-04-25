@@ -76,7 +76,7 @@ Genomic Data Analysis:
     Additionally, a fasta file will be necessary if de novo assembly is requested.
 
 
-    * **VIRALRECON_INPUT.xlsx**
+    * **[VIRALRECON_INPUT.xlsx](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/assets/input_datasets/viralrecon/viralrecon_input.xlsx)**
 
       This document contains 3 different columns:
 
