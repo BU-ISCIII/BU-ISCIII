@@ -42,6 +42,20 @@ Genomic Data Analysis:
     </details>
 
   - Bacteria: Multi-Locus Sequence Typing (MLST), analysis of virulence factors, antimicrobial resistance, and plasmids characterization ([characterization](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/characterization))
+
+    MLST service performs Multi-Locus Sequence Typing of the samples with the _de novo_ assembly genomes of the samples. It uses [ChewBBACA](https://chewbbaca.readthedocs.io/en/latest/index.html) to generate the schemas (if necessary) and perform the allele calling, and GrapeTree to generate the minimun spanning tree. You can ask for:
+
+    - cgMLST (core-genome MLST): Set of loci that are present in the majority of strains for core genome (cg) MLST schemas.
+    - wgMLST (whole-genome MLST): Set of loci that are present in at least one of the analyzed strains in the Schema Creation for whole genome MLST schemas.
+
+    Below are the files that **researchers NEED to provide** when requesting the plasmidID service.
+
+    <details markdown="1">
+    <summary>Required information for service request</summary>
+
+    - If the user wants a specific cgMLST/wgMLST schema, it needs to be provided.
+    </details>
+
   - Bacteria: Core genome or whole genome Multi-Locus Sequence Typing analysis (cg/wgMLST) (TODO wgmlst_chewbbaca)
   - Viral: Genomic reconstruction, variant calling and _de novo_ assembly ([viralrecon](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/viralrecon))
   - Viral Flu: Influenza fragment reconstruction and variant detection ([IRMA](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/IRMA))
