@@ -2,8 +2,8 @@
 
 These services are grouped together because they share most of the steps needed for the analysis. Nonetheless, they are aimed to different goals:
 - **ExomeEB** stands for Exome in a single patient of [Epidermolysis bullosa](https://www.mayoclinic.org/diseases-conditions/epidermolysis-bullosa/symptoms-causes/syc-20361062).
-- **ExomeTrio** is an **Exome** analysis from 3 related patients (usually Father, Mother and Children), taking **inheritance** into account.
-- **WGSTrio** is a **Whole Genome Analysis** of 3 (or more) related patients (usually Father, Mother and Children), taking **inheritance** into account.
+- **ExomeTrio** is an **Exome** analysis from 2 (or more) related patients (usually Father, Mother and Children), taking **inheritance** into account.
+- **WGSTrio** is a **Whole Genome Analysis** of 2 (or more) related patients (usually Father, Mother and Children), taking **inheritance** into account.
 
 All these services use [Sarek](https://nf-co.re/sarek/3.4.0), a pipeline for Mapping, Variant Calling and Annotation of either Whole Genome or Targeted sequencing data specially designed for Human and Mouse (although it can work with any reference genome).
 
