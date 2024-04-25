@@ -46,6 +46,7 @@ IRMA does not include quality trimming of the reads by itself. Therefore, before
 ![](images/IRMA_workflow.png)
 
 **IRMA** uses several auxiliar softwares in its workflow:
+
 - [BLAT](http://www.kentinformatics.com/products.html) for the match step
 - [LABEL](https://wonder.cdc.gov/amd/flu/label), which also packages certain resources used by IRMA:
   - [Sequence Alignment and Modeling System (SAM)](http://www.ncbi.nlm.nih.gov/pubmed/9927713) for both the rough align and sort steps
@@ -59,20 +60,23 @@ IRMA does not include quality trimming of the reads by itself. Therefore, before
 
 **_gene\_segment_** in the case of influenza can be any of the following: [HA, NA, NS, MP, NP, PA, PB1, PB2] and HE for Influenza-C
 
-**Final files:**
+### **Final files:**
+
 - **_gene\_segment_.bam**			Sorted BAM file for the final gene_segment assembly (merged if applicable)
 - **_gene\_segment_.bam.bai**			BAM file index for gene_segment assembly
 - **_gene\_segment_.fasta**			Final assembled plurality consensus (no mixed base calls) for gene_segment
 - **_gene\_segment_.a2m**			Optional file: Plurality consensus aligned to profile HMM
 - **_gene\_segment_.vcf**			Custom variant call file for called IRMA variants for each gene segment
 
-**Folders:**
+### **Folders:**
+
 <u>**amended_consensus/</u>**: Assembled consensus per gene segment with missed based calls. Numbers correspond to fragments in $SEG_NUMBERS
 - **_sample\_name_\__fragment\_number_.fa**		Amended consensus
 - **_sample\_name_\_7.a2m**		Optional output: amended global alignment to profile HMM
 - **_sample\_name_\_7.pad.fa**		Optional output: N-padded consensus for amplicon dropouts
 
 <u>**figures/**</u>
+
   - **_gene\_segment_-coverageDiagram.pdf**		Shows coverage and variant calls
   - **_gene\_segment_-heuristics.pdf**		Heuristic graphs for gene segment
   - **_gene\_segment_-EXPENRD.pdf**		gene segment variant phasing using experimental enrichment distances
@@ -82,6 +86,7 @@ IRMA does not include quality trimming of the reads by itself. Therefore, before
   - **READ_PERCENTAGES.pdf**		Break down for reads assembled
 
 <u>**intermediate/**</u> Intermediate data for each step
+
   - <u>**0-ITERATIVE-REFERENCES/**</u>
     - **R0-_gene\_segment_.ref**	Starting reference library sequence for segment
     - **R1-_gene\_segment_.ref**	Gene segment working reference after round 1,template for round 2
@@ -104,7 +109,8 @@ IRMA does not include quality trimming of the reads by itself. Therefore, before
     - **F2-_gene\_segment_.ref**	Reference for final assembly, gene segment,   iteration 2
     - **reads.tar.gz**	Archive of sorted, unmerged reads by gene segment
 
-<u>**logs/**</u>		
+<u>**logs/**</u>	
+
   - **ASSEMBLY_log.txt**		SSw scores per all rounds tried in the iterative refinement
   - **NR_COUNTS_log.txt**		Read pattern counts at various stages
   - **QC_log.txt**		Quality control output
@@ -113,12 +119,14 @@ IRMA does not include quality trimming of the reads by itself. Therefore, before
   - **run_info.txt**		Table of parameters used by the IRMA run
 
 <u>**matrices/**</u>			Phasing matrices used to generate heat maps
+
   - **_gene\_segment_-EXPENRD.sqm**	
   - **_gene\_segment_-JACCARD.sqm**		
   - **_gene\_segment_-MUTUALD.sqm**		
   - **_gene\_segment_-NJOINTP.sqm**	
 
-<u>**secondary/**</u>			
+<u>**secondary/**</u>
+
   - **R1-A_NA_N1.fa**		Trace A_NA_N1 sorted into secondary status
   - **R1-UNRECOGNIZABLE.fa**		Read patterns that matched flu but had poor signal according to LABEL
   - **R2-UNRECOGNIZABLE.fa**		
