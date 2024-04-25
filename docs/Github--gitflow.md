@@ -6,25 +6,25 @@
 - [Best practice or how you should do it](#best-practices---or-how-you-should-do-it)
 - [Extra documentation](#extra-documentation)
 
-# Introduction
+## Introduction
 
-## Version control
+### Version control
 
 Version control systems are a category of software tools that help a software team manage changes to source code over time. Version control software keeps track of every modification to the code in a special kind of database. If a mistake is made, developers can turn back the clock and compare earlier versions of the code to help fix the mistake while minimizing disruption to all team members.
 
-## Git
+### Git
 
 Git is a version control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source code management in software development, but it can be used to keep track of changes in any set of files. As a distributed revision control system it is aimed at speed, data integrity, and support for distributed, non-linear workflows. As with most other distributed version control systems, and unlike most client–server systems, every Git directory on every computer is a full-fledged repository with complete history and full version tracking abilities, independent of network access or a central server.
 
-## Github
+### Github
 
 Github is an open-source web-based repository hosting service for version control using git. It stores your projects written in different languages, makes easier to collaborate in their development, allows you to manage them through their web-based interface and gives you a lot of extra functions with its great integration options.
 
-## git-flow
+### git-flow
 
 GitFlow is a branching model for Git, created by Vincent Driessen. It has attracted a lot of attention because it is very well suited to collaboration and scaling the development team.
 
-## Setup
+### Setup
 
 In order to start working with Github and git-flow, you will just need to:
 
@@ -40,7 +40,7 @@ In order to start working with Github and git-flow, you will just need to:
 
 Finally, ask an admin to make you a collaborator of the BU-ISCIII repository and you are ready to go.
 
-## File status
+### File status
 
 Pay attention now — here is the main thing to remember about Git if you want the rest of your learning process to go smoothly. Git has four main states that your files can reside in: committed, modified, and staged:
 
@@ -52,7 +52,7 @@ Pay attention now — here is the main thing to remember about Git if you wa
 
 - Staged means that you have marked a modified file in its current version to go into your next commit snapshot.
 
-![](https://git-scm.com/book/en/v2/images/lifecycle.png)
+![git](https://git-scm.com/book/en/v2/images/lifecycle.png)
 
 Each file in your working directory can be in one of two states: tracked or untracked. Tracked files are files that were in the last snapshot; they can be unmodified, modified, or staged. In short, tracked files are files that Git knows about.
 
@@ -60,9 +60,9 @@ Untracked files are everything else — any files in your working directory 
 
 As you edit files, Git sees them as modified, because you’ve changed them since your last commit. As you work, you selectively stage these modified files and then commit all those staged changes, and the cycle repeats.
 
-To summ up: If a particular version of a file is in the Git directory, it’s considered committed and unmodified. If it has been modified and was added to the staging area, it is staged. And if it was changed since it was checked out but has not been staged, it is modified.
+To sum up: If a particular version of a file is in the Git directory, it’s considered committed and unmodified. If it has been modified and was added to the staging area, it is staged. And if it was changed since it was checked out but has not been staged, it is modified.
 
-## Checking the status of a file
+### Checking the status of a file
 
 File status can be check with `git status` and looks like this:
 
@@ -96,7 +96,7 @@ Changes to be committed:
     modified:   CONTRIBUTING.md
 ```
 
-## Branching
+### Branching
 
 Nearly every VCS has some form of branching support. Branching means you diverge from the main line of development and continue to do work without messing with that main line. In many VCS tools, this is a somewhat expensive process, often requiring you to create a new copy of your source code directory, which can take a long time for large projects.
 
@@ -104,15 +104,15 @@ Some people refer to Git’s branching model as its “killer feature,” and it
 
 We will use git's powerful branching model for our software development. As we'll explain in nex section, our projects will contain at least one master and one develop branches, but new branches will be used for features development.
 
-# Our working methodology
+## Our working methodology
 
-## Introduction
+### Introduction
 
 The objective of this guide is to make everyone capable of interacting in the same and documented way with the repository. We work on Git following the git-flow branching workflow while managing the repositories through Github web server. There are multiple other ways of achieving the same, but this one excels in making collaboration and scaling the development team as easy as possible.
 
 In case you find yourself working in an scenario which is not considered in this guide, feel free to find your own way out of there, document the best practices and improve the methodology by adding the fix to it. By doing this, not only you and everyone else will know how to react under the same circumstances, but they will do it in the same way, making it very easy to track everyone's work.
 
-## Understanding git-flow branching scheme
+### Understanding git-flow branching scheme
 
 [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) is a branching model for Git, created by Vincent Driessen. We use git-flow as a wrapper around existing git commands which allow us to easily implement this scheme in our daily work. But before explaining how the wrapper works we need to understand the philosophy behind the scheme.
 
@@ -150,7 +150,7 @@ It is time to create a hotfix branch. These branches are forked not from develop
 
 As you can see, with the git-flow branching scheme it is very easy to collaborate in the development, document and maintain projects, even if the development team suffers major changes.
 
-## Using Github to manage our repositories
+### Using Github to manage our repositories
 
 GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere, and allows you to graphically interact and manage your repositories. Thanks to the multiple integrative options it has, it makes pretty easy to do lots of extra functions on it, like document your projects.
 
@@ -160,7 +160,7 @@ Unluckily, most of these previously mentioned functionalities are not well suite
 
 To document the project, you can use the Github web editor to write your README file in Mardown, and the wiki pages as this one to elaborate a bit more the usage guide of the software.
 
-## Git in the command line
+### Git in the command line
 
 Git is an example of a distributed version control system (DVCS) commonly used for open source and commercial software development. DVCSs allow full access to every file, branch, and iteration of a project, and allows every user access to a full and self-contained history of all changes. Unlike once popular centralized version control systems, DVCSs like Git don’t need a constant connection to a central repository. Developers can work anywhere and collaborate asynchronously from any time zone.
 
@@ -170,7 +170,7 @@ Of course, you are free to use all the git commands if you are already used to i
 
 Learning how to properly use git in the command line would also be great at long term for an experimented user, as it will give the user a deeper control of what they are doing and how to fix future issues which may not be already considered in this guide.
 
-## Combining all the previous in one workflow
+### Combining all the previous in one workflow
 
 Git will be our main tool which both git-flow and Github depends from. It is used in the command line, and has lots and lost of different options and functionalities. But to make it easier to get hands on work, we will use it only for creating our local copies of the repositories (git copy), change between branches when working (git checkout), create (git add ./) move (git mv <fromfile tofile>) and remove (git rm <file>) files, create commits (git commit -m "<message>") and update both the local (git pull) and remote (git push) repositories with the newest changes.
 
@@ -376,7 +376,7 @@ Version tags to the main repository have to be manually pushed:
 
 ## Download submodule
 
-```
+```Bash
 git submodule init
 git submodule update
 git submodule add git@github.com:<user>/submodule_dir.git submodule_dir
@@ -384,7 +384,7 @@ git submodule add git@github.com:<user>/submodule_dir.git submodule_dir
 
 ## Update submodule
 
-```
+```Bash
 cd submodule_dir
 git pull
 cd ..
@@ -394,28 +394,17 @@ git commit -m "Pulled down update to submodule_dir"
 
 ## Check files with merge conflicts
 
-```
+```Bash
 git diff --name-only --diff-filter=U
 ```
 
-# Extra documentation
+## Extra documentation
 
 Here you can find useful links in case you want to learn more about Git, Github and git-flow. You should not need anything apart from what has been previously explained (as long as everyone stick to the plan), but extra knowledge does not harm!
 
-## Git
-
 - [Pro Git Book](https://git-scm.com/book/en/v2)
-
-## git-flow
-
 - [Original post by its creator](http://nvie.com/posts/a-successful-git-branching-model/)
 - [Easy tutorial](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
 - [Even simpler tutorial](https://jeffkreeftmeijer.com/git-flow/)
-
-## Github
-
-- [Official guides](https://guides.github.com/)
-
-## Git is fun
-
-![http://www.htzcomic.com/2018/12/25/git/](http://www.htzcomic.com/comics/2018-12-25-1223.png)
+- [Github official guides](https://guides.github.com/)
+- [Git is fun](http://www.htzcomic.com/comics/2018-12-25-1223.png)
