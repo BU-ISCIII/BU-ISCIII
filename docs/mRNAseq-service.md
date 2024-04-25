@@ -133,7 +133,6 @@ Once the process is finished, within the differential expression directory (reme
 ### mRNAseq REPORT TEMPLATE (TEAM STANDUP)
 
 Once you have finished the analysis and analyzed the results you need to report to the rest of the members. Use this template to do it:
-SRVCNM1012_20231211_RNASEQ26_mcoiras_S :white_check_mark: 
 
 **SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S**
 * Servicio: [service name]
