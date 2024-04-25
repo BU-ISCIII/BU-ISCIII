@@ -75,7 +75,7 @@ There are different websites to download the schemas:
 
  _If you don't have the schema_ in the public repositories or for any reason, you HAVE TO create it, you can use:
 
-- [Tranis](https://github.com/BU-ISCIII/taranis)
+- [Taranis](https://github.com/BU-ISCIII/taranis)
 - [ChewBBACA](https://chewbbaca.readthedocs.io/en/latest/index.html)
 
 #### Create a schema with ChewBBACA
@@ -287,7 +287,7 @@ Once all the process is finished, within the `DATE_ANALYSIS01_CHEWBBACA` folder,
 
 Once all the service results are revised in the `scratch_tmp` folder, you can continue with the next BU-ISCIII tool: `finish` as explained [here](/link/to/tools/and/iskylims/TODO).
 
-When everything is propperly coppied into the SFTP folder, you can put the update in the `update_servicios` channel's _Team Standup Bot_, with the following template:
+When everything is properly coppied into the SFTP folder, you can put the update in the `update_servicios` channel's _Team Standup Bot_, with the following template:
 
 - _**SRVXXXXXX - ACRONYMXX**_ :no_entry: = No empezado, parado o esperando   :running: = Corriendo   :mag: = En revisión   :clipboard: = Finalizado copiandose a SFTP   :white_check_mark: = Finalizado y copiado a sftp
   - **Servicio**: Core genome or whole genome Multi-Locus Sequence Typing analysis (cg/wgMLST)
