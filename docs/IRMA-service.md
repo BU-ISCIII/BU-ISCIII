@@ -1,60 +1,136 @@
-# IRMA services
+# IRMA
 
-[IRMA (Iterative Refinement Meta-Assembler)](https://wonder.cdc.gov/amd/flu/irma/) was designed for the robust assembly, variant calling, and phasing of highly variable RNA viruses and is our go-to when analysing Influenza virus.
-This software does not include quality trimming of the raw reads by itself. Therefore, before the execution of the pipeline, the samples are analysed with [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for quality control and pre-processed with [Fastp](https://github.com/OpenGene/fastp?tab=readme-ov-file#fastp).
+IRMA does not include quality trimming of the reads by itself. Therefore, before the execution of the pipeline the samples are analysed with FastQC for quality control and pre-processed with fastp.
 
-## Step-by-step guide
+## FASTQC
 
-### 0. Create the service using [buisciii-tools](https://github.com/BU-ISCIII/buisciii-tools).
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
-- Create the service from the local terminal using Iskylims Resolution ID (e.g. `bu-isciii new-service SRVCNMXXX.X`). Type `N` to create the template folder and select the corresponding template folder.
-- A folder will be created in `services_and_colaborations/CENTRE/SERVICE_TYPE` with the full name of the service, in the following format (YYYYMMDD = YearMonthDay):
-`SRVCNMXXX_YYYYMMDD_GENOMEFLUXXX_researcheruser_S`
-- Go to the recently created folder. Check that the number of reading files matches the number of samples that was specified in the service in iSkyLIMS (the number of files must be number of samples x 2 if they are paired, since there is a file of forward readings and one of reverse readings)
-```
-cd SRVCNMXXX_YYYYMMDD_WGSTRIOXXX_researcheruser_S/RAW
-ls -l *.fastq.gz | wc -l
-```
-- If everything is alright, move to `ANALYSIS/` folder and execute `lablog` (This lablog might be named after the name of the template e.g. `lablog_irma`).
-- You will end up having two folders inside `ANALYSIS/`, one named `ANALYSIS01_FLU_IRMA` and `ANALYSIS02_MAG`
-- This first lablog will rename the ANALYSIS folders (`DATE_ANALYSIS01/02`) to the current date and create folder `00-reads` with symlinks to the fastq files in `RAW`.
-- Finally, move the folder to the computing resource using `bu-isciii scratch --direction service_to_scratch SRVCNMXXX.X`.
-- From now on, all the analysis must be executed from the folder located in scratch.
+<details markdown="1">
+<summary>Output files</summary>
 
-### 1. Quality Control (FastQC)
+- `fastqc/raw/`
+  - `*_fastqc.html`: FastQC report containing quality metrics.
+  - `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
 
-- Move to the first folder `cd *ANALYSIS01_FLU_IRMA/01-preproQC/`.
-- Read the lablog and execute it `bash lablog`. This will create an auxiliar script called `_01_rawfastqc.sh` and `logs/` folder.
-- [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is the software used in this step for quality control of the raw reads. You will need to load the module before executing with `module load`.
-- Now you are ready to execute `_01_rawfastqc.sh`.
+**NB:** The FastQC plots in this directory are generated relative to the raw, input reads. They may contain adapter sequence and regions of low quality. To see how your reads look after trimming please refer to the FastQC reports in the `fastqc/trim/` directory.
 
-### 2. Pre-processing (fastp)
+</details>
 
-- You can go on with this step while the first one is still running. Start with `cd 02-preprocessing`.
-- Read the lablog carefully to check that everything is correct. Then, execute it `bash lablog`.
-- Similar to the previous step, you will see `logs/` folder and auxiliar script.
-- Load the fastp module with `module load` and run `_01_fastp.sh` to execute [Fastp](https://github.com/OpenGene/fastp?tab=readme-ov-file#fastp)
+![](images/mqc_fastqc_plot.png)
 
-### 3. Post-processing QC
+## FASTP
 
-- Move to `03-procQC/`
-- This is exactly the same as step 1, but we will do a quality assessment of the reads previously filtered with fastp. 
+[Fastp](https://github.com/OpenGene/fastp?tab=readme-ov-file#fastp) is a tool designed to provide fast, all-in-one preprocessing for FastQ files. It has been developed in C++ with multithreading support to achieve higher performance. This tools is used to pre-process the reads using multiple filters. For this specific workflow it is used for quality trimming and to filter any short-reads, adapters, polyG and polyX. This software includes in its output an html with several stats that show the state of the reads before and after processing.
 
-### 4. IRMA
+<details markdown="1">
+<summary>Output files</summary>
 
-- In `04-irma/` you may find two files: `lablog` and `create_irma_stats.sh`. You should read them carefully before continuing with the analysis.
-- Execute the lablog `bash lablog`, this will create several scripts `_01_irma.sh` `_02_create_stats.sh` and `_03_post_processing.sh`, along with `logs/` folder.
-- Load the required modules with `module load` and execute the scripts sequentially.
+- `fastp/`
+  - `*.fastp.html`: Trimming report in html format.
+  - `*.fastp.json`: Trimming report in json format.
+- `fastp/log/`
+  - `*.fastp.log`: Trimming log file.
+- `fastqc/trim/`
+  - `*_fastqc.html`: FastQC report of the trimmed reads.
+  - `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
 
-### B-1. MAG
+</details>
 
-- [MAG](https://github.com/nf-core/mag) is used in this workflow to detect sources of contamination in the samples. You can read the [MAG_Documentation](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/MAG-service.md) for further description on the methodology of this analysis.
+![](images/mqc_fastp_plot.png)
 
-#### `RESULTS/` folder.
+## IRMA workflow
 
-Once the service is finished, go to `RESULTS/` and execute the corresponding lablog. Depending on the type of Influenza Virus found int he samples you may find different files, but you should always check the following:
+[IRMA (Iterative Refinement Meta-Assembler)](https://wonder.cdc.gov/amd/flu/irma/) was designed for the robust assembly, variant calling, and phasing of highly variable RNA viruses. IRMA is deployed for this service to analyse Influenza virus. IRMA is free to use and parallelizes computations for both cluster computing and single computer multi-core setups. You can read the [IRMA manuscript](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-016-3030-6#Sec9) for more background on the methodology. 
 
-- `krona_results.html` includes the multiQC html report from [MAG](https://github.com/BU-ISCIII/buisciii-tools/blob/main/bu_isciii/assets/reports/md/mag.md)
-- `all_samples_completo.txt` includes the fasta sequence for all the fragments in all the samples.
-- Depending on the virus types found in your samples, you will have one folder for each fragment found (e.g. A_H1 for Influenza A H1_N1)
-- In case of Influenza services (FLU), you will find a file named `flu_type_summary.txt`, which will include a summary of the different types of influenza found in your samples. This is the most relevant information to be included in your report.
+![](images/IRMA_workflow.png)
+
+**IRMA** uses several auxiliar softwares in its workflow:
+- [BLAT](http://www.kentinformatics.com/products.html) for the match step
+- [LABEL](https://wonder.cdc.gov/amd/flu/label), which also packages certain resources used by IRMA:
+  - [Sequence Alignment and Modeling System (SAM)](http://www.ncbi.nlm.nih.gov/pubmed/9927713) for both the rough align and sort steps
+  - [Shogun Toolbox](https://github.com/shogun-toolbox/shogun), which is an essential part of LABEL, is used in the sort step.
+- [SSW](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0082138) for the final assembly step.
+- [MINIMAP2](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778) for the final assembly step (alternate option that may be useful for long - read assemblies).
+- [samtools](http://samtools.sourceforge.net/) for BAM-SAM conversion as well as BAM sorting and indexing
+- [GNU Parallel](http://www.gnu.org/software/parallel/) for single node parallelization
+
+### IRMA output directory structure
+
+**_gene\_segment_** in the case of influenza can be any of the following: [HA, NA, NS, MP, NP, PA, PB1, PB2] and HE for Influenza-C
+
+**Final files:**
+- **_gene\_segment_.bam**			Sorted BAM file for the final gene_segment assembly (merged if applicable)
+- **_gene\_segment_.bam.bai**			BAM file index for gene_segment assembly
+- **_gene\_segment_.fasta**			Final assembled plurality consensus (no mixed base calls) for gene_segment
+- **_gene\_segment_.a2m**			Optional file: Plurality consensus aligned to profile HMM
+- **_gene\_segment_.vcf**			Custom variant call file for called IRMA variants for each gene segment
+
+**Folders:**
+<u>**amended_consensus/</u>**: Assembled consensus per gene segment with missed based calls. Numbers correspond to fragments in $SEG_NUMBERS
+- **_sample\_name_\__fragment\_number_.fa**		Amended consensus
+- **_sample\_name_\_7.a2m**		Optional output: amended global alignment to profile HMM
+- **_sample\_name_\_7.pad.fa**		Optional output: N-padded consensus for amplicon dropouts
+
+<u>**figures/**</u>
+  - **_gene\_segment_-coverageDiagram.pdf**		Shows coverage and variant calls
+  - **_gene\_segment_-heuristics.pdf**		Heuristic graphs for gene segment
+  - **_gene\_segment_-EXPENRD.pdf**		gene segment variant phasing using experimental enrichment distances
+  - **_gene\_segment_-JACCARD.pdf**		gene segment variant phasing using modified Jaccard distances
+  - **_gene\_segment_-MUTUALD.pdf**		gene segment variant phasing using mutual association distances
+  - **_gene\_segment_-NJOINTP.pdf**		gene segment variant phasing using normalized joint probability distances
+  - **READ_PERCENTAGES.pdf**		Break down for reads assembled
+
+<u>**intermediate/**</u> Intermediate data for each step
+  - <u>**0-ITERATIVE-REFERENCES/**</u>
+    - **R0-_gene\_segment_.ref**	Starting reference library sequence for segment
+    - **R1-_gene\_segment_.ref**	Gene segment working reference after round 1,template for round 2
+    - **R2-_gene\_segment_.ref**	Working reference for gene segment after round 2
+  - <u>**1-MATCH_BLAT/**</u>		
+    - **R1.tar.gz**	
+    - **R2.tar.gz**	Archive of BLAT results for the MATCH step
+    - **R3.tar.gz**	
+  - <u>**2-SORT_BLAT/**</u>		
+    - **R1.tar.gz**	Classification/sorting intermediate files for round 1
+    - **R1.txt**	Summary statistics of sorting results for round 1
+    - **R2.tar.gz**	Classification/sorting intermediate files for round 2
+    - **R2.txt**	Summary statistics of sorting results for round 2
+  - <u>**3-ALIGN_SAM/BLAT/**</u>		
+    - **storedCounts.tar.gz**	Statistic files used to create rough consensus sequences
+  - <u>**4-ASSEMBLE_SSW/**</u>	Final assembly phase intermediate iterativeresuls
+    - **F1-_gene\_segment_.bam**	Unsorted BAM file for gene segment assembly iteration 1
+    - **F1-_gene\_segment_.ref**	Reference for final assembly, gene segment,   iteration 1
+    - **F2-_gene\_segment_.bam**	Unsorted BAM file for gene segment assembly,   iteration 2
+    - **F2-_gene\_segment_.ref**	Reference for final assembly, gene segment,   iteration 2
+    - **reads.tar.gz**	Archive of sorted, unmerged reads by gene segment
+
+<u>**logs/**</u>		
+  - **ASSEMBLY_log.txt**		SSw scores per all rounds tried in the iterative refinement
+  - **NR_COUNTS_log.txt**		Read pattern counts at various stages
+  - **QC_log.txt**		Quality control output
+  - **READ_log.txt**		Counts of assembled reads from BAM files
+  - **FLU-_sample\_name_.sh**		Configuration file corresponding to this IRMA run
+  - **run_info.txt**		Table of parameters used by the IRMA run
+
+<u>**matrices/**</u>			Phasing matrices used to generate heat maps
+  - **_gene\_segment_-EXPENRD.sqm**	
+  - **_gene\_segment_-JACCARD.sqm**		
+  - **_gene\_segment_-MUTUALD.sqm**		
+  - **_gene\_segment_-NJOINTP.sqm**	
+
+<u>**secondary/**</u>			
+  - **R1-A_NA_N1.fa**		Trace A_NA_N1 sorted into secondary status
+  - **R1-UNRECOGNIZABLE.fa**		Read patterns that matched flu but had poor signal according to LABEL
+  - **R2-UNRECOGNIZABLE.fa**		
+  - **unmatched_read_patterns.tar.gz**		Archive of left over read patterns that did not match FLU
+
+<u>**tables/**</u>			
+  - **_gene\_segment_-pairingStats.txt**		Summary of paired-end merging statistics, if applicable, gene segment
+  - **_gene\_segment_-coverage.txt**		Summary coverage statistics for assembly, gene segment
+  - **_gene\_segment_-coverage.a2m.txt**		Optional file: Coverage statistics for plurality consensus globally aligned to profile HMM
+  - **_gene\_segment_-coverage.pad.txt**		Optional file: Coverage statistics for padded plurality consensus globally aligned to profile HMM
+  - **_gene\_segment_-allAlleles.txt**		Statistics for every position & allele in the assembly, gene segment
+  - **_gene\_segment_-insertions.txt**		Called insertion variants for gene segment
+  - **_gene\_segment_-deletions.txt**		Called deletion variants for gene segment
+  - **_gene\_segment_-variants.txt**		Called single nucleotide variants for gene segment
+  - **READ_COUNTS.txt**		Read counts for various points in the assembly process
