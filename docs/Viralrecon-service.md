@@ -21,8 +21,6 @@ Move to `/ANALYSIS`. Configure the `samples_ref.txt` file according to the servi
 
     $ bash lablog_viralrecon
 
-Este script consulta al usuario a través del prompt el tipo de análisis que va a llevarse a cabo (AMPLICONS o METAGENOMICS), establece los archivos de configuración de la carpeta `../DOC` conforme a esta decisión y crea una carpeta por cada hospedador que haya sido especificado en `samples_ref.txt` (normalmente solo 1).
-
 This script prompts the user for the type of analysis to be performed (AMPLICONS or METAGENOMICS), sets up the configuration files in the `../DOC` folder and creates a folder for each host specified in samples_ref.txt (usually only 1).
 
 > Note: In case the service has special requirements, additional configurations may be necessary.
