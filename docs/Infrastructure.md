@@ -1,3 +1,5 @@
+# Infrastructure
+
 BU-ISCIII infrastructure comprises several levels of computing resources:
 
 1. Workstations: personal computers located in BU-ISCIII labs.
@@ -5,6 +7,5 @@ BU-ISCIII infrastructure comprises several levels of computing resources:
 3. HPC-ISCIII: shared high performance resource located in ISCIII's CPD.
 
 A schematic (not realistic) image of the infrastructure would be the following, being each resource in a different sub network inside ISCIII's IT systems.
-<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/master/images/bu-isciii_infrastructure.png" width="70%"/>
 
-
+<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/bu-isciii_infrastructure.png" width="70%"/>
