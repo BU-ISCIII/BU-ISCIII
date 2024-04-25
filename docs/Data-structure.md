@@ -1,6 +1,6 @@
 ## Introduction
 
-In this document we'll describe how BU-ISCIII's filesystem works. 
+In this document we'll describe how BU-ISCIII's filesystem works.
 
 There are two main folders used by BU-ISCIII:
 
