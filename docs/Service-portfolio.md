@@ -66,7 +66,6 @@ Genomic Data Analysis:
     <br>
     For the correct performance of the pipeline, it is necessary to provide some input documents:
 
-    ---
 
     * **PRIMERS BED FILE**.
     In case of amplicon-based method, we need to provide a BED file with primer coordinates for the mapping step.
@@ -88,7 +87,7 @@ Genomic Data Analysis:
       - At least one row for every sample must be included in the document.
       - If a sample is required to be analyzed against different references (individually), one row for each one is required.
       - For multifasta documents (e.g. fragmented genomes or custom documents) containing several references, their name should be specified in the Reference column.
-    ---
+
     </details>
     
   - Viral Flu: Influenza fragment reconstruction and variant detection ([IRMA](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/IRMA))
