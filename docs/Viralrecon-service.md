@@ -114,9 +114,10 @@ When there's a mix of full-numerical and strings in sample IDs (e.g. `87439.fast
 
 [Service description and references used]
 
-* **Número de muestras**: XX
-* **Estado**: Finalizado y copiado al sftp
-* **Instrumento y longitud**: Nextseq (2x150)
-* **Cantidad de lecturas**: XXM - XXM
-* **Calidad general**: Buena
-* **Incidencia muestras individuales**:
+- **Número de muestras**: 10
+- **Estado**: Finalizado y copiado al sftp
+- **Instrumento y longitud**: Nextseq (2x150)
+- **Cantidad de lecturas**: 0,5M - 2.4M
+- **Calidad general**: Buena
+- **Incidencia muestras individuales**:
+    - 2 muestras no consiguen mapear (CONTROLNEGATIVO y POSUL54). Tienen muy pocas lecturas, baja calidad y elevado porcentaje de secuencias sobrerrepresentadas.
