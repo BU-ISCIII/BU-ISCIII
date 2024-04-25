@@ -32,6 +32,7 @@
       - [cg/wgMLST service](./cgMLST-wgMLST-service.md)
       - [Lineage specific variants from outbreak-info](./Lineage-specific-variants_from_outbreak-info.md)
       - [mRNA-seq service](./mRNAseq-service.md)
+      - [Pikavirus service](./PikaVirus-service.md)
 - [[Github and development]]
   - [[Github gitflow]]
   - [[ZSH and OH-MY-ZSH]]
