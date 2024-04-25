@@ -13,11 +13,7 @@ Once these commands have been executed, you'll get a list of all the folders (ea
 
 For the new service, your service acronym will be this number + 1. For example, if the last folder after executing `ll -tr` is `SRVCNM1120_20240418_ASSEMBLY482_lherrera_S`, the service acronym for your new service will be _**ASSEMBLY483**_. Specify this in the form that appears after clicking on _Add resolution_, and click on **_Accept_**.
 
-Now, considering you've already created a buisciii-tools conda environment and installed the tools (this will be necessary eventually) in your local PC, log into your HPC user:
-
-```
-ssh -X -p 32122 youruser@portutatis.isciii.es
-```
+Now, considering you've already created a buisciii-tools conda environment and installed the tools (this will be necessary eventually) in your local PC, log into your HPC user.
 
 Once you're logged in, go into the `services_and_colaborations` folder:
 
