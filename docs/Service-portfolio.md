@@ -23,21 +23,22 @@ Genomic Data Analysis:
   - Bacteria: _De novo_ genome assembly and annotation ([Assembly](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/assembly))
   - Bacteria:  In-depth analysis of Mycobacterium species genomes (e.g. _M. tuberculosis_. _M. bovis_) ([MTBSeq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/mtbseq))
   - Bacteria: Plasmid analysis and characterization ([PlasmidID](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/plasmidid))
-  PlasmidID is a mapping-based, assembly-assisted plasmid identification tool that analyzes and gives graphic solution for plasmid identification.
-
-  PlasmidID is a computational pipeline that maps Illumina reads over plasmid database sequences. The k-mer filtered, most covered sequences are clustered by identity to avoid redundancy and the longest are used as scaffold for plasmid reconstruction. Reads are assembled and annotated by automatic and specific annotation. All information generated from mapping, assembly, annotation and local alignment analyses is gathered and accurately represented in a circular image which allow user to determine plasmidic composition in any bacterial sample.
-
-  Below are the files that **researchers NEED to provide** when requesting the RNA-seq service.
   
-  <details markdown="1">
-  <summary>Required information for service request</summary>
-  - As default annotation databases we use:
-    - AMR resistance genes: Card database
-    - Virulence genes: VirulenceFinder database
-    - IS: NCBI sequences
-    - Rep/INC genes: plasmidFinder database (Caratoli et al. 2014)
-  - If you want a specific database you need to provide a multifasta with the sequence features you want to annotate, or indicate a url where we can download the resource.
-  </details>
+    PlasmidID is a mapping-based, assembly-assisted plasmid identification tool that analyzes and gives graphic solution for plasmid identification.
+
+    PlasmidID is a computational pipeline that maps Illumina reads over plasmid database sequences. The k-mer filtered, most covered sequences are clustered by identity to avoid redundancy and the longest are used as scaffold for plasmid reconstruction. Reads are assembled and annotated by automatic and specific annotation. All information generated from mapping, assembly, annotation and local alignment analyses is gathered and accurately represented in a circular image which allow user to determine plasmidic composition in any bacterial sample.
+
+    Below are the files that **researchers NEED to provide** when requesting the RNA-seq service.
+
+    <details markdown="1">
+    <summary>Required information for service request</summary>
+    - As default annotation databases we use:
+      - AMR resistance genes: Card database
+      - Virulence genes: VirulenceFinder database
+      - IS: NCBI sequences
+      - Rep/INC genes: plasmidFinder database (Caratoli et al. 2014)
+    - If you want a specific database you need to provide a multifasta with the sequence features you want to annotate, or indicate a url where we can download the resource.
+    </details>
 
   - Bacteria: Multi-Locus Sequence Typing (MLST), analysis of virulence factors, antimicrobial resistance, and plasmids characterization ([characterization](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/characterization))
   - Bacteria: Core genome or whole genome Multi-Locus Sequence Typing analysis (cg/wgMLST) (TODO wgmlst_chewbbaca)
