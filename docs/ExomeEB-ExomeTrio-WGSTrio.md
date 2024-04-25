@@ -33,22 +33,22 @@ ls -l *.fastq.gz | wc -l
   - `../../DOC/family.ped` a file containing the pedigree of the samples in [PED format](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
      - You should check the `family.ped` file when there are more than 3 samples in the case of trios, as it might need some editing.
 
-- As indicated in the lablog. Before running `_01_run_sarek.sh` you need to load the required modules with `module load`
-- Then, you can run `bash _01_run_sarek`.
+- As indicated in the lablog. Before running `_01_run_sarek.sh` you need to load the required modules: `module load Nextflow singularity`
+- Then, you can run `bash _01_run_sarek` 
 - Once sarek is finished, you can run `_02_clean.sh`, an auxiliar script that removes folders generated during the workflow which are not used in further steps of the analysis.
 
 #### 2.2 Mapping stats with Picard.
 
 In this service, [Picard](https://broadinstitute.github.io/picard/) is used to gather mapping quality metrics into a single table that can be easily inspected.
 - For this task, start by moving to the folder: `cd 99-stats`
-- Load the modules and execute the lablog: `module load ****; bash lablog`. This lablog will generate two scripts:
+- Load the modules and execute the lablog: `module load picard; bash lablog`. This lablog will generate two scripts:
   - `_01_picardHsMetrics.sh` runs picard to analyze the `sample.cram` files from sarek's results and output [multiple quality metrics](http://broadinstitute.github.io/picard/picard-metric-definitions.html#HsMetrics).
   - ` _02_hsMetrics_all.sh` filters the output from the previous step, keeping only the most relevant columns regarding mapping stats.
 
 ### 3. Post-processing of results from sarek.
 
 - Enter the post-processing folder and execute the lablog: `cd 02-postprocessing; bash lablog`
-- Load the corresponding modules that can be found in the lablog with `module load ****`
+- Load the corresponding modules that can be found in the lablog: `module load GATK/X.X.X...`
 - Sequentially execute each of the scripts previously generated to filter the results from Sarek's variant calling (vcf):
   - `_01_separate_snps_indels.sh` separates SNPs and indels into two different vcf files: `snps.vcf.gz` & `indels.vcf.gz`
   - `_02_filter.sh` apply several filters to process the vcf files.
@@ -57,7 +57,7 @@ In this service, [Picard](https://broadinstitute.github.io/picard/) is used to g
 
 ### 4. Annotation.
 
-This step is performed apart from sarek because we aim to provide a more thorough annotation of the variants, which will include prediction of effect and correlation with the disease thanks to [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html). This latter will also include inheritance typing.
+This step is performed apart from sarek because we aim to provide a more thorough annotation of the variants, which will include prediction of effect and correlation with the disease thanks to [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html). This latter will also include inheritance mode.
 
 - Move to the folder: `cd 03-annotation`. Which will contain the following files:
 - Before executing the lablog, you might need to modify exomiser's configuration file (`exomiser_configfile.yml`):
@@ -65,17 +65,24 @@ This step is performed apart from sarek because we aim to provide a more thoroug
   - For both **exomeEB** and **exometrio**, make sure that the bed files are correctly located in `REFERENCES/`: e.g. `Illumine_Exome_CEX_TargetedRegions.bed` as this is the variable going into the line `intervalFilter: {bed: BED_FILE}`
   - When running both **wgstrio** and **exometrio** services, make sure that the `family.ped` pedigree file is correctly generated, as it is essential to perform inheritance mode prediction.
 - Now you can run the lablog: `bash lablog`. Double-check that the previous variables are correctly located in the configuration file.
-- Load the modules as indicated in the lablog: `module load ****`
+- Load the modules as indicated in the lablog: `module load BCFtools/X.X.X VEP/X.X.X R/X.X.X Java/X.X.X`
 
 We are ready to initialize the annotation process:
 - `bash 01_run_bcftools_query` will execute `_01_bcftools_query`, using awk and BCFtools [query](https://samtools.github.io/bcftools/howtos/query.html) to modify the VCF of variants created in 02-postprocessing (`variants.fil_mod.vcf`) and will create a table of variants inside vep folder: `vep/variants.table`.
 - `_02_vep_annotation.sh` will annotate all variants from the exome/WGS analysis (takes `variants.fil_mod.vcf` and creates `vep_annot.vcf`)
 - `_03_vep_plugin_NSFP_parse.sh` calls the auxiliar script `Merge_All.R` which edits `vep_annot.vcf` and paste the columns from VEP-plugin (located in /vep/variants.table) and the genic data from the [dbNSFP database](http://database.liulab.science/dbNSFP), generating a bigger table `variants_annot_all.tab`. This table is filtered using AWK to keep only low frequency variants in `variants_annot_filterAF_head.tab`.
-  - For ExomeEB, this script is separated into 3 scripts: 
+  - For ExomeEB, this script is split into 3 scripts: 
     - `_03_merge_data1.sh` creates a table `/vep/vep_dbNSFP.txt` with the genic data from dbNSFP database.
     - `_04_merge_data2.sh` merges the data from the previous table with the `variants.table` from sarek vcf, creating `variants_annot_all.tab`.
     - `_05_conseq_filtering.sh` filters variants that are moderately and highly present, creating `variants_annot_highmoderate.tab`.
 - The next step is running exomiser (`_04_exomiser_*.sh` or `_06_exomiser_exome.sh` for exomeEB), which differs between the pipelines:
-  - In exomeEB exomiser will target relevant genes for the disease and will not offer inheritance typing.
-  - For exometrio and WGStrio, it won't target specific genes, but will use `DOC/family.ped` file to separate variants depending on the inheritance type.
-- Finally, for trio services, `_05_filter_heritance_ALL.sh` separates the annotated variants in `/variants_annot_all.tab` depending on the type of inheritance into multiple files called `vep_annot_**.txt`.
+  - In exomeEB exomiser will target relevant genes for the disease and will not offer inheritance mode.
+  - For exometrio and WGStrio, it won't target specific genes, but will use `DOC/family.ped` file to split variants depending on the inheritance mode.
+- Finally, for trio services, `_05_filter_heritance_ALL.sh` splits the annotated variants in `/variants_annot_all.tab` depending on the mode of inheritance into multiple files called `vep_annot_**.txt`.
+
+Once the service is finished, you should go to results and execute the corresponding lablog. Depending on the service you may find different files, but you should always check the following files:
+- `multiqc_report.html` for quality control.
+- `mapping_metrics.csv` to check the overall coverage and mapping quality.
+- `variant_annot*.tab` can be used to find the variants with the highest predicted effect by vep. It can also be used to find low frequency variants (e.g. AF < 0.05|0.01).
+- `exomiser.html` in **exomeEB services** to select the most relevant genes found, based on exomiser and variant scores.
+
