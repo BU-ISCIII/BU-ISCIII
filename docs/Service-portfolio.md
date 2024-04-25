@@ -45,55 +45,90 @@ Genomic Data Analysis:
   - Bacteria: Core genome or whole genome Multi-Locus Sequence Typing analysis (cg/wgMLST) (TODO wgmlst_chewbbaca)
   - Viral: Genomic reconstruction, variant calling and _de novo_ assembly ([viralrecon](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/viralrecon))
   - Viral Flu: Influenza fragment reconstruction and variant detection ([IRMA](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/IRMA))
-- RNAseq: Transcriptome sequencing  ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
+- mRNAseq: Transcriptome sequencing  ([mrnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
   - Differential Gene Expression (DEG) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
   After quantification, differntial expression analysis is carried out with [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
   Below are the files that **researchers NEED to provide** when requesting the RNA-seq service.
-  <details markdown="1">
-  <summary>Required information for service request</summary>
-    <b>Service Notes Description</b>
-    In this field (when requesting service in <i>iskylims</i>), the researcher needs to provide relevant information such as which type of NGS data is going to be analyzed. Options include:
 
-      Genes (mRNA)
-      Transcripts
-
-    **comparatives.txt**
-
-    The `comparatives.txt` file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
-
-    1. Incremental index representing each comparison.
-    2. Baseline group/s.
-    3. Group against which the baseline group/s in the first column is compared.
-
-    Example:
-
-    ```Bash
-    1 Treatment Control
-    2 Treatment       Control
-    3 Treatment       Control
-    4 Treatment1-Treatment2       Control1-Control2
-    ```
-
-    **clinical_data.txt**
-
-    The `clinical_data.txt` file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
-
-  - **Name:** Sample name.
-  - **Group:** Group to which the sample belongs.
-
-    Example:
-
-    ```Bash
-       Name    Group
-    ```
-
-  </details>
+    <details markdown="1">
+    <summary>Required information for service request (genes)</summary>
+      **Service Notes Description** 
+      When requesting a service in iskylims, researchers are required to provide pertinent details, including the type of NGS data intended for analysis. Please be specific when requesting the mRNA-seq service by indicating something like: 'mRNAseq for genes'.
+  
+      **comparatives.txt**
+  
+      The `comparatives.txt` file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
+  
+      1. Incremental index representing each comparison.
+      2. Baseline group/s.
+      3. Group against which the baseline group/s in the first column is compared.
+  
+      Example:
+  
+      ```Bash
+      1 Treatment Control
+      2 Treatment       Control
+      3 Treatment       Control
+      4 Treatment1-Treatment2       Control1-Control2
+      ```
+  
+      **clinical_data.txt**
+  
+      The `clinical_data.txt` file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
+  
+    - **Name:** Sample name.
+    - **Group:** Group to which the sample belongs.
+  
+      Example:
+  
+      ```Bash
+         Name    Group
+      ```
+  
+    </details>
 
   - Differential transcript expression (DET) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
   After quantification, differntial expression analysis is carried out with [fishpond](https://www.bioconductor.org/packages/release/bioc/html/fishpond.html).
   Below are the files that researchers need to provide when requesting the RNA-seq service.
+    </details>
+    <details markdown="1">
+    <summary>Required information for service request (transcripts)</summary>
+      **Service Notes Description**
+      When requesting a service in iskylims, researchers are required to provide pertinent details, including the type of NGS data intended for analysis. Please be specific when requesting the mRNA-seq service by indicating something like: 'mRNAseq for transcripts'.
+
+      **comparatives.txt**
+
+      The `comparatives.txt` file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
+
+      1. Incremental index representing each comparison.
+      2. Baseline group/s.
+      3. Group against which the baseline group/s in the first column is compared.
+
+      Example:
+
+      ```Bash
+      1 Treatment Control
+      2 Treatment       Control
+      3 Treatment       Control
+      4 Treatment1-Treatment2       Control1-Control2
+      ```
+
+      **clinical_data.txt**
+
+      The `clinical_data.txt` file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
+
+    - **Name:** Sample name.
+    - **Group:** Group to which the sample belongs.
+
+      Example:
+
+      ```Bash
+         Name    Group
+      ```
+    </details>
+
   - Differential miRNA expression (DEM) (TODO mirnaseq)
   - Gene expression changes over a series of time points (TODO timeseries_rnaseq)
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
