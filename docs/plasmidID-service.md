@@ -70,6 +70,8 @@ bu-isciii bioinfo-doc SRVCNMXXX.X
 
 ### mRNAseq report template (TEAM STANDUP)
 
+Once you have finished the analysis and analyzed the results you need to report to the rest of the members. Use this template to do it:
+
 **SRVXXXYYYY_YYYYMMDD_PLASMIDIDZZZ_researcher_S**
 
 - Servicio: [service name]
