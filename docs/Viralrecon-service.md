@@ -43,6 +43,23 @@ This script generates different scripts that must be executed in an orderly mann
 
     $ bash _01_run_<reference1>.sh
 
+---
+
+**NOTE FOR AMPLICONS**
+
+In the case of analysis of sequenced samples using amplicons, the primer_bed with the coordinates of the primers must be provided. If a de novo assembly is being carried out, it is also necessary to provide a fasta file with the sequences of the primers. These 2 files can be placed in the `../../REFERENCES` folder. **Before running the `_01_run_<reference1>.sh` script**, the following lines must be added to the end of the corresponding `<reference>_viralrecon.sbatch` file:
+
+    --primer_bed ../../REFERENCES/Primers_scheme_rsv.bed \
+    --primer_fasta ../../REFERENCES/RSV_primers.fasta
+
+Furthermore, in the case of RSV analysis, the type of virus (A or B) must be specified by adding `rsv_a` or `rsv_b` in the next line:
+
+    --nextclade_dataset_name 'rsv_x'
+
+* Note: If you only have the sequence of the primers, you can create your own scheme.bed file using blast. Check [How to create scheme.bed](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Viralrecon-service#how-to-create-schemebed) for more information.
+
+---
+
 Running this script will spawn the pipeline in the SLURM process queue. You can monitor the pipeline progress by checking the newly generated log file.
 
     $ tail -f <reference>_date_viralrecon.log
@@ -95,6 +112,34 @@ Lastly, remember to remove all the files related to this service from `scratch_t
 
     $ bu-isciii scratch SRVCNMXXX.X
     > remove_scratch
+
+
+### How to create scheme.bed
+
+`scheme.bed` is a file that contains coordinates of where your primers are located inside a reference in a table format. The columns are:
+
+| Column Index  | Name | Description  
+| ------------- | ------------- | ------------- |
+| 1  | chrom  | The reference genome.  |
+| 2  | chromStart  | Start position of the sequence  |
+| 3  | chromEnd  | Ending position of the sequence  |
+| 4  | name  | Primer name (make sure its the same as `primers.fasta`)  |
+| 5  | primerPool  | Primer pool (irrelevant most of the times)  |
+| 6  | strand  | Orientation of the strand |
+
+If the reference selected for the service has changed, it is quite likely that your primers now land on different positions of the genome. Therefore, you will need to create a new bed file with the new coordinates.
+
+To do so, you can use blast in order to align your sequences to your reference:
+`blastn -num_threads 10 -evalue 1 -task 'blastn-short' -subject /data/bi/references/virus/RSV/your_reference.fasta -query primers.fasta -out blast.txt -outfmt '6 stitle std slen qlen qcovs' -num_alignments 1`
+
+This will generate a series of alignments with your primers sequences in `blast.txt`. Lets add a header so it's easier to understand:
+
+`echo 'stitle    qaccver saccver pident  length  mismatch        gapopen qstart  qend    sstart  send    evalue  bitscoreslen    qlen    qcovs' | cat - blast.txt > blast_mod.txt`
+
+**Note:** You need only one row per primer in your scheme.bed but you will most likely find some queries that don't match exactly with the reference. In these cases you should try to select the ones with the `length` as close to the `qlen` as possible but keeping the `pident` as high as possible too (try to find a balance between the two metrics)
+
+Once you have selected the corresponding lines, you can execute an auxiliar script called `blast_parser.py` (you may find it in `/data/bi/references/auxiliar_scripts/`) to do the rest of the work:
+```python3 blast_parser.py blast_mod.txt scheme.bed```
 
 ### Common errors while running the service
 
