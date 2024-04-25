@@ -1,27 +1,29 @@
-## General Code Style
+# General Code Style
 
 While you should follow the code style that's already there for files that you're modifying, the following are required for any new code.
 
-### Indentation
+## Indentation
 
 Indent 4 spaces. No tabs.
 
 Use blank lines between blocks to improve readability. Indentation is four spaces. Whatever you do, don't use tabs. For existing files, stay faithful to the existing indentation.
 
-### Pipelines
+## Pipelines
 
-Pipelines should be split one per line if they don't all fit on one line. 
+Pipelines should be split one per line if they don't all fit on one line.
 
 If a pipeline all fits on one line, it should be on one line.
 
 If not, it should be split at one pipe segment per line with the pipe on the newline and a 2 space indent for the next section of the pipe. This applies to a chain of commands combined using '|' as well as to logical compounds using '||' and '&&'.
 
-##### _Bad:_
+### _Bad:_
+
 ```shell
 command1 | command2 | command3 | command4 | command5 | command6 | command7
 ```
 
-##### _Good:_
+### _Good:_
+
 ```shell
 command1 \
     | command2 \
@@ -29,30 +31,34 @@ command1 \
     | command4
 ```
 
-##### _Good:_ All fits on one line
+### _Good:_ All fits on one line
+
 ```shell
 command1 | command2
 ```
 
 When possible, use environment variables instead of shelling out to a command.
 
-##### _Bad:_
+### _Bad:_
+
 ```shell
 $(pwd)
 ```
 
-##### _Good:_
+### _Good:_
+
 ```shell
 $PWD
 ```
 
 TODO: Add a list of all environment variables you can use.
 
-###  If / For / While
+### If / For / While
 
 Put `; do` and `; then` on the same line as the `while`, `for` or `if`.
 
-##### _Good:_
+### _Good:_
+
 ```shell
 for dir in ${dirs_to_cleanup}; do
     if [[ -d "${dir}/${ORACLE_SID}" ]]; then
@@ -76,7 +82,8 @@ done
 
 Ensure that local variables are only seen inside a function and its children by using `local` or other `typeset` variants when declaring them. This avoids polluting the global name space and inadvertently setting or interacting with variables that may have significance outside the function.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 function func_bad() {
     global_var=37  #  Visible only within the function block
@@ -91,7 +98,8 @@ echo "global_var = $global_var"  # global_var = 37
                                  # Has been set by function call.
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 func_good() {
     local local_var=""
@@ -110,7 +118,8 @@ echo "global_var = $global_var" # move function result to global scope
 
 In the next example, lots of global variables are used over and over again, but the script "unfortunately" works anyway. The `parse_json()` function does not even return a value and the two functions shares their variables. You could also write all this without any function; this would have the same effect.
 
-##### _Bad:_ with global variables
+#### _Bad:_ with global variables
+
 ```shell
 #!/bin/bash
 
@@ -154,7 +163,8 @@ echo "foobar: $counter - $i"
 
 In shell scripts, it is less common that you really want to reuse the functionality, but the code is much easier to read if you write small functions with appropriate return values and parameters.
 
-##### _Good:_ with local variables
+#### _Good:_ with local variables
+
 ```shell
 #!/bin/zsh
 
@@ -206,12 +216,14 @@ echo "foobar: $counter - $i"
 
 All caps, separated with underscores, declared at the top of the file. Constants and anything exported to the environment should be capitalized.
 
-##### _Constant:_
+#### _Constant:_
+
 ```shell
 readonly PATH_TO_FILES='/some/path'
 ```
 
 ##### _Constant and environment:_
+
 ```shell
 declare -xr ORACLE_SID='PROD'
 ```
@@ -245,7 +257,8 @@ fi
 
 Private or utility functions should be prefixed with an underscore:
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 _helper-util()  {
     ...
@@ -256,7 +269,8 @@ _helper-util()  {
 
 After a script or function terminates, a `$?` from the command line gives the exit status of the script, that is, the exit status of the last command executed in the script, which is, by convention, 0 on success or an integer in the range 1 - 255 on error.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 my_bad_func() {
     # didn't work with zsh / bash is ok
@@ -274,7 +288,8 @@ my_bad_func() {
 }
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 my_good_func() {
     # didn't work with zsh / bash is ok
@@ -294,26 +309,32 @@ my_good_func() {
     return 1
 }
 ```
+
 Example:
+
 ```Bash
 command &>> log_file || error ${LINENO} $(basename $0) "See log for more information. \ncommand: \n commando + params"
 
 ```
+
 ### Check return values
 
 Always check return values and give informative error messages. For unpiped commands, use `$?` or check directly via an if statement to keep it simple. Use nonzero return values to indicate errors.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 mv "${file_list}" "${dest_dir}/"
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 mv "${file_list}" "${dest_dir}/" || exit 1
 ```
 
-##### _Good:_ use "$?" to get the last return value
+#### _Good:_ use "$?" to get the last return value
+
 ```shell
 mv "${file_list}" "${dest_dir}/"
 if [[ "$?" -ne 0 ]]; then
@@ -321,6 +342,7 @@ if [[ "$?" -ne 0 ]]; then
     exit 1
 fi
 ```
+
 You can use this function for each important command evaluation:
 
 ```Bash
@@ -331,8 +353,8 @@ error(){
     local message="$3"
     local code="${4:-1}"
 
-	RED='\033[0;31m'
-	NC='\033[0m'
+ RED='\033[0;31m'
+ NC='\033[0m'
 
     if [[ -n "$message" ]] ; then
         echo -e "\n---------------------------------------\n"
@@ -350,6 +372,7 @@ error(){
 }
 
 ```
+
 ## Features and Bugs
 
 ### Command Substitution
@@ -358,12 +381,14 @@ Use `$(command)` instead of backticks.
 
 Nested backticks require escaping the inner ones with `\`. The `$(command)` format doesn't change when nested and is easier to read.
 
-##### _Bad:_
+#### _Bad:_
+
 ```shell
 var="`command \`command1\``"
 ```
 
-##### _Good:_
+#### _Good:_
+
 ```shell
 var="$(command "$(command1)")"
 ```
@@ -373,11 +398,14 @@ var="$(command "$(command1)")"
 Eval is evil! Eval munges the input when used for assignment to variables and can set variables without making it possible to check what those variables were. Avoid `eval` if possible.
 
 ### Script template
+
 You can use this [file]() as template for creating a new script.
 
 ### Dependency check
+
 You can dependency check using this script:
-```
+
+```shell
 #!/bin/bash
 
 #=============================================================
@@ -400,7 +428,7 @@ VERSION=1.0
 #SHORT USAGE RULES
 #LONG USAGE FUNCTION
 usage() {
-	cat << EOF
+ cat << EOF
 Check_dependencies Short function to evaluate if files exist
 usage : $0 <program_name1> [program_name2] ...
 example: lib/check_dependencies.sh foo bar
@@ -432,8 +460,8 @@ for command in "$@"; do
 
     printf '%s' $command
     if ! [ -x "$(which $command 2> /dev/null)" ]; then
-		
-		
+  
+  
         printf $distance_expression
         printf "${RED}NOT INSTALLED${NC} \n"
         let missing_dependencies++
@@ -448,8 +476,10 @@ if [ $missing_dependencies -gt 0 ]; then
     exit 1
 fi
 ```
+
 ### Mandatory files checking
-```
+
+```shell
 #!/bin/bash
 
 #=============================================================
@@ -498,6 +528,7 @@ if [ $missing_files -gt 0 ]; then
     exit 1
 fi
 ```
+
 ## References
 
 - [Shell Style Guide](https://google.github.io/styleguide/shell.xml)
