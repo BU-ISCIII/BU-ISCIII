@@ -8,7 +8,7 @@
    4. [[High Performance Computing (ISCIII-HPC)]]
       - [[Usage]]
       - [[Issues]]
-   5. [[Storage]]
+   5. Storage
       - [[SFTP management]]
    6. [[Data structure]]
       - [[bioinfo_doc]]
