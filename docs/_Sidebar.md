@@ -31,7 +31,7 @@
       - [[IRMA service]]
       - [[PlasmidID service]]
       - [[cgMLST wgMLST service]]
-      - [[mRNA-seq service]]
+      - [[mRNAseq service]]
       - [[Pikavirus service]]
       - [[Lineage specific variants from outbreakinfo]]
 - [[Github and development]]
