@@ -16,9 +16,83 @@ Genomic Data Analysis:
 - DNAseq / cDNAseq: Exome sequencing (WES) / Genome sequencing (WGS) / Targeted sequencing
   - Low-frequency variants detection and annotation for whole genome or sequencing panel (e.g. retinoblastoma gene panel) ([lowfreq_panel](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/lowfreq_panel))
   - Eukaria: Variant calling and annotation for a sequencing panel (e.g. epidermolysis gene panel, mouse or rat gene panel) ([exomeeb](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/exomeeb))
+
+    ExomeEB service uses nextflow's pipeline sarek to detect variants on whole genome or targeted sequencing data, in this case exome for single samples. The output is then processed with GATK-toolkit and annotated with [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [Exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html) which will include prediction of effect and inheritance mode, targeting a specific list of genes if given by the researcher.
+
+    Below are the files that **researchers NEED to provide** when requesting the ExomeEB service.
+
+    <details markdown="1">
+    <summary>Required information for service request</summary>
+    <b>Service Notes Description</b>
+
+    When requesting a service in iskylims, researchers are required to provide pertinent details, including a list of targeted genes to analyse during exomiser's annotation step if necessary.
+
+    - **targeted_regions.bed:** a file with targeted genomic coordinates during sequencing protocol in [BED format](https://www.ensembl.org/info/website/upload/bed.html), consists of one line per feature. 
+    ```
+    chrom - name of the chromosome or scaffold. Any valid seq_region_name can be used, and chromosome names can be given with or without the 'chr' prefix.
+    chromStart - Start position of the feature in standard chromosomal coordinates (i.e. first base is 0).
+    chromEnd - End position of the feature in standard chromosomal coordinates
+    name - Label to be displayed under the feature. Optional.
+
+    1       chromStart   chromEnd   orientation(+/-)       name
+    1       chromStart   chromEnd   orientation(+/-)       name
+    ...
+    chrX       chromStart   chromEnd   orientation(+/-)       name
+    ```
+    </details>
+
   - Eukaria (non-human): Variant calling, annotation and SNP-based outbreak analysis (e.g. diploid fungal outbreak) (TODO freebayes_outbreak)
   - Human:  Exome sequencing for variant calling, annotation and inheritance filtering (e.g. Exome sequencing of a human trio (two parents and one child))  ([exometrio](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/exometrio))
+
+    Exometrio service uses nextflow's pipeline sarek to detect variants on whole genome or targeted sequencing data, in this case exome for multiple related samples, ussually relatives. The output is then processed with GATK-toolkit and annotated with [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [Exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html) which will include prediction of effect and inheritance mode.
+
+    Below are the files that **researchers NEED to provide** when requesting the Exometrio service.
+
+    <details markdown="1">
+    <summary>Required information for service request</summary>
+
+    - **targeted_regions.bed:** a file with targeted genomic coordinates during sequencing protocol in [BED format](https://www.ensembl.org/info/website/upload/bed.html), consists of one line per feature.
+    ```
+    chrom - name of the chromosome or scaffold. Any valid seq_region_name can be used, and chromosome names can be given with or without the 'chr' prefix.
+    chromStart - Start position of the feature in standard chromosomal coordinates (i.e. first base is 0).
+    chromEnd - End position of the feature in standard chromosomal coordinates
+    name - Label to be displayed under the feature. Optional.
+
+    1       chromStart   chromEnd   orientation(+/-)       name
+    1       chromStart   chromEnd   orientation(+/-)       name
+    ...
+    chrX       chromStart   chromEnd   orientation(+/-)       name
+    ```
+
+    - **family.ped:** A pedigree file following [PED format](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
+    ```
+    family.ped
+
+    group   samplefather_samplefather   0       0       1       1
+    group   samplemother_samplemother   0       0       2       1
+    group   samplechildren_samplechildren   samplefather_samplefather   samplemother_samplemother   1       2
+    ```
+    </details>
+
   - Human: Whole genome sequencing for SNPs variant calling, annotation and  inheritance filtering (e.g.WGS of a human trio )  ([wgstrio](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/wgstrio))
+
+    WGStrio service uses nextflow's pipeline sarek to detect variants on whole genome or targeted sequencing data, in this case Whole genome for multiple related samples, ussually relatives. The output is then processed with GATK-toolkit and annotated with [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [Exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html) which will include prediction of effect and inheritance mode.
+
+    Below are the files that **researchers NEED to provide** when requesting the WGStrio service.
+
+    <details markdown="1">
+    <summary>Required information for service request</summary>
+
+    - **family.ped:** A pedigree file following [PED format](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
+    ```
+    family.ped
+
+    group   samplefather_samplefather   0       0       1       1
+    group   samplemother_samplemother   0       0       2       1
+    group   samplechildren_samplechildren   samplefather_samplefather   samplemother_samplemother   1       2
+    ```
+    </details>
+
   - Fungal / bacteria / virus : Variant calling, annotation and SNP-based outbreak analysis (e.g. haploid fungal outbreak) ([snippy](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/snippy))
   - Bacteria: _De novo_ genome assembly and annotation ([Assembly](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/assembly))
   - Bacteria:  In-depth analysis of Mycobacterium species genomes (e.g. _M. tuberculosis_. _M. bovis_) ([MTBSeq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/mtbseq))
