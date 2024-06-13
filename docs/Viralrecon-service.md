@@ -74,6 +74,9 @@ Once the pipelines have been executed for all references, you can continue with 
 
 Once finished, repeat the process if there are any other host.
 
+> [!WARNING]
+> If there is more than 1 host, please remember to use the appropriate kraken database. Full info on which organisms are associated with each kraken database can be found in **`/data/bi/references/kraken/README`**.
+
 ---
 
 On completion of the pipeline, it is strongly recommended to review different files to check that it all worked properly. Among others, the 3 essential ones are the following:
@@ -86,7 +89,10 @@ On completion of the pipeline, it is strongly recommended to review different fi
 
 ---
 
-Meantime, you can access the `YYMMDD_ANALYSIS_0X_MAG` folder and execute the process following its [manual](https://github.com/BU-ISCIII/BU-ISCIII/wiki/MAG-service).
+In the meantime, you can access the `YYMMDD_ANALYSIS_0X_MAG` folder and execute the process following its [manual](https://github.com/BU-ISCIII/BU-ISCIII/wiki/MAG-service).
+
+> [!WARNING]
+> Please take into account that, if there are both samples with **single-end reads** and **paired-end reads** associated with the service, you'll have to run **MAG** for single-end and paired-end reads **separately** (use the `--single_end` parameter when running MAG with the samples that contain single-end reads).
 
 If the pipeline has **successfully finished**, move to the `../RESULTS` folder.
 
@@ -95,6 +101,9 @@ Check the lablog and execute it.
     $ bash lablog_viralrecon_results
 
 Access the newly created folder and execute the scripts in order.
+
+> [!WARNING]
+> If the researcher asked you to provide them with the **reads without host**, create a folder within `/RESULTS/*_entrega01/`, and copy these reads inside this folder, so that the researcher can find them easily.
 
 If everything is correct and the necessary files and links have been generated, you can proceed with the service completion. To do this, execute the finish module of buisciii-tools.
 
@@ -113,6 +122,7 @@ Lastly, remember to remove all the files related to this service from `scratch_t
     $ bu-isciii scratch SRVCNMXXX.X
     > remove_scratch
 
+---
 
 ### How to create scheme.bed
 
@@ -141,13 +151,47 @@ This will generate a series of alignments with your primers sequences in `blast.
 Once you have selected the corresponding lines, you can execute an auxiliar script called `blast_parser.py` (you may find it in `/data/bi/references/auxiliar_scripts/`) to do the rest of the work:
 ```python3 blast_parser.py blast_mod.txt scheme.bed```
 
+---
+
 ### Common errors while running the service
+* Make sure that `samples_ref` file does not contain any spaces as it's read as a tab-separated file. You can use `cat -A samples_ref.txt` to ensure this (`\t` is shown as `^I` in this case).
+  
+* When there's a mix of full-numerical and strings in sample IDs (e.g. `87439.fastq.gz` and `SARS_01.fastq.gz`) the pipeline may crush in `MULTIQC` step. This is caused because there's a bug with MultiQC ([MultiQC issue](https://github.com/nf-core/viralrecon/issues/345)) that can be temporarily fixed by adding any non-numerical character to the sample IDs. Nevertheless, you can follow the instructions in [this tutorial](https://drive.google.com/drive/u/0/folders/1-GafpZR2HVlecNaAsXIslK3aecHplD4z) to properly correct this error.
 
-Make sure that `samples_ref` file does not contain any spaces as it's read as a tab-separated file. You can use `cat -A samples_ref.txt` to ensure this (`\t` is shown as `^I` in this case).
+* When running `bash _01_run_<reference1>.sh` and checking the `.log` file, you might see the following message related with Bowtie2, where `XXX` is the number of mapped reads against the reference for each sample:
+    > -[nf-core/viralrecon] X samples skipped since they failed Bowtie2 1000 mapped read threshold: <br> XXX: SAMPLE1 <br> XXX: SAMPLE2 <br> ... </br>
+    
+    If this happens, you'll have to determine if it is still worth it to analyse these samples (**we want to find out if the number of mapped reads for each sample (XXX above) is greater or equal to the theoretical number of reads needed for a 10x coverage of the reference genome**). To do so, do the following calculation:
+    > A) **PAIRED-END READS**: number of reads = (genome size * 10) / (read length x 2) <br> B) **SINGLE-END READS**: number of reads = (genome size * 10) / (read length) </br>
 
-When there's a mix of full-numerical and strings in sample IDs (e.g. `87439.fastq.gz` and `SARS_01.fastq.gz`) the pipeline may crush in `MULTIQC` step. This is caused because there's a bug with MultiQC ([MultiQC issue](https://github.com/nf-core/viralrecon/issues/345)) that can be temporarily fixed by adding any non-numerical character to the sample IDs. Nevertheless, you can follow the instructions in [this tutorial](https://drive.google.com/drive/u/0/folders/1-GafpZR2HVlecNaAsXIslK3aecHplD4z) to properly correct this error.
+    If the obtained number is greater than the one associated with each sample (XXX), this sample can be **omitted** in the analysis. Otherwise, it might be worth it to decrease `--min_mapped_reads` (default value: **1000**) when running viralrecon so that this sample is not skipped by Bowtie2.
 
+* If the service contains samples from **multiple runs**, the corresponding  `./mapping_illumina_yyyymmdd.xlsx` will contain, in its first column, only one value: the name of the first run that was found by the script, which is used in this file for every sample even though that's not correct. Make sure to change this manually in this file so that every sample is associated with its correct run.
 
+* If your service contains samples with single-end reads, the `%unmapped_reads` column in `./mapping_illumina_yyyymmdd.xlsx` will have **negative** values, which clearly makes no sense. If this happens, you'll have to do the following calculations on the following columns of this file, so that data is correct:
+    * Column `readshostR1` must be equal to `readshost` for these samples.
+    * `%readshost` = (`readshost` * 100) / `totalreads`
+    * `unmappedreads` = `totalreads` - (`readshost` + `readsvirus`)
+    * `%unmappedreads` = (`unmappedreads` * 100) / `totalreads`
+
+* Make sure no **Ns** are found in the `variants_long_table.csv` file.
+
+---
+
+### What if the researcher wants me to send them the no host reads?
+
+If the researcher, when requesting the service, asks you to provide them with the **.fastq.gz files with no host**, you'll have to add this on `/DOC/viralrecon.config`:
+
+```
+withName: 'KRAKEN2_KRAKEN2' {
+            publishDir = [
+                pattern: "*.{unclassified.fastq.gz,unclassified_1.fastq.gz,unclassified_2.fastq.gz,txt}"
+            ]
+        }
+```
+The no host reads will be inside **`/*_mapping/kraken2/`** for each host and each reference.
+
+---
 
 ## Viralrecon report template
 
@@ -164,3 +208,6 @@ When there's a mix of full-numerical and strings in sample IDs (e.g. `87439.fast
 - **Calidad general**: Buena
 - **Incidencia muestras individuales**:
     - 2 muestras no consiguen mapear (CONTROLNEGATIVO y POSUL54). Tienen muy pocas lecturas, baja calidad y elevado porcentaje de secuencias sobrerrepresentadas.
+  
+
+---
