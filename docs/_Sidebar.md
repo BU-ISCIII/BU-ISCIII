@@ -34,6 +34,7 @@
       - [[mRNAseq service]]
       - [[Pikavirus service]]
       - [[Lineage specific variants from outbreakinfo]]
+      - [[IRMA code explanation]]
 - [[Github and development]]
   - [[Github gitflow]]
   - [[ZSH and OH-MY-ZSH]]
