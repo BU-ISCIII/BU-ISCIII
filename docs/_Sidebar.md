@@ -24,6 +24,7 @@
    7. [[Update policy (DB and software)]]
    8. How to: guides for BU-ISCIII members
       - [[How to manage services in iSkyLims]]
+      - [[Handle sample resequencing]]
       - [[Assembly service]]
       - [[Viralrecon service]]
       - [[ExomeEB ExomeTrio WGSTrio service]]
