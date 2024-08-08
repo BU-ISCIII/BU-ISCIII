@@ -25,8 +25,10 @@ ll -tr
 Now, let's execute the first BU-ISCIII tool: `new-service`, where you'll need to specify the resolution ID associated to this service.
 
 ```shell
-bu-isciii new-service SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
 ```
+
+The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. 
 
 Once `new-service` is executed, you'll be asked:
 
@@ -51,7 +53,7 @@ bash lablog_assembly
 After executing this file, if everything is OK, we can now proceed with the new BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/bi`, since this `scratch_tmp` folder will be the one used for the assembly analysis.
 
 ```shell
-bu-isciii scratch SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
 ```
 
 Once `scratch` is executed, you'll be asked:
@@ -118,7 +120,7 @@ multiqc_report.html     quast_global_report.html
 If everything is correct and all the files have the expected content, we can proceed to copy the content of the `RESULTS` folder to the researcher's SFTP. To do this, we should now execute the next BU-ISCIII tool: `finish`, which will delete temporary files, copy the results from scratch back to the `services_and_colaborations` folder, rename those folders that should not be copied into the researcher's SFTP and copy those that are of interest to this SFTP:
 
 ```shell
-bu-isciii finish SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.tool.log finish SRVCNMXXX.X
 ```
 
 After executing `finish`, you'll have to specify again that we are performing an assembly analysis (`assembly_annot`) and allow for this tools to rename (`RAW` and `TMP` will be renamed as `RAW_NC` and `TMP_NC`) and delete some folders (`work` will be deleted).
@@ -128,7 +130,7 @@ Once `finish` is done, the results will be now at the researcher's SFTP and we c
 To execute `bioinfo_doc`, we have to **go back to our WS user**, in which we should already have mounted the `bioinfo_doc` folder. If this is the case, we can do the following, **always after having checked the kmerfinder, quast and multiqc reports and looking for any remarkable aspects that the researcher should be informed about**:
 
 ```shell
-bu-isciii bioinfo-doc SRVCNMXXX.X > service_info
+bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X > service_info
 ```
 
 Once you've specified the `service_info` option, you should execute the `bioinfo-doc` BU-ISCIII tool again indicating the `delivery` option this time. Please note that the program will ask you to create the markdown files associated to this specific delivery, apart from whether we want to add some notes. If there is something we want to inform the researcher about, we can create a `delivery_notes.txt` with this information, by executing the following commands, **before executing `bu-isciii bioinfo-doc SRVCNMXXX.X > delivery`**:
@@ -143,7 +145,7 @@ Once this has been done, execute `bu-isciii bioinfo-doc SRVCNMXXX.X > delivery`,
 Lastly, remember to remove all the files related to this service from `scratch_tmp`:
 
 ```shell
-bu-isciii scratch SRVCNMXXX.X > remove_scratch
+bu-isciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X > remove_scratch
 ```
 
 ## ASSEMBLY REPORT TEMPLATE (TEAM STANDUP)
