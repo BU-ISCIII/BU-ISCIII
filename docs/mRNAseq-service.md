@@ -32,8 +32,9 @@ If so, you are ready to proceed.
 
   - Copy files in the folder service from `services_and_colaborations` to `scratch_tmp/`.
     ```bash
-    bu-isciii scratch --direction service_to_scratch SRVXXXYYYY.1
+    bu-isciii --log-file SRVXXXYYYY.1.tool.log scratch --direction service_to_scratch SRVXXXYYYY.1
     ```
+    The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service.
 
 2. Go to `ANALYSIS/${DATE}_ANALYSIS01_RNASEQ` in the service folder copied to `scratch_tmp/` and execute the `lablog`.
   ```bash
