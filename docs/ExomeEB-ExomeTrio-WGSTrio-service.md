@@ -11,7 +11,7 @@ All these services use [Sarek](https://nf-co.re/sarek/3.4.0), a pipeline for Map
 
 ### 1. Create the service using [buisciii-tools](https://github.com/BU-ISCIII/buisciii-tools).
 
-- Create the service from the local terminal using Iskylims Resolution ID (e.g. `bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVIIERXXX.X`). The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. Type `N` to create the template folder and select the corresponding template folder (either exometrio, exomeeb or wgstrio).
+- Create the service from the local terminal using Iskylims Resolution ID (e.g. `bu-isciii --log-file SRVIIERXXX.X.tool.log new-service SRVIIERXXX.X`). The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. FFor instance, you may want to name the log as `SRVIIERXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVIIERXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVIIERXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results). Type `N` to create the template folder and select the corresponding template folder (either exometrio, exomeeb or wgstrio).
 - A folder will be created in `services_and_colaborations/CENTRE/SERVICE_TYPE` with the full name of the service, in the following format (YYYYMMDD = YearMonthDay):
 `SRVIIERXXX_YYYYMMDD_WGSTRIOXXX_researcheruser_S`
 - Go to the recently created folder. Check that the number of reading files matches the number of samples that was specified in the service in iSkyLIMS (the number of files must be number of samples x 2 if they are paired, since there is a file of forward readings and one of reverse readings)
@@ -22,7 +22,7 @@ ls -l *.fastq.gz | wc -l
 - For exome services, `REFERENCES` folder should include BED files with coordinates for the targeted regions, exons and/or genes during sequencing.
 - If everything is alright, move to `ANALYSIS` folder and execute `lablog` (This lablog might be named after the name of the template e.g. `lablog_exometrio`).
 - This first lablog will rename the main ANALYSIS folder (`DATE_ANALYSIS01`) to the current date and create folder `00-reads` with symlinks to the fastq files in `RAW`.
-- Finally, move the folder to the computing resource using `bu-isciii --log-file SRVCNMXXX.X.tool.log scratch --direction service_to_scratch SRVIIERXXX.X`.
+- Finally, move the folder to the computing resource using `bu-isciii --log-file SRVIIERXXX.X.tool.log scratch --direction service_to_scratch SRVIIERXXX.X`. Use the specific option you are using to name the log (i.e. `SRVIIERXXX.X.service_to_scratch.log`).
 - From now on, all the analysis must be executed from the folder located in scratch.
 
 ### 2. Analysis starts: Sarek.

@@ -28,7 +28,7 @@ Now, let's execute the first BU-ISCIII tool: `new-service`, where you'll need to
 bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
 ```
 
-The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. 
+The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).  
 
 Once `new-service` is executed, you'll be asked:
 
@@ -55,6 +55,8 @@ After executing this file, if everything is OK, we can now proceed with the new 
 ```shell
 bu-isciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
 ```
+
+Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
 
 Once `scratch` is executed, you'll be asked:
 
@@ -120,7 +122,7 @@ multiqc_report.html     quast_global_report.html
 If everything is correct and all the files have the expected content, we can proceed to copy the content of the `RESULTS` folder to the researcher's SFTP. To do this, we should now execute the next BU-ISCIII tool: `finish`, which will delete temporary files, copy the results from scratch back to the `services_and_colaborations` folder, rename those folders that should not be copied into the researcher's SFTP and copy those that are of interest to this SFTP:
 
 ```shell
-bu-isciii --log-file SRVCNMXXX.X.tool.log finish SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 ```
 
 After executing `finish`, you'll have to specify again that we are performing an assembly analysis (`assembly_annot`) and allow for this tools to rename (`RAW` and `TMP` will be renamed as `RAW_NC` and `TMP_NC`) and delete some folders (`work` will be deleted).
@@ -132,6 +134,8 @@ To execute `bioinfo_doc`, we have to **go back to our WS user**, in which we sho
 ```shell
 bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X > service_info
 ```
+
+Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service_info.log` or `SRVCNMXXX.X.delivery.log`).
 
 Once you've specified the `service_info` option, you should execute the `bioinfo-doc` BU-ISCIII tool again indicating the `delivery` option this time. Please note that the program will ask you to create the markdown files associated to this specific delivery, apart from whether we want to add some notes. If there is something we want to inform the researcher about, we can create a `delivery_notes.txt` with this information, by executing the following commands, **before executing `bu-isciii bioinfo-doc SRVCNMXXX.X > delivery`**:
 
