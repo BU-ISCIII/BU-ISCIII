@@ -14,7 +14,7 @@ This service depends on `assembly` services as one of th plasmidID inputs is the
 
 ### 1. Create the service using [buisciii-tools](https://github.com/BU-ISCIII/buisciii-tools)
 
-- Create the service from the local terminal using iskylims Resolution ID (e.g. `bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X`). The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. Type `Y` so the folder is not created (it's already created for the assembly step) and only the new plasmidid template is copied.
+- Create the service from the local terminal using iskylims Resolution ID (e.g. `bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X`). The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results). Type `Y` so the folder is not created (it's already created for the assembly step) and only the new plasmidid template is copied.
 - A folder will be created in `services_and_colaborations/CENTRE/SERVICE_TYPE` with the full name of the service.
 - Go to the recently created folder. Check that the number of reading files matches the number of samples that was specified in the service in iSkyLIMS (the number of files must be number of samples x 2 if they are paired, since there is a file of forward readings and one of reverse readings)
 
@@ -25,7 +25,7 @@ ls -l *.fastq.gz | wc -l
 
 - If everything is alright, move to `ANALYSIS` folder and execute `lablog` (This lablog might be named after the name of the template e.g. `lablog_plasmidid`).
 - This first lablog will rename the main ANALYSIS folder (`DATE_ANALYSIS01`) to the current date and create folder `00-reads` with symlinks to the fastq files in `RAW`.
-- Finally, move the folder to the computing resource using `bu-isciii --log-file SRVCNMXXX.X.tool.log scratch --direction service_to_scratch SRVIIERXXX.X`.
+- Finally, move the folder to the computing resource using `bu-isciii --log-file SRVCNMXXX.X.tool.log scratch --direction service_to_scratch SRVCNMXXX.X`. Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
 - From now on, all the analysis must be executed from the folder located in scratch.
 
 ### 2. Analysis starts
@@ -56,17 +56,18 @@ Always check that the files are correctly copied/proper links created to the del
 If everything is correct and all the files have the expected content, we can proceed with the bu-isciii tools finish module:
 
 ```Bash
-bu-isciii --log-file SRVCNMXXX.X.tool.log finish SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 ```
 
 Once someone has reviewed the service and given the ok, you can deliver the service. Remember to move to your workstation for this:
 
 ```Bash
-bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.service-info.log bioinfo-doc SRVCNMXXX.X
 # select service-info
-bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
+bu-isciii --log-file SRVCNMXXX.X.delivery.log bioinfo-doc SRVCNMXXX.X
 # select delivery
 ```
+
 
 ### mRNAseq report template (TEAM STANDUP)
 

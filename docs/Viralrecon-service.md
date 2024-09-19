@@ -13,7 +13,7 @@ Create the service and the needed folder structure. Select the **Viralrecon** te
     $ bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
     > Viralrecon
 
-> Note: If the resolution ID is not specified, it will be requested via the prompt. The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service.
+> Note: If the resolution ID is not specified, it will be requested via the prompt. The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).
 
 If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, move inside the newly created folder at `/data/bi/services_and_colaborations/CNM/virology/`. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
 
@@ -30,6 +30,8 @@ Edit the folder name `YYMMDD_ANALYSIS_0X_MAG` based on the number of analyses to
 Copy the contents of the service folders to scratch. To do this, run the **scratch** tool from buisciii-tools.
 
     $ bu-isciii --log-file SRVCNMXXX.X.tool.log scratch --direction service_to_scratch SRVCNMXXX.X
+
+Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
 
 Once finished, move to the newly copied service folder in scratch (its mounted path in scratch_tmp) `/data/bi/scratch_tmp/bi/`. Access the `ANALYSIS` folder and at this point, you will need to launch the pipeline once for each host successively. Access the folder of the first existing host (e.g., `YYYYMMDD_ANALYSIS01_METAGENOMIC_HUMAN`).
 
@@ -107,13 +109,15 @@ Access the newly created folder and execute the scripts in order.
 
 If everything is correct and the necessary files and links have been generated, you can proceed with the service completion. To do this, execute the finish module of buisciii-tools.
 
-    $ bu-isciii --log-file SRVCNMXXX.X.tool.log finish SRVCNMXXX.X
+    $ bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 
 This module will do several things. First, it cleans up the folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space. Then it copies all the service files back to its `/data/bi/services_and_colaborations/CNM/virology/` folder, and also copies the content of this service to the researcher's sftp repository.
 
 In order to complete the delivery of results to the researcher, you need to run the bioinfo-doc module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/bioinfo_doc/` folder.
 
     $ bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
+
+Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service_info.log` or `SRVCNMXXX.X.delivery.log`).
 
 This module will be executed twice. First time select the service_info option, and the next time select the delivery option. There is the option to add delivery notes (by prompt or by providing a file) during its execution.
 
