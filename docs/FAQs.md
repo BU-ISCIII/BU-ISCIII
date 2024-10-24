@@ -25,9 +25,7 @@ How you do it, depends on the tool you are using for ssh-ing. I will explain the
 
 ### SHH
 
-* If you have admin permissions on your machine (recommended):
-
-Add the following lines to your "/etc/ssh/ssh_config" file
+Add the following lines to your "/etc/ssh/ssh_config" file `sudo nano /etc/ssh/ssh_config`
 
 ```
 # Keep alive
@@ -35,10 +33,6 @@ Host *
     ServerAliveInterval 300
     ServerAliveCountMax 2
 ```
-
-* If you don't have admin permissions (not tested):
-
-Same as above, but you will have to modify your personal config file (usually "~/.ssh/config")
 
 Now restart ssh service:
 
