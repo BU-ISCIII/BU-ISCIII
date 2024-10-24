@@ -2,9 +2,6 @@
 
 - [Index](#index)
   - [I can't copy data from the HPC to my workstation](#i-cant-copy-data-from-the-hpc-to-my-workstation)
-  - [Keep ssh sessions alive](#keep-ssh-sessions-alive)
-    - [SHH](#shh)
-    - [PUTTY](#putty)
   - [Decent working environment in Windows 10 WSL](#decent-working-environment-in-windows-10-wsl)
   - [Copy and export only visible cells in libreoffice calc](#copy-and-export-only-visible-cells-in-libreoffice-calc)
   - [I've installed docker and now I can't connect to my machine with ssh](#ive-installed-docker-and-now-i-cant-connect-to-my-machine-with-ssh)
@@ -17,32 +14,6 @@
 
 Take notice than ssh connection to HPC is unidirectional, I mean you can only access the HPC from your workstation, and you cannot access your workstation from the HPC. This means you have to copy date from your workstation to the HPC and **NOT** backwards.
 
-## Keep ssh sessions alive
-
-Asterix will kick you out every time you keep your connection idle for a set period of time. To avoid this annoying feature of the firewall, you can modify your ssh connection settings to send NULL packages every X seconds, which will keep your connection up and running.
-
-How you do it, depends on the tool you are using for ssh-ing. I will explain the modifications you have make in the most broadly used tools to send a keep-alive signal every 5 minutes.
-
-### SHH
-
-Add the following lines to your "/etc/ssh/ssh_config" file `sudo nano /etc/ssh/ssh_config`
-
-```
-# Keep alive
-Host *
-    ServerAliveInterval 300
-    ServerAliveCountMax 2
-```
-
-Now restart ssh service:
-
-```
-sudo service ssh restart
-```
-
-### PUTTY
-
-In your session properties, go to Connection and under Sending of null packets to keep session active, set Seconds between keepalives to 300.
 
 ## Decent working environment in Windows 10 WSL
 

@@ -231,6 +231,33 @@ mkdir -p /media/backup
 ![](https://raw.githubusercontent.com/BU-ISCIII/BU-ISCIII/master/images/backintime_autoremove.png)
 7. Click ok and done! Create your first one on demand to check if everything works.
 
+## Keep ssh sessions alive
+
+Asterix will kick you out every time you keep your connection idle for a set period of time. To avoid this annoying feature of the firewall, you can modify your ssh connection settings to send NULL packages every X seconds, which will keep your connection up and running.
+
+How you do it, depends on the tool you are using for ssh-ing. I will explain the modifications you have make in the most broadly used tools to send a keep-alive signal every 5 minutes.
+
+### SHH
+
+Add the following lines to your "/etc/ssh/ssh_config" file `sudo nano /etc/ssh/ssh_config`
+
+```
+# Keep alive
+Host *
+    ServerAliveInterval 300
+    ServerAliveCountMax 2
+```
+
+Now restart ssh service:
+
+```
+sudo service ssh restart
+```
+
+### PUTTY
+
+In your session properties, go to Connection and under Sending of null packets to keep session active, set Seconds between keepalives to 300.
+
 ## Configure printers
 
 The printer network in ISCIII is connected via samba, so first we need to install the samba client package:
