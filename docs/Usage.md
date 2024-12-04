@@ -28,7 +28,7 @@ To get started, follow these instructions:
 
 2. **Add Custom Environment Variables to `.bashrc`**
     
-    Next, include additional exports to configure language settings, cache directories, and R library paths. Add the following block to your `.bashrc file`:
+    Next, include additional exports to configure language settings, cache directories, and R library paths. Add the following block to your `.bashrc` file:
 
     ```bash
     ### EXPORTS ###
@@ -39,7 +39,19 @@ To get started, follow these instructions:
     export R_LIBS_USER="/data/bi/pipelines/r-lib/"
     ```
 
-3. **Create the `buisciii_config.yml` File**
+3. **Add SLURM Aliases to `.bashrc`**
+    
+    To simplify the process of viewing SLURM job information, you can add the following aliases to your `.bashrc` file. These will allow you to easily check node and job statuses.
+
+    ```bash
+    ### SLURM ALIASES ###
+    alias si="sinfo -o \"%20P %5D %14F %8z %10m %10d %11l %16f %N\""
+    alias sq="squeue -o \"%8i %12j %4t %10u %20q %20P %10Q %5D %11l %11L %50R %10C %c\""
+    alias allqueue="watch 'squeue -o \"%7i %75j %8T %10u %5a %10P %8Q %5D %11l %8M %7C %7m %R\" | grep \"RUNNING\"'"
+    ```
+
+
+4. **Create the `buisciii_config.yml` File**
     
     To use the buisciii-tools, you will need to create a configuration file called buisciii_config.yml in your home directory. This file stores the necessary API credentials. Create it with the following content:
 
