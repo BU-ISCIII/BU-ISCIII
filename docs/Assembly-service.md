@@ -125,6 +125,14 @@ If everything is correct and all the files have the expected content, we can pro
 bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 ```
 
+It is possible that the following warning appears while transferring data to the researcher's SFTP:
+
+```shell
+rsync: failed to set permissions on "/data/bi/sftp/Lab_Folder/SSRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS/YYYYMMDD_entrega01/*": Operation not permitted (1)
+```
+
+It is just a warning. Please check that everything has been copied correctly and continue with the protocol as usual.
+
 After executing `finish`, you'll have to specify again that we are performing an assembly analysis (`assembly_annot`) and allow for this tools to rename (`RAW` and `TMP` will be renamed as `RAW_NC` and `TMP_NC`) and delete some folders (`work` will be deleted).
 
 Once `finish` is done, the results will be now at the researcher's SFTP and we can go back to `/data/bi/services_and_colaborations/CNM/bacteriology/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS`. If all the reports have been copied correctly into the corresponding `services_and_colaborations` folder, we can now execute the next BU-ISCIII tool: `bioinfo-doc`, which will create a `.pdf` report with the information that will be delivered to the researcher.
