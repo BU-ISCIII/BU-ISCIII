@@ -7,7 +7,7 @@ This service consists in an in-depth analysis of *Mycobacterium*-especies genome
 First of all, take the service and click on _**Add resolution**_ in [**iSkyLIMS**](https://iskylims.isciii.es/) after logging in with your user and password. For this to happen, you need to specify the estimated delivery date, your user and a service acronym. In order to know which acronym to use for this new resolution, log into your WS user and execute the following commands:
 
 ```shell
-cd /data/bi/services_and_colaborations/CNM/bacteriology
+cd /data/ucct/bi/services_and_colaborations/CNM/bacteriology
 ll -tr
 ```
 
@@ -20,7 +20,7 @@ Now, considering you've already created a buisciii-tools conda environment and i
 Once you're logged in, go into the `services_and_colaborations` folder:
 
 ```shell
-cd /data/bi/services_and_colaborations/CNM/bacteriology/
+cd /data/ucct/bi/services_and_colaborations/CNM/bacteriology/
 ll -tr
 ```
 
@@ -52,7 +52,7 @@ Let's execute the `lablog_mtbseq` file:
 bash lablog_mtbseq
 ```
 
-After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/bi`, since this `scratch_tmp` folder will be the one used for the MTBSeq analysis.
+After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/ucct/bi`, since this `scratch_tmp` folder will be the one used for the MTBSeq analysis.
 
 ```shell
 bu-isciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
@@ -67,7 +67,7 @@ Once `scratch` is executed, you'll be asked:
 Once this function is finished, we should go into the `scratch_tmp` folder and the specific folder associated with our service:
 
 ```shell
-cd /data/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_MTUBERCULOSISXXX_researcher_S/ANALYSIS/DATE_ANALYSIS02_MTBSEQ
+cd /data/ucct/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_MTUBERCULOSISXXX_researcher_S/ANALYSIS/DATE_ANALYSIS02_MTBSEQ
 ```
 
 > [!WARNING]
@@ -170,9 +170,9 @@ If everything is correct and all the necessary files and links have indeed been 
 
     $ bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 
-This module will do several things. First, it cleans up the service folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space (in **MTBSeq**, these folders are `Bam`, `Mpileup` and `GATK_Bam`, along with the .fastq.gz files from `01-processing/fastp`). Then, it copies all the service files back to its `/data/bi/services_and_colaborations/CNM/bacteriology/` folder, and also copies the content of this service to the researcher's sftp repository.
+This module will do several things. First, it cleans up the service folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space (in **MTBSeq**, these folders are `Bam`, `Mpileup` and `GATK_Bam`, along with the .fastq.gz files from `01-processing/fastp`). Then, it copies all the service files back to its `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/` folder, and also copies the content of this service to the researcher's sftp repository.
 
-In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/bioinfo_doc/` folder.
+In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
 
     $ bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
 

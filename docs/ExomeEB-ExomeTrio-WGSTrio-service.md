@@ -14,11 +14,13 @@ All these services use [**nf-core/sarek**](https://nf-co.re/sarek/), a pipeline 
 - Create the service from the local terminal using the corresponding [**iSkyLIMS**](https://iskylims.isciii.es/) Resolution ID (e.g. `bu-isciii --log-file SRVIIERXXX.X.tool.log new-service SRVIIERXXX.X`).
 
   >[!NOTE]
-  >The option `--log-file` will save a log file for tracking purposes in a specific location. **This option should be used every time the BU-ISCIII tool is used for the service**. For instance, you may want to name the log as `SRVIIERXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVIIERXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVIIERXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results) file.<br>
+  >The option `--log-file` will save a log file for tracking purposes in a specific location. **This option should be used every time the BU-ISCIII tool is used for the service**. For instance, you may want to name the log as `SRVIIERXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVIIERXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVIIERXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results) file.
+  >
+  >Please make sure this .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
   >
   > When being asked whether you want to skip or not the service folder creation, type `N` to create the template folder, and then select the corresponding template folder (either `exometrio`, `exomeeb` or `wgstrio`).
 
-- A folder will be created within `/data/bi/services_and_colaborations/IIER/human_genetics` with the full name of the service, with the following format (YYYYMMDD = YearMonthDay):
+- A folder will be created within `/data/ucct/bi/services_and_colaborations/IIER/human_genetics` with the full name of the service, with the following format (YYYYMMDD = YearMonthDay):
   - For **ExomeEB**: `SRVIIERXXX_YYYYMMDD_EXOMAEBXXX_researcheruser_S`
   - For **ExomeTrio**: `SRVIIERXXX_YYYYMMDD_TRIOXXX_researcheruser_S`
   - For **WGSTrio**: `SRVIIERXXX_YYYYMMDD_WGSTRIOXXX_researcheruser_S`
@@ -135,7 +137,7 @@ Once the service is finished, you should go to `RESULTS` and execute the corresp
 
 ---
 
-If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools.
+If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools. Please make sure the .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
 
     $ bu-isciii --log-file SRVIIERXXX.X.finish.log finish SRVIIERXXX.X
 
@@ -158,9 +160,9 @@ This module will do several things. First, it **cleans up** the service folder, 
   * `03-annotation/dbNSFP_ENSG_plugin_hg19.txt`
   * `03-annotation/dbNSFP_ENSG_plugin_Columns.txt`
   
-Then, it copies all the service files back to its `/data/bi/services_and_colaborations/IIER/human_genetics/` folder, and also copies the content of this service to the researcher's SFTP repository.
+Then, it copies all the service files back to its `/data/ucct/bi/services_and_colaborations/IIER/human_genetics/` folder, and also copies the content of this service to the researcher's SFTP repository.
 
-In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/bioinfo_doc/` folder.
+In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
 
     $ bu-isciii --log-file SRVIIERXXX.X.tool.log bioinfo-doc SRVIIERXXX.X
 

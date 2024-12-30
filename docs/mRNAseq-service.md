@@ -5,7 +5,7 @@ This is a brief tutorial on how to perform an mRNAseq Service as a member of the
 After creating the service folder in `services_and_colaborations` using the [buisciii-tools](https://github.com/BU-ISCIII/buisciii-tools), your **service folder** should look like this:
 
 ```bash
-cd /data/bi/services_and_colaborations/*/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/
+cd /data/ucct/bi/services_and_colaborations/*/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/
 
 tree -L 1 .
 .
@@ -26,7 +26,7 @@ If so, you are ready to proceed.
 1. Go to `ANALYSIS/` in the service folder:
   - Execute the `lablog_rnaseq`.
     ```bash
-    cd /data/bi/services_and_colaborations/virology/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS
+    cd /data/ucct/bi/services_and_colaborations/virology/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS
     bash lablog
     ```
 
@@ -38,7 +38,7 @@ If so, you are ready to proceed.
 
 2. Go to `ANALYSIS/${DATE}_ANALYSIS01_RNASEQ` in the service folder copied to `scratch_tmp/` and execute the `lablog`.
   ```bash
-  cd /data/bi/scratch_tmp/bi/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS/${DATE}_ANALYSIS01_RNASEQ
+  cd /data/ucct/bi/scratch_tmp/bi/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS/${DATE}_ANALYSIS01_RNASEQ
   bash lablog
   ```
 

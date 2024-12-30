@@ -73,11 +73,11 @@ rsync -rlv {result_files} bioinfoadm@neptuno:/srv/bioinformatica/{shared_folder}
 
 ISCIII's sFTP is managed using [syncplify.me](https://www.syncplify.me/) software. BU-ISCIII has access to its own virtual sftp site ```sftpbioinfo```. Instructions for accessing the resouce are located in [[bioinfo_doc]]/documentation/sftp/Guía de Administración para Bioinformática de su Virtual SFTP.pdf. Also in this folder you can find a easy tutorial for setting up Filezilla and access the sftp.
 
-BU-ISCIII has a shared folder named sftp an located in ```/data/bi/sftp``` with 1 tb available for data sharing. Any folder/file copied to this directory is seen in the virtual sftp site for access and sharing configuration. A folder for each ISCIII research group is generated and shared with the service requesting users, also custom folders can be generated for specific purposes. sftp folder looks like this:
+BU-ISCIII has a shared folder named sftp an located in ```/data/ucct/bi/sftp``` with 1 tb available for data sharing. Any folder/file copied to this directory is seen in the virtual sftp site for access and sharing configuration. A folder for each ISCIII research group is generated and shared with the service requesting users, also custom folders can be generated for specific purposes. sftp folder looks like this:
 
 ```Bash
 pwd
-    /data/bi/sftp
+    /data/ucct/bi/sftp
 ls
 labbacteriavac
 SpainUDP

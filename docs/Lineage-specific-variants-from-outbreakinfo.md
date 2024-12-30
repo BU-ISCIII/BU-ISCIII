@@ -5,7 +5,7 @@
 ### 1. Go to the folder with the results
 
 ```
-cd /data/bi/research/20230922_LINEAGE_VARIANTS_OUTBREAKINFO_SV
+cd /data/ucct/bi/research/20230922_LINEAGE_VARIANTS_OUTBREAKINFO_SV
 mkdir $(date '+%Y%m%d')_variants
 cd $(date '+%Y%m%d')_variants
 ```
@@ -52,7 +52,7 @@ ssh bioinfoadm@10.22.140.224
 ### 2. Go to the folder with the results
 
 ```
-cd /data/bi/research/20230922_LINEAGE_VARIANTS_OUTBREAKINFO_SV
+cd /data/ucct/bi/research/20230922_LINEAGE_VARIANTS_OUTBREAKINFO_SV
 mkdir $(date '+%Y%m%d')_variants
 cd $(date '+%Y%m%d')_variants
 ```

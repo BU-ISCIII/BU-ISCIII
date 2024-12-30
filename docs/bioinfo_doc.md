@@ -1,10 +1,10 @@
 # Bioinfo-doc
 
-Unlike “/data/bi”, ”bioinfo_doc” is backed up but can not be accesed from the HPC. This folder is for storing static files, like documentation, papers, posters, slides, ...
+Unlike “/data/ucct/bi”, ”bioinfo_doc” is backed up but can not be accesed from the HPC. This folder is for storing static files, like documentation, papers, posters, slides, ...
 
 ## 4.1. /collaborations
 
-In this folder we keep track of our collaborations: the original idea of the project, meetings, experiments, evolution, results, publications, talks, posters, … They are classified by year of creation, and share project name with the same folder inside “/data/bi/research”, but they do not have a fixed subfolder structure inside.
+In this folder we keep track of our collaborations: the original idea of the project, meetings, experiments, evolution, results, publications, talks, posters, … They are classified by year of creation, and share project name with the same folder inside “/data/ucct/bi/research”, but they do not have a fixed subfolder structure inside.
 
 ## 4.2. /congresses
 
@@ -39,7 +39,7 @@ New pipelines that we may want to look into.
 
 ## 4.8. /research
 
-Research projects and proposals, organised with the same folder style as “/data/bi/research”.
+Research projects and proposals, organised with the same folder style as “/data/ucct/bi/research”.
 
 ## 4.9. /publications
 
@@ -47,7 +47,7 @@ Our publications.
 
 ## 4.10. /services
 
-Here we keep track and statistics of all the services we make. They are classified by year and have the same names as their counterparts in “/data/bi/services_and_collaborations”.
+Here we keep track and statistics of all the services we make. They are classified by year and have the same names as their counterparts in “/data/ucct/bi/services_and_collaborations”.
 
 ## 4.11. /thesis
 

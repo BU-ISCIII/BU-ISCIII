@@ -13,8 +13,8 @@ To get started, follow these instructions:
     ```bash
     # >>> mamba initialize >>>
     # !! Contents within this block are managed by 'micromamba shell init' !!
-    export MAMBA_EXE='/data/bi/pipelines/micromamba/bin/micromamba';
-    export MAMBA_ROOT_PREFIX='/data/bi/pipelines/micromamba';
+    export MAMBA_EXE='/data/ucct/bi/pipelines/micromamba/bin/micromamba';
+    export MAMBA_ROOT_PREFIX='/data/ucct/bi/pipelines/micromamba';
     __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
     if [ $? -eq 0 ]; then
         eval "$__mamba_setup"
@@ -35,8 +35,8 @@ To get started, follow these instructions:
     export LC_ALL="en_US.UTF8"
 
     ## Added by me ##
-    export NXF_SINGULARITY_CACHEDIR="/data/bi/pipelines/singularity-images"
-    export R_LIBS_USER="/data/bi/pipelines/r-lib/"
+    export NXF_SINGULARITY_CACHEDIR="/data/ucct/bi/pipelines/singularity-images"
+    export R_LIBS_USER="/data/ucct/bi/pipelines/r-lib/"
     ```
 
 3. **Add SLURM Aliases to `.bashrc`**

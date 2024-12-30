@@ -38,7 +38,7 @@ Since the cg/wgMLST definition is usually done along with the construction of a 
 >In order to know which acronym to use for this new resolution, log into your WS user and execute the following commands:
 >
 >```shell
->cd /data/bi/services_and_colaborations/CNM/bacteriology
+>cd /data/ucct/bi/services_and_colaborations/CNM/bacteriology
 >ll -tr
 >```
 >
@@ -56,7 +56,7 @@ Now, considering you've already created a buisciii-tools micromamba environment 
 Once you're logged in, go into the `services_and_colaborations` folder:
 
 ```shell
-cd /data/bi/services_and_colaborations/CNM/bacteriology/
+cd /data/ucct/bi/services_and_colaborations/CNM/bacteriology/
 ll -tr
 ```
 
@@ -98,7 +98,7 @@ bash lablog_chewbbaca
 
 Once this file has been executed, please take into consideration that this service is usually performed along with other pipelines, so **run all the necessary `lablog` files before moving on to the next BU-ISCIII module**.
 
-After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/bi`, since this `scratch_tmp` folder will be the one used for the analysis.
+After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/ucct/bi`, since this `scratch_tmp` folder will be the one used for the analysis. Please make sure the .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
 
 ```shell
 bu-isciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
@@ -113,7 +113,7 @@ Once `scratch` is executed, you'll be asked:
 Once this function is finished, we should go into the `scratch_tmp` folder and the specific folder associated with our service:
 
 ```shell
-cd /data/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_CHARACTERIZATIONXXX_researcher_S/ANALYSIS/DATE_ANALYSIS0X_CHEWBBACA
+cd /data/ucct/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_CHARACTERIZATIONXXX_researcher_S/ANALYSIS/DATE_ANALYSIS0X_CHEWBBACA
 ```
 
 > [!WARNING]
@@ -401,13 +401,13 @@ Once the whole process is finished, within the `DATE_ANALYSIS01_CHEWBBACA` folde
 > [!WARNING]
 > While revising the results, if you see a sample that is considerably far away from the others and that is assigned to another bacteria or any other problem, remove it and run chewBBACA again. Don't hesitate to ask the team about this if you have any doubts.
 
-If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools.
+If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools. Please make sure the .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
 
     $ bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 
-This module will do several things. First, it cleans up the service folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space (no folders or files are deleted in this case). Then, it copies all the service files back to its `/data/bi/services_and_colaborations/CNM/bacteriology/` folder, and also copies the content of this service to the researcher's sftp repository.
+This module will do several things. First, it cleans up the service folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space (no folders or files are deleted in this case). Then, it copies all the service files back to its `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/` folder, and also copies the content of this service to the researcher's sftp repository.
 
-In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/bioinfo_doc/` folder.
+In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
 
     $ bu-isciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
 
