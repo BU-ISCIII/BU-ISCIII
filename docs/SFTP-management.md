@@ -15,7 +15,7 @@ Sign in credentials:
 
 # 2. Create a virtual folder in the SFTP manager
 
-1. Create the folder in `/data/bi/sftp/` with the command line `mkdir NewFolder`.
+1. Create the folder in `/data/ucct/bi/sftp/` with the command line `mkdir NewFolder`.
 
 > [!NOTE]
 > The criteria to name the folder is the laboratory of the scientist.

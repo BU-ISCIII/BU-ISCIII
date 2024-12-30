@@ -1,8 +1,8 @@
-# /data/bi
+# /data/ucct/bi
 
 This folder is intended to be used for data analysis and temporal results storage. It is our biggest folder but it is not backed up, so data which is wanted to be stored should be moved to the storage cabin as soon as there is space available there. Intermediate files and duplicates have also to be removed to free space for future analysis.
 
-data/bi folder is mounted in ```/data/bi/``` in the HPC environment and should be in this location in all the machines mounting the resource, easing the use of absolute paths in software config files.
+data/bi folder is mounted in ```/data/ucct/bi/``` in the HPC environment and should be in this location in all the machines mounting the resource, easing the use of absolute paths in software config files.
 
 Inside /bi you can find the following subfolders:
 

@@ -5,7 +5,7 @@ Welcome to this (as) brief (as possible) tutorial on how to perform an Assembly 
 First of all, take the service and click on _**Add resolution**_ in [iskyLIMS](https://iskylims.isciii.es/) after loggin in with your user and password. For this to happen, you need to specify the estimated delivery date, your user and a service acronym. In order to know which acronym to use for this new resolution, log into your WS user and execute the following commands:
 
 ```shell
-cd /data/bi/services_and_colaborations/CNM/bacteriology
+cd /data/ucct/bi/services_and_colaborations/CNM/bacteriology
 ll -tr
 ```
 
@@ -18,7 +18,7 @@ Now, considering you've already created a buisciii-tools conda environment and i
 Once you're logged in, go into the `services_and_colaborations` folder:
 
 ```shell
-cd /data/bi/services_and_colaborations/CNM/bacteriology/
+cd /data/ucct/bi/services_and_colaborations/CNM/bacteriology/
 ll -tr
 ```
 
@@ -50,7 +50,7 @@ Let's execute the `lablog_assembly` file:
 bash lablog_assembly
 ```
 
-After executing this file, if everything is OK, we can now proceed with the new BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/bi`, since this `scratch_tmp` folder will be the one used for the assembly analysis.
+After executing this file, if everything is OK, we can now proceed with the new BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/ucct/bi`, since this `scratch_tmp` folder will be the one used for the assembly analysis.
 
 ```shell
 bu-isciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
@@ -65,7 +65,7 @@ Once `scratch` is executed, you'll be asked:
 Once this function is finished, we should go into the `scratch_tmp` folder and the specific folder associated with our service:
 
 ```shell
-cd /data/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/ANALYSIS/DATE_ANALYSIS01_ASSEMBLY
+cd /data/ucct/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/ANALYSIS/DATE_ANALYSIS01_ASSEMBLY
 ```
 
 Once we're inside, we can execute our next executable file: `lablog`, which will create symbolic links to our raw reads and the `samples_id.txt` file, apart from asking us the following information:
@@ -128,14 +128,14 @@ bu-isciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
 It is possible that the following warning appears while transferring data to the researcher's SFTP:
 
 ```shell
-rsync: failed to set permissions on "/data/bi/sftp/Lab_Folder/SSRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS/YYYYMMDD_entrega01/*": Operation not permitted (1)
+rsync: failed to set permissions on "/data/ucct/bi/sftp/Lab_Folder/SSRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS/YYYYMMDD_entrega01/*": Operation not permitted (1)
 ```
 
 It is just a warning. Please check that everything has been copied correctly and continue with the protocol as usual.
 
 After executing `finish`, you'll have to specify again that we are performing an assembly analysis (`assembly_annot`) and allow for this tools to rename (`RAW` and `TMP` will be renamed as `RAW_NC` and `TMP_NC`) and delete some folders (`work` will be deleted).
 
-Once `finish` is done, the results will be now at the researcher's SFTP and we can go back to `/data/bi/services_and_colaborations/CNM/bacteriology/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS`. If all the reports have been copied correctly into the corresponding `services_and_colaborations` folder, we can now execute the next BU-ISCIII tool: `bioinfo-doc`, which will create a `.pdf` report with the information that will be delivered to the researcher.
+Once `finish` is done, the results will be now at the researcher's SFTP and we can go back to `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS`. If all the reports have been copied correctly into the corresponding `services_and_colaborations` folder, we can now execute the next BU-ISCIII tool: `bioinfo-doc`, which will create a `.pdf` report with the information that will be delivered to the researcher.
 
 To execute `bioinfo_doc`, we have to **go back to our WS user**, in which we should already have mounted the `bioinfo_doc` folder. If this is the case, we can do the following, **always after having checked the kmerfinder, quast and multiqc reports and looking for any remarkable aspects that the researcher should be informed about**:
 
@@ -148,7 +148,7 @@ Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service
 Once you've specified the `service_info` option, you should execute the `bioinfo-doc` BU-ISCIII tool again indicating the `delivery` option this time. Please note that the program will ask you to create the markdown files associated to this specific delivery, apart from whether we want to add some notes. If there is something we want to inform the researcher about, we can create a `delivery_notes.txt` with this information, by executing the following commands, **before executing `bu-isciii bioinfo-doc SRVCNMXXX.X > delivery`**:
 
 ```shell
-cd /data/bioinfo_doc/services/2024/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S #Go to the specific folder of the service.
+cd /data/ucct/bioinfo_doc/services/2024/SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S #Go to the specific folder of the service.
 nano delivery_notes.txt #Create and edit the .txt file with notes. Press Crtl + X to save your data and press Enter to exit.
 ```
 

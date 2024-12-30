@@ -205,7 +205,7 @@ Documentation:
 
 ## 4. Storage
 
-We keep running out of disk space in `/data/bi`. We need to optimise the archiving proccess and set a storage expansion scheme for the next years based on our data size historical evolution.
+We keep running out of disk space in `/data/ucct/bi`. We need to optimise the archiving proccess and set a storage expansion scheme for the next years based on our data size historical evolution.
 
 ## 5. Fastq files in a dedicate storage
 

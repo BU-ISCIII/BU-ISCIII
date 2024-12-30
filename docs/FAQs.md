@@ -5,8 +5,8 @@
   - [I can't copy data from the HPC to my workstation](#i-cant-copy-data-from-the-hpc-to-my-workstation)
   - [What if a certain run is not stored in `srv/fastq_repo` anymore?](#what-if-a-certain-run-is-not-stored-in-srvfastq_repo-anymore)
   - [What if the HPC is not working or it is working very slowly?](#what-if-the-hpc-is-not-working-or-it-is-working-very-slowly)
-  - [How to mount `/data/bi/` and `/data/bioinfo_doc/`?](#how-to-mount-databi-and-databioinfo_doc)
-  - [What if `/data/bi/` and `/data/bioinfo_doc/` unmount for any reason?](#what-if-databi-and-databioinfo_doc-unmount-for-any-reason)
+  - [How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?](#how-to-mount-dataucctbi-and-dataucctbioinfo_doc)
+  - [What if `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` unmount for any reason?](#what-if-dataucctbi-and-dataucctbioinfo_doc-unmount-for-any-reason)
   - [How can I install a new release of the BU-ISCIII tools in the HPC?](#how-can-i-install-a-new-release-of-the-bu-isciii-tools-in-the-hpc)
   - [How can I install a new version of an nf-core pipeline in the HPC?](#how-can-i-install-a-new-version-of-an-nf-core-pipeline-in-the-hpc)
   - [What if the researcher asked for the analysis of samples that do not appear on iSkyLIMS?](#what-if-the-researcher-asked-for-the-analysis-of-samples-that-do-not-appear-on-iskylims)
@@ -30,7 +30,7 @@ rsync -rlv -aP -L --rsh='ssh -p32122' <ws_path> user@portutatis.isciii.es:<desti
 
 ## I can't copy data from the HPC to my workstation
 
-**Take notice than ssh connection to HPC is unidirectional**, I mean **you can only access the HPC from your workstation, and you cannot access your workstation from the HPC**. This means you have to copy date from your workstation to the HPC and **NOT** backwards.
+**Take notice that ssh connection to HPC is unidirectional**, I mean **you can only access the HPC from your workstation, and you cannot access your workstation from the HPC**. This means you have to copy date from your workstation to the HPC and **NOT** backwards.
 
 ## What if a certain run is not stored in `srv/fastq_repo` anymore?
 
@@ -45,7 +45,7 @@ If a specific run is not recent, it might have already been archived and not app
 ![Form](../images/Form.png)
    * **Tipo**: Solicitud
    * **Categoría**: >> Sistemas, Comunicaciones y Seguridad >> **Clúster HPC**.
-   * **Urgencia**: Alta
+   * **Urgencia**: depending on the situation.
    * **Observadores**: add the people that should be monitoring this issue.
    * **Título**: something like "**Re-compartición de datos de secuenciación masiva**".
    * **Descripción**: something like:
@@ -58,6 +58,14 @@ If a specific run is not recent, it might have already been archived and not app
   ```
 4. Click on **+ Enviar mensaje**.
 5. Keep an eye on your inbox, since you'll receive a reply on your request via email.
+   
+>[!NOTE]
+>Please take into account that the previous approach is for when a run is older than 1 year. If the run that you cannot find is quite recent and you still cannot find it in `/srv/fastq_repo`, you should check iSkyLIMS to see if it was loaded correctly. If this is the case, please check **`NGS_Data`**, since the raw reads might be there.
+>
+>You must have NGS_Data mounted in your local PC. To mount it, run the following command (**you might have to ask for all pertinent permissions before mountint this folder, by submitting a request in sau.isciii.es**):
+>```
+>sudo mount -v -t cifs -o username=<user>,domain=ISCIII //galera.isciii.es/NGS_Data /data/NGS_Data
+>```
 
 ## What if the HPC is not working or it is working very slowly?
 
@@ -65,26 +73,26 @@ There may be occasions in which you cannot log in the HPC or it works very slowl
 
 If you or any of the members of the Unit believe that the SAU should be aware of this, please submit a petition on [**sau.isciii.es**](https://sau.isciii.es/).
 
-## How to mount `/data/bi/` and `/data/bioinfo_doc/`?
+## How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?
 
-The **`/data/bi/`** resource is essential for the correct usage of the BU-ISCIII tools, since everything that is needed for the proper development of the services that are requested via [**iSkyLIMS**](https://iskylims.isciii.es/) is stored in `/data/bi/`.
+The **`/data/ucct/bi/`** resource is essential for the correct usage of the BU-ISCIII tools, since everything that is needed for the proper development of the services that are requested via [**iSkyLIMS**](https://iskylims.isciii.es/) is stored in `/data/ucct/bi/`.
 
-Furthermore, all the information regarding the delivery of previous services, among other relevant stuff for the Unit, is stored in **`/data/bioinfo_doc/`**. Having access to this folder is also fundamental to be able to deliver finished services.
+Furthermore, all the information regarding the delivery of previous services, among other relevant stuff for the Unit, is stored in **`/data/ucct/bioinfo_doc/`**. Having access to this folder is also fundamental to be able to deliver finished services.
 
-Once you are assigned a WS and a local user, you shouldn't have access to /data/bi/ and /data/bioinfo_doc/. You'll have to mount these folders in your WS. To do so, follow these steps:
+Once you are assigned a WS and a local user, you shouldn't have access to /data/ucct/bi/ and /data/ucct/bioinfo_doc/. You'll have to mount these folders in your WS. To do so, follow these steps:
 
-1. Open a new terminal and lauch these commands. You'll be creating the `/data/bi/` and `/data/bioinfo_doc/` folders locally:
+1. Open a new terminal and lauch these commands. You'll be creating the `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` folders locally:
 ```
-sudo mkdir -p /data/bi/
-sudo mkdir /data/bioinfo_doc/
+sudo mkdir -p /data/ucct/bi/
+sudo mkdir /data/ucct/bioinfo_doc/
 ```
-2. Mount `/data/bi/` in your WS
+2. Mount `/data/ucct/bi/` in your WS
 ```
-sudo sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,allow_other,default_permissions -p 32122 <user>@portutatis.isciii.es:/data/bi /data/bi/
+sudo sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,allow_other,default_permissions -p 32122 <user>@portutatis.isciii.es:/data/ucct/bi /data/ucct/bi/
 ```
-3. Now, mount `/data/bioinfo_doc/` in your WS
+3. Now, mount `/data/ucct/bioinfo_doc/` in your WS
 ```
-sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.isciii.es/bioinfo_doc /data/bioinfo_doc
+sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.isciii.es/bioinfo_doc /data/ucct/bioinfo_doc
 ```
 
 >[!NOTE]
@@ -95,16 +103,16 @@ sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.
 > ```
 > id
 > ```
-> You'll see two variables, called uid and gid, which will have associated a number. This number is the one you have to indicate when mounting `/data/bi/` and `/data/bioinfo_doc/`.
+> You'll see two variables, called uid and gid, which will have associated a number. This number is the one you have to indicate when mounting `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`.
 
-## What if `/data/bi/` and `/data/bioinfo_doc/` unmount for any reason?
+## What if `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` unmount for any reason?
 
-It is pretty common that these resources unmount for some reason, mainly because the power shut down at some point. In these cases, you'll have to mount them again running the commands from [How to mount `/data/bi/` and `/data/bioinfo_doc/`?](#how-to-mount-databi-and-databioinfo_doc).
+It is pretty common that these resources unmount for some reason, mainly because the power shut down at some point. In these cases, you'll have to mount them again running the commands from [How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?](#how-to-mount-databi-and-databioinfo_doc).
 
-If you need to unmount manually any of these folders (maybe because you mounted them wrong), run the following (notice this is for `/data/bi/`, but it can be done also for `/data/bioinfo_doc/`):
+If you need to unmount manually any of these folders (maybe because you mounted them wrong), run the following (notice this is for `/data/ucct/bi/`, but it can be done also for `/data/ucct/bioinfo_doc/`):
 
 ```
-sudo fusermount -uz /data/bi
+sudo fusermount -uz /data/ucct/bi
 ```
 
 ## How can I install a new release of the BU-ISCIII tools in the HPC?
@@ -112,12 +120,12 @@ sudo fusermount -uz /data/bi
 If there is a new release of the BU-ISCIII tools, you should install it in the HPC. To do so, follow these steps:
 
 1. Log in the HPC with your credentials.
-2. Go to `/data/bi/pipelines/buisciii-tools/`.
+2. Go to `/data/ucct/bi/pipelines/buisciii-tools/`.
 3. Run `git branch` to check the branch in which you are right now. You should be in the `main` branch.
 4. Create a new micromamba environment for the new release: `micromamba create -n buisciii-tools_X.X.X`.
 5. Activate this new micromamba environment: `micromamba activate buisciii-tools_X.X.X`.
 6. Run `git pull` to get the latest changes on the clone of the buisciii-tools GitHub repository.
-7. While being in `/data/bi/pipelines/buisciii-tools/`, run `pip install .`
+7. While being in `/data/ucct/bi/pipelines/buisciii-tools/`, run `pip install .`
 
 >[!NOTE]
 >You might need to install `pip` in your new micromamba environment. To do so, run `micromamba install pip`.
@@ -127,17 +135,17 @@ If there is a new release of the BU-ISCIII tools, you should install it in the H
 If you need to install on the HPC a new version of an **nf-core pipeline**, this procedure should be done by means of the [**nf-core-tools**](https://nf-co.re/docs/nf-core-tools/pipelines/download). To do so, follow these steps:
 
 1. Activate the corresponding micromamba environment: `micromamba activate nf-core-2.14.0`.
-2. Go to the folder in which you want to download the new version of this pipeline. Let's say you want to download a new version of [nf-core-bacass](https://nf-co.re/bacass/2.4.0/): `cd /data/bi/pipelines/nf-core-bacass`.
-3. Make sure you have added this line in your `.bashrc` file: `export NXF_SINGULARITY_CACHEDIR="/data/bi/pipelines/singularity-images"`, as stated in the [**Usage**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Usage) page in the wiki.
+2. Go to the folder in which you want to download the new version of this pipeline. Let's say you want to download a new version of [nf-core-bacass](https://nf-co.re/bacass/2.4.0/): `cd /data/ucct/bi/pipelines/nf-core-bacass`.
+3. Make sure you have added this line in your `.bashrc` file: `export NXF_SINGULARITY_CACHEDIR="/data/ucct/bi/pipelines/singularity-images"`, as stated in the [**Usage**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Usage) page in the wiki.
 4. In your HPC home, create the following file:
 ```
 cd ~
 find $NXF_SINGULARITY_CACHEDIR -name "*.img" > my_list_of_remotely_available_images.txt
 ```
-This is done so as to avoid unnecessary container image downloads. The .txt file created will contain a list of already available images as plain text, in this case the images stored in `/data/bi/pipelines/singularity-images/`.
+This is done so as to avoid unnecessary container image downloads. The .txt file created will contain a list of already available images as plain text, in this case the images stored in `/data/ucct/bi/pipelines/singularity-images/`.
 
 5. Run the following command, which consists in three steps:
-   * Inside the `/data/bi/pipelines/your-pipeline/` folder, create a new subfolder for the new version of the pipeline.
+   * Inside the `/data/ucct/bi/pipelines/your-pipeline/` folder, create a new subfolder for the new version of the pipeline.
    * Go to this new subfolder.
    * Run the **`download`** module, specifying the following options:
      * `-r`: pipeline release to download.
