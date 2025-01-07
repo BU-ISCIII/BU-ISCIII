@@ -123,7 +123,7 @@ Define CLI entry points for your package:
 buisciii-tools = "buisciii_tools.__main__:run_buisciii_tools"
 ```
 
-This means running buisciii-tools on the command line will execute the run_buisciii_tools function in the `buisciii_tools.__main__ module`.
+This means running buisciii-tools on the command line will execute the run_buisciii_tools function in the `buisciii_tools.__main__` module.
 
 Step 6: Configure Package Discovery
 
