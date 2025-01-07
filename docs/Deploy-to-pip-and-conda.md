@@ -415,7 +415,8 @@ Manually edit the meta.yaml file if needed:
 
 - Update dependencies. **IMPORTANT** The skeleton will only be populated with dependencies in the `pyproject.toml` file, you will need to add dependencies set in both `requirements.txt` or `environment.yml` if any inside the `run:` section.
 - Add maintainers.
-- Check licensing information.
+- Check licensing information. Reviwers ask for GPL-3.0-or-later (adding the -or-later that is not added with the skeleton)
+- Add the run_export parameters.
 
 Example:
 
@@ -475,7 +476,7 @@ test:
 
 about:
   summary: cg/wgMLST allele calling software, schema evaluation and allele distance estimation for outbreak reserch.
-  license: GPL-3.0
+  license: GPL-3.0-or-later
   license_file: LICENSE
   home: https://github.com/BU-ISCIII/taranys
 
