@@ -417,6 +417,7 @@ Manually edit the meta.yaml file if needed:
 - Add maintainers.
 - Check licensing information. Reviwers ask for GPL-3.0-or-later (adding the -or-later that is not added with the skeleton)
 - Add the run_export parameters.
+- **IMPORTANT** remove `pip check` in `tests:` section. It fails due to some conflict in conda utils.
 
 Example:
 
