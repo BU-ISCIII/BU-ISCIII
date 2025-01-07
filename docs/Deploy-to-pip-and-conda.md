@@ -492,6 +492,12 @@ Set up Bioconda build tools:
 micromamba install -c conda-forge bioconda-utils conda-build
 ```
 
+Lint the recipe:
+
+```bash
+bioconda-utils lint recipes config.yml --packages PACKAGE_NAME
+```
+
 Test the recipe:
 
 ```bash
@@ -499,12 +505,6 @@ bioconda-utils build recipes config.yml --packages PACKAGE_NAME
 ```
 
 Fix any errors and repeat the process until the recipe is built and test successfully.
-
-Lint the recipe:
-
-```bash
-bioconda-utils lint recipes config.yml --packages PACKAGE_NAME
-```
 
 **Step 5:** Create a Pull Request
 
