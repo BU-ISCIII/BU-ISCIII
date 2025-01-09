@@ -225,11 +225,11 @@ Your package will now be available on Pypi.
 You need to follow the instructions above to create the project on PyPI for the first time. After that, a GitHub Action workflow can be used to automatically upload a new version to PyPI whenever a new version is released on GitHub.
 
 Step 1: Configure the github repository as a trusty publisher on pypi.
-![pypi_publish1](../images/pypi_publish1.png)
+<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/55acd3f7cb0cde7130ff663898024f1f10d05b72/images/pypi_publish1.png" width="600" height="400" align="middle" alt="pypi publish 1"/>
 
 Go to `Publishing` and `Add a new publisher`:
 
-![pypi_publish2](../images/pypi_publish2.png)
+<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/55acd3f7cb0cde7130ff663898024f1f10d05b72/images/pypi_publish2.png" width="600" height="400" align="middle" alt="pypi publish 2"/>
 
 Fill the form accordingly the workflow and environment you are going to create in the next step.
 
