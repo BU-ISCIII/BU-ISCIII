@@ -39,6 +39,7 @@
 - [[Github and development]]
   - [[Github gitflow]]
   - [[ZSH and OH-MY-ZSH]]
+  - [[Deploy to pip and conda]]
   - [[Development environment and IDE VIM Config]]
   - [[Code style]]
     - [[Python]]
