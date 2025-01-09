@@ -331,7 +331,7 @@ Now, we're ready to run MEGA.
 
 After running MEGA, you should see this screen:
 
-![MEGA-screen](../images/MEGA-screen.png)
+![MEGA-screen](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/MEGA-screen.png)
 
 To load `phylo.aln.fasta` or `clean.core.aln.fasta` into MEGA, follow these steps:
 
@@ -341,13 +341,13 @@ To load `phylo.aln.fasta` or `clean.core.aln.fasta` into MEGA, follow these step
 4. Reply **NO** to the emerging window asking *Protein-coding nucleotide sequence data?*
 5. Reply **YES** to the emerging window asking *Would you like to use the currently active data?*
 6. Select these options on the next window and click on OK:
-![MEGA-setup](../images/MEGA-setup.png)
+![MEGA-setup](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/MEGA-setup.png)
 7. You'll see a matrix like this one:
-![MEGA-matrix](../images/MEGA-matrix.png)
+![MEGA-matrix](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/MEGA-matrix.png)
 8. Click on the superior ***Export distances as Excel file*** button.
 9. On the emerging window, select **0 decimal places**, export as **matrix** and lower left matrix. You'll get this matrix as an Excel file. Copy this matrix and paste it on the **`snpmatrix_all_pos`** sheet from the summary Excel file:
 
-    ![MEGA-export](../images/MEGA-export.png)
+    ![MEGA-export](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/MEGA-export.png)
 
 10.  Repeat this procedure, but this time select **Column** as export type. You'll get an Excel file; copy it and paste it on the **`snpmatrix_all_pos_pairs`** sheet from the summary Excel file.
 11.  Repeat the previous steps for the **`clean.core.aln.fasta`** file. Repeat steps 9 and 10 with this file, and copy the Excel results from MEGA into the **`snpmatrix_core`** and **`snpmatrix_core_pairs`** sheets from the Excel summary file.
@@ -445,7 +445,7 @@ Now, you should copy this output and paste it into an **Excel** sheet. Then, cre
 
 Once you're sheet is ready, and considering you've already installed IGV in your **local computer**, run IGV. You'll see this screen:
 
-![IGV-screenshot](../images/IGV-screenshot.png)
+![IGV-screenshot](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/IGV-screenshot.png)
 
 Now, follow these steps. First, you will load the reference genome and then you'll load the `snps.bam` files you obtained previoulsy after running `snippy` for each sample:
 1. Go to **Genomes** -> **Load Genome from File**. Select the file you used previously as reference genome.
@@ -456,11 +456,11 @@ After following these steps, you'll see something like this (after zooming in):
 
 #### CASE 1: TRUE VARIANT
 
-![IGV-screenshot-true-variant](../images/IGV-screenshot-true-variant.png)
+![IGV-screenshot-true-variant](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/IGV-screenshot-true-variant.png)
 
 Using your mouse, you can search for the specific position that is specified in the `core.tab` file and click on the superior boxes (one track corresponds to one sample and the other track belongs to the other sample). In our case, one of the boxes is grey and the other one is red for the same position. If we click on these boxes, we'll see these little windows:
 
-![TP-comparison](../images/TP-comparison.png)
+![TP-comparison](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/TP-comparison.png)
 
 In this case, mostly all reads have the same base for this specific location, and this happens for both samples. The called alleles have a good depth of coverage, so we can infer that this is a **TRUE VARIANT**, since one of the samples has a lot of reads for a base that is different from the reference base and, since both samples have a good depth of coverage, we can be sure that this position really has a different base for each sample, so the difference reported by `core.tab` is real.
 
@@ -470,11 +470,11 @@ In this case, mostly all reads have the same base for this specific location, an
 
 Now, using the same example as before, let's check another case you might come across, which is when one of the called variants has low depth of coverage, making it a false positive. Check this case:
 
-![IGV-screenshot-low-depth](../images/IGV-screenshot-low-depth.png)
+![IGV-screenshot-low-depth](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/IGV-screenshot-low-depth.png)
 
 On position 3440421, you can see an A for both samples. However, let's check the number of reads that have that base for each sample:
 
-![LD-comparison](../images/LD-comparison.png)
+![LD-comparison](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/LD-comparison.png)
 
 As you can tell, one of the samples has only 9 reads covering this position, and all these reads have an A. Then, in theory, this position shouldn't be considered a position for which both samples have different bases; both have the same base, but this is not what `core.tab` says. 
 
@@ -488,7 +488,7 @@ In our Excel file, we should indicate this, apart from saying that for one of th
 
 In some cases, a variant might not be true because there are **insertions/deletions** close to the position that was reported. For example, let's check this image:
 
-![FP-indel-comparison](../images/FP-indel-comparison.png)
+![FP-indel-comparison](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/FP-indel-comparison.png)
 
 For a specific position, both samples have the same base (an A, which is also the reference base) for almost all reads, but right next to this position there is an insertion. This will affect the variant calling, so false differences between the samples will be identified, which is the case in this situation.
 
@@ -500,7 +500,7 @@ If you come across a situation like this, write FALSE on your Excel sheet and in
 
 Sometimes, a certain position reported by `core.tab` will have different bases for each sample, but these samples will have reads will a specific base and other reads with another sample at the same time. Let's see an example given our two samples from before:
 
-![recombinant-site](../images/recombinant-site.png)
+![recombinant-site](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/recombinant-site.png)
 
 As you can see, both samples have reads with a C and reads with a G at the same position, so calling a base in this case gets more difficult. This is a **recombinant site** that **Gubbins** will discard so, even though there is a real difference between both samples, this position will not be considered when creating `clean.core.aln`, so we should not take it into account.
 
