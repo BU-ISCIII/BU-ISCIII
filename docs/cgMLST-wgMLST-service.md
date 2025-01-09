@@ -15,7 +15,7 @@ Each bacterial species has their own **MLST schema**. A **Schema** is a **pre-de
 
 Let's get started with the service. When performing a cgMLST/wgMLST service, remember that **this service des not have a specific associated acronym**. Usually, cgMLST/wgMLST service is part of assembly service (see the [**Assembly documentation**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Assembly-service)), because it needs the assemblies to be performed.
 
-Additionally, it is usually performed along with the [**Characterization**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/Characterization-service.md), [**PlasmidID**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/plasmidID-service.md) and [**Snippy**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/Snippy-service.md) services, so the acronym will probably be one as explained in the wiki pages of these services.
+Additionally, it is usually performed along with the [**Characterization**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/Characterization-service.md), [**PlasmidID**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/plasmidID-service.md) and [**Snippy**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service) services, so the acronym will probably be one as explained in the wiki pages of these services.
 
 ### Software used
 
@@ -25,7 +25,7 @@ According to its manual, chewBBACA allows to define the target loci in a schema 
 
 chewBBACA can annotate the schema loci, compute the set of loci that constitute the core genome for a given dataset, and generate interactive reports for schema and allele calling results evaluation to enable an intuitive analysis of the results in surveillance and outbreak detection settings or population studies.
 
-Since the cg/wgMLST definition is usually done along with the construction of a phylogenetic tree, this service is usually done along with [**IQTREE**](http://www.iqtree.org/) and [**grapetree**](https://github.com/achtman-lab/GrapeTree). The usage of **IQTREE** is explained in the [**Snippy wiki**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service.md) page, while the usage of **grapetree** for the creation and visualisation of a **minimum spanning tree** will be explained here.
+Since the cg/wgMLST definition is usually done along with the construction of a phylogenetic tree, this service is usually done along with [**IQTREE**](http://www.iqtree.org/) and [**grapetree**](https://github.com/achtman-lab/GrapeTree). The usage of **IQTREE** is explained in the [**Snippy wiki**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service) page, while the usage of **grapetree** for the creation and visualisation of a **minimum spanning tree** will be explained here.
 
 ## Bioinformatics procedure
 
@@ -241,7 +241,7 @@ Once you have run all the scripts from `02-chewbbaca`, it is time to extract the
 
 This script will use the `results_alleles.tsv` file obtained after performing allele calling to determine the cgMLST, rendering several .tsv and .txt files, apart from an HTML report that should have the following aspect:
 
-![cgMLST_report](../images/cgMLST_report.png)
+![cgMLST_report](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/cgMLST_report.png)
 
 If you place your mouse on the end of the lines, you'll see the number of genes that compose your cgMLST95, cgMLST99 and cgMLST100 considering all the genomes that were used for the schema creation. You can also check the number of loci that compose the cgMLST100 in the corresponding .log file.
 
@@ -335,9 +335,9 @@ Once you have checked that everything has finished correctly by checking the `lo
       - **ALM** - **Alleles 20% Larger than the length Mode of the distribution of the matched loci** (CDS length > (locus length mode + locus length mode * 0.2)) (see image below). This determination is based on the currently identified set of alleles for a given locus. It is important to remember that, although infrequently, the mode may change as more alleles for a given locus are called and added to a schema.
       - **ASM** - similar to ALM but for Alleles 20% Smaller than the length Mode distribution of the matched loci (CDS length < (locus length mode - locus length mode * 0.2)). As with ALMs it is important to remember that, although infrequently, the mode may change as more alleles for a given locus are called and added to a schema.
   
-        ![PLOT](../images/PLOT.png)
-        ![NIPH-NIPHEM](../images/NIPH-NIPHEM.png)
-        ![ALM-ASM](../images/ALM-ASM.png)
+        ![PLOT](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/PLOT.png)
+        ![NIPH-NIPHEM](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/NIPH-NIPHEM.png)
+        ![ALM-ASM](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/ALM-ASM.png)
 
     - `invalid_cds.txt`: Contains the list of alleles predicted by Prodigal that were excluded based on the minimum sequence size value and presence of ambiguous bases.
   

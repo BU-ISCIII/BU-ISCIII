@@ -42,7 +42,7 @@ If a specific run is not recent, it might have already been archived and not app
 2. Click on **+ Crear una petición**.
 3. Fill in the form:
    
-![Form](../images/Form.png)
+![Form](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/Form.png)
    * **Tipo**: Solicitud
    * **Categoría**: >> Sistemas, Comunicaciones y Seguridad >> **Clúster HPC**.
    * **Urgencia**: depending on the situation.
@@ -182,7 +182,7 @@ If you see an error message like the previous one, it means there is one sample 
   You'll see there are no reads associated with the sample that is missing, and that the quality is 0. Therefore, this sample has not been sequenced and has no reads. You'll have to indicate this to the researcher when delivering the service results.
 
   **Example**:
-  ![No-reads-sample](../images/No-reads-sample.png)
+  ![No-reads-sample](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/No-reads-sample.png)
 
 </details>
 
