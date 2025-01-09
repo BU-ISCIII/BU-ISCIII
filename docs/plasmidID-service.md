@@ -153,7 +153,7 @@ In this Excel file, we can find the following sheets:
   * The **ASSEMBLY** columns are relative to the assembly service. Please check the [**Characterization service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Characterization-service) page.
 * **snpmatrix_all_pos**: please check the [**Snippy service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service).
 * **snpmatrix_all_pos_pairs**: please check the [**Snippy service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service).
-* **snpmatrix_core**: please check the [**Snippy service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Sinppy-service).
+* **snpmatrix_core**: please check the [**Snippy service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service).
 * **snpmatrix_core_pairs**: please check the [**Snippy service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service).
 * **plasmids**: this sheet is filled in combining the results from **ARIBA with plasmidfinder** and from **PlasmidID**. For each sample, there is a .tab report that you should open. You'll find 8 columns: `id`, `length`, `species`, `description`, `fraction_covered`, `contig_name`, `percentage` and `images`. Copy all columns except for the `images` column and paste them into the `plasmids` sheet in the Excel summary file.
 * **virulence**: please check the [**Characterization service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Characterization-service).
