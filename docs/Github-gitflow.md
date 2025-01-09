@@ -68,8 +68,8 @@ File status can be check with `git status` and looks like this:
 
 ```
 $ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
+On branch main
+Your branch is up-to-date with 'origin/main'.
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
@@ -87,8 +87,8 @@ File status change when you add, modify or delete a file. In order to reverse ch
 ```
 $ git add CONTRIBUTING.md
 $ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
+On branch main
+Your branch is up-to-date with 'origin/main'.
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
@@ -102,7 +102,7 @@ Nearly every VCS has some form of branching support. Branching means you diverge
 
 Some people refer to Git’s branching model as its “killer feature,” and it certainly sets Git apart in the VCS community. Why is it so special? The way Git branches is incredibly lightweight, making branching operations nearly instantaneous, and switching back and forth between branches generally just as fast. Unlike many other VCSs, Git encourages workflows that branch and merge often, even multiple times in a day. Understanding and mastering this feature gives you a powerful and unique tool and can entirely change the way that you develop.
 
-We will use git's powerful branching model for our software development. As we'll explain in nex section, our projects will contain at least one master and one develop branches, but new branches will be used for features development.
+We will use git's powerful branching model for our software development. As we'll explain in nex section, our projects will contain at least one main and one develop branches, but new branches will be used for features development.
 
 ## Our working methodology
 
@@ -122,7 +122,7 @@ In the previous image you can see a summary of how a repository should be organi
 
 ![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_1.png)
 
-While a default just-born git repository only contains one branch (master), a git-flow repository always starts with at least two branches (master and develop). You should move straight to develop and start creating your project there: write the early documentation, create the folder structure and the basic code. NO DEVELOPMENT SHOULD EVER BE DONE IN THE MASTER BRANCH!
+While a default just-born git repository only contains one branch (main), a git-flow repository always starts with at least two branches (main and develop). You should move straight to develop and start creating your project there: write the early documentation, create the folder structure and the basic code. NO DEVELOPMENT SHOULD EVER BE DONE IN THE main BRANCH!
 
 Once the skeleton of your project is done, it's time to forget about the develop branch and start creating features. It does not matter what you are going to do next, from adding new features to the interface to adding database support, because there should always be a way of splitting it in one or more sub-projects or tasks (feature branches). Stop one second to think what exactly you want to do and how, and then create a new feature branch called whateveryouaregoingtodohere (make sure the name self-explains to the other collaborators what is going on there) for each different thing you want to do.
 
@@ -140,13 +140,13 @@ If for any reason you discover major bugs or lack of features, it is time to mer
 
 ![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_4.png)
 
-Finally, you are happy with the project at release state, so you merge the release branch into both master and develop, and remove the release branch. Good work, everyone! The first version of the project is archived as 1.0 in master branch and ready to be downloaded by anyone.
+Finally, you are happy with the project at release state, so you merge the release branch into both main and develop, and remove the release branch. Good work, everyone! The first version of the project is archived as 1.0 in master branch and ready to be downloaded by anyone.
 
 ![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_5.png)
 
 But it will come the time when someone discovers that your released version was not bug-free at all. And this is the production version of the project, and always have to be ready to be used. And probably develop has evolved since the last time you released that version, so rolling back to that time stamp and going back to the beginning of the workflow would be a pain. No reason to do it, anyway! There is an easy way to fix this!
 
-It is time to create a hotfix branch. These branches are forked not from develop but from master, and from master in the release version you want to. So simply move to your hotfix branch, fix the bug and merge it back to both master (with a minor release bump) and develop (so following versions do not have the bug). And remove the hotfix branch. Problem solved!
+It is time to create a hotfix branch. These branches are forked not from develop but from main, and from main in the release version you want to. So simply move to your hotfix branch, fix the bug and merge it back to both main (with a minor release bump) and develop (so following versions do not have the bug). And remove the hotfix branch. Problem solved!
 
 As you can see, with the git-flow branching scheme it is very easy to collaborate in the development, document and maintain projects, even if the development team suffers major changes.
 
@@ -195,7 +195,7 @@ If you are starting a brand new project, follow these steps to make sure it has 
 
 `git flow init`
 
-Assign master to master the role and develop to the develop role, build the skeleton of your project in develop and push it back to GitHub!
+Assign main to main the role and develop to the develop role, build the skeleton of your project in develop and push it back to GitHub!
 
 ## Opening an existing project
 
@@ -249,7 +249,7 @@ If you are in one of the few cases where you should work on develop, just move t
 
 `git checkout develop`
 
-## Working on the master branch
+## Working on the main branch
 
 NEVER. DO. IT! Please.
 
@@ -356,7 +356,7 @@ Closing a feature will remove the branch after merging it with develop, so do it
 
 ## Close a hotfix
 
-Closing a hotfix will remove the branch after merging it  with both master and develop. Do it when the bug is fixed after the last commit.
+Closing a hotfix will remove the branch after merging it  with both main and develop. Do it when the bug is fixed after the last commit.
 
 `git flow hotfix finish <your_hotfix>`
 
@@ -366,7 +366,7 @@ When releasing a final version <version> (format 'X.Y.Z') of the project, you wi
 
 `git flow release start <version>`
 
-Do not make any changes here, THIS BRANCH IS NOT FOR DEVELOPMENT. Everything should have been already tested before releasing the stable version. Still, if you need to do any last minute changes, everything you do will be correctly merged to both master and develop at release time:
+Do not make any changes here, THIS BRANCH IS NOT FOR DEVELOPMENT. Everything should have been already tested before releasing the stable version. Still, if you need to do any last minute changes, everything you do will be correctly merged to both main and develop at release time:
 
 `git flow release finish <version>`
 

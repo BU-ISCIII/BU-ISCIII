@@ -6,7 +6,7 @@ Operating-system-level virtualization, also known as containerization, refers to
 
 Think about it as the heir of virtual machines, also, It was useful to me thinking about a massive virtualenv mode like python enviroments.
 
-<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/master/images/VMs-and-Containers.jpg" width="70%"/>
+<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/VMs-and-Containers.jpg" width="70%"/>
 
 ## Implementation
 
@@ -16,7 +16,7 @@ There are multiple programs that implement containers, most famous nowadays are 
 
 Generally containers have been designed to solve a single primary use case for a **enterprise** (micro-service virtualization). Unfortunately this is not the case for scientific computation were we are interested on the reproducibility of complex software environments. Because of this situation, and although Docker and Singularity are very similar in concept and usage, Singularity has been developed thinking in scientific HPC environments, and provide some useful features, as User NameSpace, in contrast with Docker that works through a daemon owned by root.
 
-<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/master/images/containers-for-science-and-highperformance-computing-41-1024.jpg" width="100%"/>
+<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/containers-for-science-and-highperformance-computing-41-1024.jpg" width="100%"/>
 
 ## Advantages of containers: Singularity
 
