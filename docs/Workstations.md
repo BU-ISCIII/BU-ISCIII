@@ -225,10 +225,10 @@ mkdir -p /media/backup
 ```
 
 4. Open BackInTime in your machine and create the following backup plan:
-![](https://raw.githubusercontent.com/BU-ISCIII/BU-ISCIII/master/images/backintime_general.png)
+![](https://raw.githubusercontent.com/BU-ISCIII/BU-ISCIII/main/images/backintime_general.png)
 5. Select your home folder in the include tab, and whatever you want to exclude in the correspondent tab.
 6. In autoremove, set it to this:
-![](https://raw.githubusercontent.com/BU-ISCIII/BU-ISCIII/master/images/backintime_autoremove.png)
+![](https://raw.githubusercontent.com/BU-ISCIII/BU-ISCIII/main/images/backintime_autoremove.png)
 7. Click ok and done! Create your first one on demand to check if everything works.
 
 ## Keep ssh sessions alive

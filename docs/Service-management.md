@@ -4,7 +4,7 @@ In this section we are going to explain how BU-ISCIII manages service requests. 
 
 The service flow begins when a user asks for a new service, the petition is recorded using iSkyLIMS and a notification is sent to the user and to BU-ISCIII responsible. The petition is evaluated and a resolution is created, accepting or denying the service. If accepted, the service is queued until the responsible for the task is available and then passes to in progress state. Finally, when the service is finished a delivery is sent to the researcher and the service passes to Delivered state.
 
-<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/master/images/service_management.png" width="100%"/>
+<img src="https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/service_management.png" width="100%"/>
 
 ## States description
 
