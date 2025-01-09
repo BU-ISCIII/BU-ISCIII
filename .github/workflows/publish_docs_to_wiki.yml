@@ -43,4 +43,4 @@ jobs:
           git add .
           git commit -m "Update Wiki content"
           git remote add upstream https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
-          git push -f upstream main
+          git push -f upstream master
