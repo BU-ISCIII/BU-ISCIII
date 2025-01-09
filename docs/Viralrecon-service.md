@@ -25,7 +25,7 @@ This script prompts the user for the type of analysis to be performed (AMPLICONS
 
 > Note: In case the service has special requirements, additional configurations may be necessary.
 
-Edit the folder name `YYMMDD_ANALYSIS_0X_MAG` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_MAG`.
+Edit the folder name `YYMMDD_ANALYSIS_01_TAXPROFILER` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_TAXPROFILER`.
 
 Copy the contents of the service folders to scratch. To do this, run the **scratch** tool from buisciii-tools.
 
@@ -91,10 +91,7 @@ On completion of the pipeline, it is strongly recommended to review different fi
 
 ---
 
-In the meantime, you can access the `YYMMDD_ANALYSIS_0X_MAG` folder and execute the process following its [manual](https://github.com/BU-ISCIII/BU-ISCIII/wiki/MAG-service).
-
-> [!WARNING]
-> Please take into account that, if there are both samples with **single-end reads** and **paired-end reads** associated with the service, you'll have to run **MAG** for single-end and paired-end reads **separately** (use the `--single_end` parameter when running MAG with the samples that contain single-end reads).
+**In the meantime, you can access the `YYMMDD_ANALYSIS_0X_TAXPROFILER` folder and execute the process following its [**manual**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Taxprofiler-service).**
 
 If the pipeline has **successfully finished**, move to the `../RESULTS` folder.
 
