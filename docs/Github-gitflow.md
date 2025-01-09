@@ -116,33 +116,33 @@ In case you find yourself working in an scenario which is not considered in this
 
 [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) is a branching model for Git, created by Vincent Driessen. We use git-flow as a wrapper around existing git commands which allow us to easily implement this scheme in our daily work. But before explaining how the wrapper works we need to understand the philosophy behind the scheme.
 
-![Summary of how git-flow works](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/git-flow.png)
+![Summary of how git-flow works](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow.png)
 
 In the previous image you can see a summary of how a repository should be organised following this branching scheme, and how it evolves through time (y axis, from top to bottom). Each parallel vertical line represents different a branch, each bubble a new push to the main repository, and the arrows between the branches show forking (outcoming arrows) and merging (incoming arrows) events. Now let's try to explain step by step what's going on there!
 
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/git-flow_1.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_1.png)
 
 While a default just-born git repository only contains one branch (master), a git-flow repository always starts with at least two branches (master and develop). You should move straight to develop and start creating your project there: write the early documentation, create the folder structure and the basic code. NO DEVELOPMENT SHOULD EVER BE DONE IN THE MASTER BRANCH!
 
 Once the skeleton of your project is done, it's time to forget about the develop branch and start creating features. It does not matter what you are going to do next, from adding new features to the interface to adding database support, because there should always be a way of splitting it in one or more sub-projects or tasks (feature branches). Stop one second to think what exactly you want to do and how, and then create a new feature branch called whateveryouaregoingtodohere (make sure the name self-explains to the other collaborators what is going on there) for each different thing you want to do.
 
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/git-flow_2.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_2.png)
 
 When creating a feature branch you are just forking the develop repository, coping it to a new branch where you can experiment in your idea without the risk of damaging anything in the common develop branch. You can also work in different feature branches at the same time, trying different approaches to solve a problem, and test them to finally keep only the best solution. Doing this allow us to work in a modular way and makes very easy to implement in develop each feature only when they are ready to roll, without messing with other feature's development in the meanwhile.
 
 Once our features are completed (completely finished and tested), we can merge them back into the develop branch. After doing this, all the new functionalities implemented in our feature will be integrated in the develop branch and, as there is nothing left to do in this feature and is already a core part of the project, the feature branch can be removed.
 
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/git-flow_3.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_3.png)
 
 If we consider that our project is finally ready to be released in its actual state in the develop branch, it is time to create a release branch. This branch will pump the version number of the project and fork the develop branch into a brand new release branch. It is time to intensively test it to its limits, and discover any bugs that we could have missed before this point. NO DEVELOPMENT SHOULD BE CARRIED IN A RELEASE BRANCH, only minor bug fixes and last minute tweaks. Every change you make in a release branch will be merged back to develop.
 
 If for any reason you discover major bugs or lack of features, it is time to merge back to develop, remove the release branch and create the corresponding feature branches where you will work on those problems. Once that you consider everything is ready to be released (again), create the release branch from the updated develop branch and test again.
 
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/git-flow_4.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_4.png)
 
 Finally, you are happy with the project at release state, so you merge the release branch into both master and develop, and remove the release branch. Good work, everyone! The first version of the project is archived as 1.0 in master branch and ready to be downloaded by anyone.
 
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/git-flow_5.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/git-flow_5.png)
 
 But it will come the time when someone discovers that your released version was not bug-free at all. And this is the production version of the project, and always have to be ready to be used. And probably develop has evolved since the last time you released that version, so rolling back to that time stamp and going back to the beginning of the workflow would be a pain. No reason to do it, anyway! There is an easy way to fix this!
 
@@ -174,7 +174,7 @@ Learning how to properly use git in the command line would also be great at long
 
 Git will be our main tool which both git-flow and Github depends from. It is used in the command line, and has lots and lost of different options and functionalities. But to make it easier to get hands on work, we will use it only for creating our local copies of the repositories (git copy), change between branches when working (git checkout), create (git add ./) move (git mv <fromfile tofile>) and remove (git rm <file>) files, create commits (git commit -m "<message>") and update both the local (git pull) and remote (git push) repositories with the newest changes.
 
-Repository creation and documentation will be handled from Github, and all the branching scheme will be operated by git-flow wrapper. For details of how to do each action see the next page of this wiki: [Best practices - or how you should do it](https://github.com/BU-ISCIII/coding_documentation/wiki/Best-practices---or-how-you-should-do-it)
+Repository creation and documentation will be handled from Github, and all the branching scheme will be operated by git-flow wrapper. For details of how to do each action see the next page of this wiki: [Best practices - or how you should do it](https://github.com/BU-ISCIII/dotfiles/wiki/Best-practices---or-how-you-should-do-it)
 
 # Best practices - or how you should do it
 
@@ -183,13 +183,13 @@ Repository creation and documentation will be handled from Github, and all the b
 If you are starting a brand new project, follow these steps to make sure it has the right internal structure so you and anyone else can work on it without problems:
 
 1. First, navigate to [BU-ISCII](https://github.com/BU-ISCIII/) and click on "New".
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/Create_repo_1.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/Create_repo_1.png)
 
 2. Now name to your project and add a short description to it. Leave the repository public (you will need for hosting private repositories) and check the "Initialize this repository with a README" box. Click on "Create repository".
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/Create_repo_2.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/Create_repo_2.png)
 
 3. Your repository is now created, but we still need to give it our basic format. Click on "Branch: master", write "develop" and click on "Create branch".
-![](https://github.com/BU-ISCIII/coding_documentation/blob/master/images/Create_repo_3.png)
+![](https://github.com/BU-ISCIII/dotfiles/blob/master/images/Create_repo_3.png)
 
 4. Now clone it to your local machine a transform it into a git-flow repository with
 
