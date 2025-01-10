@@ -20,7 +20,7 @@ See [[Data Structure]].
 
 Download the latest LTS version from [ubuntu.com](https://ubuntu.com/download/desktop).
 
-> **Note:** For the moment, we recommend installing [22.04.5 LTS](https://releases.ubuntu.com/22.04/?_ga=2.34887202.2033516692.1736508482-451044865.1736508482&_gl=1*qqnjfr*_gcl_au*MTc4NjEyOTkxNC4xNzM2NTA4NDgz) ubuntu version to prevent compatibility conflicts.
+> **Note:** *For the moment, it is recommended installing [22.04.5 LTS](https://releases.ubuntu.com/22.04/?_ga=2.34887202.2033516692.1736508482-451044865.1736508482&_gl=1*qqnjfr*_gcl_au*MTc4NjEyOTkxNC4xNzM2NTA4NDgz) ubuntu version to prevent compatibility conflicts.*
 
 In your Linux server open the "startup disk Creation" tool to create a bootable USB disk.
 
@@ -30,7 +30,9 @@ In your Linux server open the "startup disk Creation" tool to create a bootable 
 
 When server is planned for computation propose, the installation settings are different to prevent for one side that critical partitions could full by user data and for other hand to install software packets for this propose.
 
-During software installation, before running the installation GUI:
+Once your machine has been rebooted with the bootable disk plugged in, and the boot mode has been chosen, you will see the language selection menu followed by Ubuntu’s boot options. Then, before running the installation itself, click the "**Try Ubuntu**" button as shown in the image below.
+
+![image](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/Tryubuntu.png)
 
 - Open gparted in your WS
     1. Create swap primary partition at the end of the disk (8000 MB). Select filesystem as ext4 and partition name and label as _swap_.
