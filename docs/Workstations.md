@@ -20,6 +20,8 @@ See [[Data Structure]].
 
 Download the latest LTS version from [ubuntu.com](https://ubuntu.com/download/desktop).
 
+> **Note:** For the moment, we recommend installing [22.04.5 LTS](https://releases.ubuntu.com/22.04/?_ga=2.34887202.2033516692.1736508482-451044865.1736508482&_gl=1*qqnjfr*_gcl_au*MTc4NjEyOTkxNC4xNzM2NTA4NDgz) ubuntu version to prevent compatibility conflicts.
+
 In your Linux server open the "startup disk Creation" tool to create a bootable USB disk.
 
 ## Clean installation
