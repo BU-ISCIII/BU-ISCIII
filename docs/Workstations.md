@@ -157,44 +157,44 @@ Then, in the installation GUI select the following options:
 
 ### Users and groups
 
-1. Create the following groups replacing the gid values for the ones defined in axterix:
+1. Create the following group replacing the gid value for the one defined in portutatis:
 
 ```Bash
 sudo addgroup bioinfo
 sudo groupmod -g <gid_bioinfo> bioinfo
-sudo addgroup sshaccess
-sudo groupmod -g <gid_sshaccess> sshaccess
-sudo addgroup bioinfoaccess
-sudo groupmod -g <gid_bioinfoaccess> bioinfoaccess
 ```
 
-2. Add bioinfoadm user to the groups
+Ask a teammate for the gid he/she has configured in his/her WS. It can be obtained running the following command:
 
 ```Bash
-sudo usermod -a -G bioinfoaccess bioinfoadm
-sudo usermod -a -G sshaccess bioinfoadm
+cat /etc/group | grep "bioinfo:x" | cut -d':' -f3
+```
+
+2. Add bioinfoadm user to the group
+
+```Bash
 sudo usermod -a -G bioinfo bioinfoadm
 ```
 
 3. Create your user `<user>` and add the following groups
 
-3.1 If your user name is already defined in asterix use the same uid and gid as in asterix
+3.1 If your user name is already defined in portutatis, use the same uid and gid as in portutatis.
 
 ```Bash
 sudo adduser <user> -u <uid>
-sudo usermod -a -G bioinfoaccess,sshaccess,bioinfo,sudo <user>
+sudo usermod -a -G bioinfo,sudo <user>
 sudo groupmod -g <gid> <user>
 ```
 
-3.2 If you do not have user account in asterix yet, do the following:
+3.2 If you do not have user account in portutatis yet, do the following:
 
 ```Bash
 sudo adduser <user>
-sudo usermod -a -G bioinfoaccess,sshaccess,bioinfo,sudo <user>
+sudo usermod -a -G bioinfo,sudo <user>
 ```
 
-3.2.1 If you get your user account in asterix after some time using your server, perform the following:
-Use `id <user>` logged in asterix to know your assigned uid and gid, and change them in your local machine:
+3.2.1 If you get your user account in portutatis after some time using your server, perform the following:
+Use `id <user>` logged in portutatis to know your assigned uid and gid, and change them in your local machine:
 
 ```Bash
 usermod -u <uid> <user>
@@ -294,7 +294,7 @@ mkdir -p /media/backup
 
 ## Keep ssh sessions alive
 
-Asterix will kick you out every time you keep your connection idle for a set period of time. To avoid this annoying feature of the firewall, you can modify your ssh connection settings to send NULL packages every X seconds, which will keep your connection up and running.
+Portutatis will kick you out every time you keep your connection idle for a set period of time. To avoid this annoying feature of the firewall, you can modify your ssh connection settings to send NULL packages every X seconds, which will keep your connection up and running.
 
 How you do it, depends on the tool you are using for ssh-ing. I will explain the modifications you have make in the most broadly used tools to send a keep-alive signal every 5 minutes.
 
