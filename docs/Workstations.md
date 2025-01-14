@@ -90,19 +90,19 @@ sudo pvdisplay
 Take the "PV Name" and substitute it in the next command:
 
 ```Bash
-vgcreate <vgroup> <PV Name>
+sudo vgcreate <vgroup> <PV Name>
 ```
 
 Finally, allocate space for the logical volumes.
 
 ```Bash
-lvcreate -L 20G -n lv_root <vgroup>
-lvcreate -L [whatever space you want to assign to your home]G -n lv_home <vgroup> # Left some space free so you can reassign this space in whatever partition you need in the future.
-lvcreate -L 30G -n lv_opt <vgroup>
-lvcreate -L 20G -n lv_tmp <vgroup>
-lvcreate -L 20G -n lv_var <vgroup>
-lvcreate -L 2G -n lv_var_log <vgroup>
-lvcreate -L 20G -n lv_root_all <vgroup>
+sudo lvcreate -L 20G -n lv_root <vgroup>
+sudo lvcreate -L [whatever space you want to assign to your home]G -n lv_home <vgroup> # Left some space free so you can reassign this space in whatever partition you need in the future.
+sudo lvcreate -L 30G -n lv_opt <vgroup>
+sudo lvcreate -L 20G -n lv_tmp <vgroup>
+sudo lvcreate -L 20G -n lv_var <vgroup>
+sudo lvcreate -L 2G -n lv_var_log <vgroup>
+sudo lvcreate -L 20G -n lv_root_all <vgroup>
 ```
 
 This is an example of PV creation from the command line.
