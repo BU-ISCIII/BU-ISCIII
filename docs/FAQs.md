@@ -8,6 +8,7 @@
   - [How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?](#how-to-mount-dataucctbi-and-dataucctbioinfo_doc)
   - [What if `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` unmount for any reason?](#what-if-dataucctbi-and-dataucctbioinfo_doc-unmount-for-any-reason)
   - [How can I install a new release of the BU-ISCIII tools in the HPC?](#how-can-i-install-a-new-release-of-the-bu-isciii-tools-in-the-hpc)
+  - [How can I install a new version of a Singularity image in the HPC?](#how-can-i-install-a-new-version-of-a-singularity-image-in-the-hpc)
   - [How can I install a new version of an nf-core pipeline in the HPC?](#how-can-i-install-a-new-version-of-an-nf-core-pipeline-in-the-hpc)
   - [What if the researcher asked for the analysis of samples that do not appear on iSkyLIMS?](#what-if-the-researcher-asked-for-the-analysis-of-samples-that-do-not-appear-on-iskylims)
   - [What if a sample appears on iSkyLIMS but it is not present inside `/srv/fastq_repo/`?](#what-if-a-sample-appears-on-iskylims-but-it-is-not-present-inside-srvfastq_repo)
@@ -129,6 +130,20 @@ If there is a new release of the BU-ISCIII tools, you should install it in the H
 
 >[!NOTE]
 >You might need to install `pip` in your new micromamba environment. To do so, run `micromamba install pip`.
+
+## How can I install a new version of a Singularity image in the HPC?
+
+Most of the programmes on which our templates rely are executed based on **Singularity images** (please find detailed documentation on Singularity [**here**](https://docs.sylabs.io/guides/3.0/user-guide/quick_start.html)). It is **recommendable** to keep the versions of these images **updated** regularly, but **always testing first that they work correctly before adding them into our templates**. 
+
+What should be done in order to download a Singularity image? Follow these steps:
+
+1. First, go to: **https://depot.galaxyproject.org/singularity/**.
+2. In this page, you'll see several Singularity images ready to be downloaded. Pay attention to the names of the files and their submission dates (second column).
+3. For example, let's say we want to download the latest mtbseq Singularity image. Press `Ctrl + F` to search for "mtbseq", and you'll see in yellow all the found occurrences. Once this has been done, simply check which image is the most recent.
+4. Once identified, place your mouse on the most recent image and right-click on it. Click on "Copy link address".
+5. Now, log into the HPC and go to `/data/ucct/bi/pipelines/singularity-images`. Here, run `wget` and paste into the terminal the link you just copied. Press Enter and your Singularity image will be downloaded inside this folder.
+
+Once you have the new Singularity image, please test it before implementing it into the templates manually.
 
 ## How can I install a new version of an nf-core pipeline in the HPC?
 
