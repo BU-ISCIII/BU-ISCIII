@@ -352,6 +352,30 @@ To load `phylo.aln.fasta` or `clean.core.aln.fasta` into MEGA, follow these step
 10.  Repeat this procedure, but this time select **Column** as export type. You'll get an Excel file; copy it and paste it on the **`snpmatrix_all_pos_pairs`** sheet from the summary Excel file.
 11.  Repeat the previous steps for the **`clean.core.aln.fasta`** file. Repeat steps 9 and 10 with this file, and copy the Excel results from MEGA into the **`snpmatrix_core`** and **`snpmatrix_core_pairs`** sheets from the Excel summary file.
 
+### What if I want to check what the tree obtained after `iqtree` looks like?
+
+As indicated previously, after running `iqtree` we should obtain a `.treefile` file that will be then stored in the corresponding subfolder from `RESULTS` for the researchers to check. 
+
+However, it is recommendable to **visualise the tree** we just generated in order to see if your results make sense or with the objective of analysing the phylogenetic relationships existing among the samples from the service.
+
+There are several **tree** **visualisers**, but the one that will be explained in this document, and that is used the most within the Unit for this purpose, is [**iTOL**](https://itol.embl.de/). **iTOL** is an online tool for the **display**, **annotation** and **management** of **phylogenetic trees**. It allows the user to manage and visualise trees directly in the browser, annotating them at the same time with various datasets.
+
+Let's say you already have a `.treefile` file from `iqtree` and you want to visualise it in iTOL. To do so, follow these steps:
+1. Create an account in iTOL if you don't have one. Otherwise, please log in with your credentials.
+2. Once logged in, click on "**My Trees**".
+3. In this page, you'll see a list of all the trees you have uploaded into iTOL. To upload a new tree, click on "**Tree upload**" and either drop the `.treefile` file into the emerging box or select it on an emerging window.
+4. Once uploaded, it is very recommendable to rename the tree so that you can identify it easily later. Usually, we name the uploads in iTOL according to the service ID and indicating if they were generated from `phylo.aln` or `clean.core.aln`, to wit, before or after running gubbins to filter for recombinant sites.
+5. Once renamed, click on the tree name. You'll see a first version of your tree, but we should make a few adjustments before reviewing it properly:
+   1. On the **control panel**, click on **Advanced** -> **Midpoint root**.
+   2. **Advanced** -> **Bootstraps / metadata** -> **Display**.
+      1. Click on **Text**, Font **14** px.
+   3. **Advanced** -> **Tree scale box** -> **Display**.
+   4. **Advanced** -> **Leaf node symbols** -> **Display**.
+   5. **Advanced** -> **Internal node symbols** -> **Display**.
+6. If you want to export the tree, you can click on the **control panel** and then **Export**. You can export your tree in SVG, EPS, PDF, PNG, newick, phyloXML and NEXUS formats.
+
+Once you're done, your tree will be stored in your account with the changes you made, so you'll be able to check it whenever you like.
+
 ### What if I want to check the size of `phylo.aln`?
 
 Please run:
