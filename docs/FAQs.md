@@ -11,6 +11,7 @@
   - [How can I install a new version of a Singularity image in the HPC?](#how-can-i-install-a-new-version-of-a-singularity-image-in-the-hpc)
   - [How can I install a new version of an nf-core pipeline in the HPC?](#how-can-i-install-a-new-version-of-an-nf-core-pipeline-in-the-hpc)
   - [What if the researcher asked for the analysis of samples that do not appear on iSkyLIMS?](#what-if-the-researcher-asked-for-the-analysis-of-samples-that-do-not-appear-on-iskylims)
+  - [What if the researcher selected the wrong services when submitting a request via iSkyLIMS?](#what-if-the-researcher-selected-the-wrong-services-when-submitting-a-request-via-iskylims)
   - [What if a sample appears on iSkyLIMS but it is not present inside `/srv/fastq_repo/`?](#what-if-a-sample-appears-on-iskylims-but-it-is-not-present-inside-srvfastq_repo)
   - [How to upload raw sequences into SRA](#how-to-upload-raw-sequences-into-sra)
   - [Decent working environment in Windows 10 WSL](#decent-working-environment-in-windows-10-wsl)
@@ -178,6 +179,24 @@ mkdir nf-core-bacass-2.4.0 && cd nf-core-bacass-2.4.0 && nf-core download bacass
 In some cases, a researcher might ask for the analysis of samples that do not appear on iSkyLIMS. There is not a universal solution for this, unfortunately, since this can be solved in different ways depending on the situation:
 * For example, the researcher, in the request message, might directly give you a link from which you have to download the raw sequences. These files might not have been uploaded in iSkyLIMS. In this case, you'll have to download these sequences manually and insert them in the `RAW` folder of the service.
 * Sometimes, the researcher may have named the samples in iSkyLIMS in one specific way, when the raw files are named after another structure. For example, the sample name in iSkyLIMS might be 680-24, but in reality the sample name is 20240680. Plus, the researcher might have indicated the wrong run/project. This depends very much of the situation, but it is recommendable to do some research on iSkyLIMS regarding the most recent runs that have been uploaded into this platform, in order to try to see if there are recent samples that could be the sample that we are really looking for.
+
+## What if the researcher selected the wrong services when submitting a request via iSkyLIMS?
+
+As you may know already, when preparing a request submission, the researcher has to select via [**iSkyLIMS**](https://iskylims.isciii.es/drylab/sequencing-request) which services they want us to carry out with the samples they indicate. 
+
+It is not rare to notice that a researcher has selected the wrong service/s when submitting this request (or they have forgotten to add a service that is needed for the completion), and this will make `bu-isciii new-service` to offer the user to import templates that have nothing to do with the service requested. For example, imagine a researcher wants us to perform plasmid analysis (which corresponds to the Bacteria: Plasmid analysis and characterization service), but they have only selected the Bacteria: Multi-Locus Sequence Typing (MLST), analysis of virulence factors, antimicrobial resistance, and plasmids characterization service, which corresponds to characterization. In this case, we would need to add manually the service that is missing.
+
+How can we do this? We should go in this situation to: **https://iskylims.isciii.es/admin/**. To access this page, you have to log in with the following credentials:
+* **User**: bioinfoadm
+* **Password**: IYKYK
+
+After that, you'll get into a **Django admin interface**. You'll find several sections, including "**Authentication and authorization**", "**Core**", "**Django_utils**", "**Drylab**" and "**Wetlab**". In this case, we should:
+1. Go to the **Services** section from **Drylab**, and there we'll see all the services that have been requested so far.
+2. Click on the service ID for which this incidence has happened.
+3. Once inside, go to the **AvailableServices** box and, while carefully pressing `Ctrl`, remove and include those services that you need.
+4. Press **SAVE** at the end of the page, and your changes will have been saved.
+
+Now, if you refresh the service page on iSkyLIMS, you'd see the correct services associated with your service. You can then add a new resolution for this service, accept it and start with the analyses :)
 
 ## What if a sample appears on iSkyLIMS but it is not present inside `/srv/fastq_repo/`?
 
