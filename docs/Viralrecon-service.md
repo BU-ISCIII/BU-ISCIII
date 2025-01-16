@@ -4,9 +4,10 @@ Once the service has been [accepted in iSkyLIMS](https://github.com/BU-ISCIII/BU
 
 Log in with your HPC user.
 
-Load the buisciii-tools environment.
+Load the buisciii-tools environment (select the environment with the most recent version of buisciii-tools).
 
-    $ conda activate buisciii-tools
+    $ micromamba env list | grep buisciii
+    $ micromamba activate buisciii-tools_X.X.X
 
 Create the service and the needed folder structure. Select the **Viralrecon** template.
 
