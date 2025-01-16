@@ -17,7 +17,7 @@ Create the service and the needed folder structure. Run twice the "new-service" 
 
 > Note: If the resolution ID is not specified, it will be requested via the prompt. The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).
 
-If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, move inside the newly created folder at `/data/ucct/bi/services_and_colaborations/CNM/virology/`. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
+If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, copy de log inside the newly created folder at `/data/ucct/bi/services_and_colaborations/CNM/virology/` and move in. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
 
 Move to `/ANALYSIS`. Configure the `samples_ref.txt` file according to the service requirements (samples, reference genomes, hosts, etc.). Check the `lablog_viralrecon` and execute it.
 
