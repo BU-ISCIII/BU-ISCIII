@@ -19,7 +19,7 @@ Create the service and the needed folder structure. Run twice the "new-service" 
 
 If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, move inside the newly created folder at `/data/ucct/bi/services_and_colaborations/CNM/virology/`. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
 
-Move to `/ANALYSIS`. Configure the `samples_ref.txt` file according to the service requirements (samples, reference genomes, hosts, etc.). Check the lablog and execute it.
+Move to `/ANALYSIS`. Configure the `samples_ref.txt` file according to the service requirements (samples, reference genomes, hosts, etc.). Check the `lablog_viralrecon` and execute it.
 
     $ bash lablog_viralrecon
 
@@ -27,7 +27,7 @@ This script prompts the user for the type of analysis to be performed (AMPLICONS
 
 > Note: In case the service has special requirements, additional configurations may be necessary.
 
-Edit the folder name `YYMMDD_ANALYSIS_01_TAXPROFILER` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_TAXPROFILER`.
+Check the `lablog_taxprofiler` Edit the folder name `YYMMDD_ANALYSIS_01_TAXPROFILER` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_TAXPROFILER`.
 
 Copy the contents of the service folders to scratch. To do this, run the **scratch** tool from buisciii-tools.
 
