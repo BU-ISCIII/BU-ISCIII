@@ -9,11 +9,10 @@ Load the buisciii-tools environment (select the environment with the most recent
     $ micromamba env list | grep buisciii
     $ micromamba activate buisciii-tools_X.X.X
 
-Create the service and the needed folder structure. Run twice the "new-service" module, selecting **Viralrecon** and **Taxprofiler** templates separately, in order to add both to the folder structure.
+Create the service and the needed folder structure. Run the "new-service" module, selecting **ALL** option in order to add **Viralrecon** and **Taxprofiler** templates to the folder structure.
 
     $ bu-isciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
-    > Viralrecon (first time)
-    > Taxprofiler (second time)
+    > All
 
 > Note: If the resolution ID is not specified, it will be requested via the prompt. The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).
 
