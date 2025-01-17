@@ -45,7 +45,7 @@ This script prompts the user for the type of analysis to be performed (AMPLICONS
 
 > Note: In case the service has special requirements, additional configurations may be necessary.
 
-Check the `lablog_taxprofiler` Edit the folder name `YYMMDD_ANALYSIS_01_TAXPROFILER` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_TAXPROFILER`.
+Check the `lablog_taxprofiler` and execute it. Edit the folder name `YYMMDD_ANALYSIS_01_TAXPROFILER` based on the number of analyses to be performed. If only one host exists, it shall be set as `YYMMDD_ANALYSIS_02_TAXPROFILER`.
 
 Copy the contents of the service folders to scratch. To do this, run the **scratch** tool from buisciii-tools.
 
