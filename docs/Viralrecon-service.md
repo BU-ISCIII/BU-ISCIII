@@ -18,7 +18,26 @@ Create the service and the needed folder structure. Run the "new-service" module
 
 If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, copy de log inside the newly created folder at `/data/ucct/bi/services_and_colaborations/CNM/virology/` and move in. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
 
-Move to `/ANALYSIS`. Configure the `samples_ref.txt` file according to the service requirements (samples, reference genomes, hosts, etc.). Check the `lablog_viralrecon` and execute it.
+Move to `/ANALYSIS`. In case the pipeline is going to use several references, configure the `samples_ref.txt` file according to the service requirements (samples, reference genomes, hosts, etc.).
+
+> **Note:** In the case of a single reference, the `samples_ref.txt` file configuration can be made during lablog_viralrecon execution, where the required data for its setup will be prompted interactively from the user through the terminal.
+
+The file shall be structured as follows:
+
+        SampleID	Reference	Host
+        SampleID	Reference	Host
+        SampleID	Reference	Host
+        ...
+
+The columns are spaced with a tabulation (this is critical for the proper functioning of the pipeline). This file must include all samples to be tested, as well as the references to be used, and the host organism from which the samples have been collected. It is possible that the same sample will appear several times, in cases where this sample needs to be analysed with several references. This would be an example of a configured `samples_ref.txt` file:
+
+        SAR00001    MH173047.1  human
+        SAR00001    KX838946.2  human
+        SAR00077    MH173047.1  human
+        SAR00088    MH173047.1  human
+        SAR00099    MH173047.1  human
+ 
+Once the `samples_ref.txt` file is set up , check the `lablog_viralrecon` and execute it.
 
     $ bash lablog_viralrecon
 
