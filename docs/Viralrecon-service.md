@@ -176,8 +176,6 @@ Once you have selected the corresponding lines, you can execute an auxiliar scri
 
 ### Common errors while running the service
 * Make sure that `samples_ref` file does not contain any spaces as it's read as a tab-separated file. You can use `cat -A samples_ref.txt` to ensure this (`\t` is shown as `^I` in this case).
-  
-* When there's a mix of full-numerical and strings in sample IDs (e.g. `87439.fastq.gz` and `SARS_01.fastq.gz`) the pipeline may crush in `MULTIQC` step. This is caused because there's a bug with MultiQC ([MultiQC issue](https://github.com/nf-core/viralrecon/issues/345)) that can be temporarily fixed by adding any non-numerical character to the sample IDs. Nevertheless, you can follow the instructions in [this tutorial](https://drive.google.com/drive/u/0/folders/1-GafpZR2HVlecNaAsXIslK3aecHplD4z) to properly correct this error.
 
 * When running `bash _01_run_<reference1>.sh` and checking the `.log` file, you might see the following message related with Bowtie2, where `XXX` is the number of mapped reads against the reference for each sample:
     > -[nf-core/viralrecon] X samples skipped since they failed Bowtie2 1000 mapped read threshold: <br> XXX: SAMPLE1 <br> XXX: SAMPLE2 <br> ... </br>
