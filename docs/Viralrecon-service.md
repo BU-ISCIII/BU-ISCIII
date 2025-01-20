@@ -119,7 +119,8 @@ Check the lablog and execute it.
 
     $ bash lablog_viralrecon_results
 
-Access the newly created folder and execute the scripts in order.
+Then access the newly created folder and execute the scripts in order.
+This lablog (and the scripts inside the new folder) gathers all the files containing the results and statistics of the analyses carried out during the viralrecon pipeline. It creates folders corresponding to different processes (mapping, assembly, annotation) and symbolic links to the main files (mapping_illumina.xlsx, variants_long_table.xlsx, multiqc_report.html and pangolin and nextclade reports). Finally, the `excel_generator.py` script will convert the csv files to xlsx format.
 
 > [!WARNING]
 > If the researcher asked you to provide them with the **reads without host**, create a folder within `/RESULTS/*_entrega01/`, and copy these reads inside this folder, so that the researcher can find them easily.
