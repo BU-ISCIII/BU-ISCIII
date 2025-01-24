@@ -200,7 +200,7 @@ Now, if you refresh the service page on iSkyLIMS, you'd see the correct services
 
 ## What if a sample appears on iSkyLIMS but it is not present inside `/srv/fastq_repo/`?
 
-You might come across a certain sample that appears on iSkyLIMS but which, when running `bu-isciii new-service`, cannot be found in `/srv/fastq_repo/`, as indicated in an error message like this one:
+You might come across a certain sample that appears on iSkyLIMS but which, when running `buisciii new-service`, cannot be found in `/srv/fastq_repo/`, as indicated in an error message like this one:
 ```
 This regex has not output any file: /srv/fastq_repo/XXXXXXX_GEN_XXX_XXXXXXXX_XXXXXXX/XXXXXXXXX_*. This
 maybe because the project is not yet in the fastq repoor because some of the samples are not in the 

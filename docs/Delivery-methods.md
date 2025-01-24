@@ -87,4 +87,4 @@ GeneticDiagnosis
 
 #### Steps for delivering a service
 
-Use bu-isciii tools delivery module. If the researcher does not have a user and folder configured in the sftp you will need to follow the [this manual](./SFTP-management.md).
+Use buisciii tools delivery module. If the researcher does not have a user and folder configured in the sftp you will need to follow the [this manual](./SFTP-management.md).
