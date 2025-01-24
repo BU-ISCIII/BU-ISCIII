@@ -32,7 +32,7 @@ If so, you are ready to proceed.
 
   - Copy files in the folder service from `services_and_colaborations` to `scratch_tmp/`.
     ```bash
-    bu-isciii --log-file SRVXXXYYYY.1.tool.log scratch --direction service_to_scratch SRVXXXYYYY.1
+    buisciii --log-file SRVXXXYYYY.1.tool.log scratch --direction service_to_scratch SRVXXXYYYY.1
     ```
     The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service.
 

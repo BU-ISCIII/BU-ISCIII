@@ -8,14 +8,13 @@ BU-ISCIII is focus on the analysis of high throughput data (NGS) inside Computat
 
 ## Service portfolio
 
-Genomic Data Analysis:
+**Genomic Data Analysis:**
 
-- Pre-processing and quality analysis
-- Sequence quality analysis and host genome removal ([seek_and_destroy](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/seek_and_destroy))
-- Next Generation Sequencing data analysis
+- Sequence quality analysis and host genome removal ([seek_and_destroy](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/seek_and_destroy))
 - DNAseq / cDNAseq: Exome sequencing (WES) / Genome sequencing (WGS) / Targeted sequencing
-  - Low-frequency variants detection and annotation for whole genome or sequencing panel (e.g. retinoblastoma gene panel) ([lowfreq_panel](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/lowfreq_panel))
-  - Eukaria: Variant calling and annotation for a sequencing panel (e.g. epidermolysis gene panel, mouse or rat gene panel) ([exomeeb](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/exomeeb))
+  - Low-frequency variants detection and annotation for whole genome or sequencing panel (e.g. retinoblastoma gene panel) ([lowfreq_panel](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/lowfreq_panel))
+  
+  - Eukaria: Variant calling and annotation for a sequencing panel (e.g. epidermolysis gene panel, mouse or rat gene panel) ([exomeeb](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/exomeeb))
 
     ExomeEB service uses nextflow's pipeline sarek to detect variants on whole genome or targeted sequencing data, in this case exome for single samples. The output is then processed with GATK-toolkit and annotated with [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [Exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html) which will include prediction of effect and inheritance mode, targeting a specific list of genes if given by the researcher.
 
@@ -27,7 +26,8 @@ Genomic Data Analysis:
 
     When requesting a service in iskylims, researchers are required to provide pertinent details, including a list of targeted genes to analyse during exomiser's annotation step if necessary.
 
-    - **targeted_regions.bed:** a file with targeted genomic coordinates during sequencing protocol in [BED format](https://www.ensembl.org/info/website/upload/bed.html), consists of one line per feature. 
+    - **targeted_regions.bed:** a file with targeted genomic coordinates during sequencing protocol in [BED format](https://www.ensembl.org/info/website/upload/bed.html), consists of one line per feature.
+
     ```
     chrom - name of the chromosome or scaffold. Any valid seq_region_name can be used, and chromosome names can be given with or without the 'chr' prefix.
     chromStart - Start position of the feature in standard chromosomal coordinates (i.e. first base is 0).
@@ -39,10 +39,11 @@ Genomic Data Analysis:
     ...
     chrX       chromStart   chromEnd   orientation(+/-)       name
     ```
+
     </details>
 
   - Eukaria (non-human): Variant calling, annotation and SNP-based outbreak analysis (e.g. diploid fungal outbreak) (TODO freebayes_outbreak)
-  - Human:  Exome sequencing for variant calling, annotation and inheritance filtering (e.g. Exome sequencing of a human trio (two parents and one child))  ([exometrio](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/exometrio))
+  - Human:  Exome sequencing for variant calling, annotation and inheritance filtering (e.g. Exome sequencing of a human trio (two parents and one child))  ([exometrio](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/exometrio))
 
     Exometrio service uses nextflow's pipeline sarek to detect variants on whole genome or targeted sequencing data, in this case exome for multiple related samples, ussually relatives. The output is then processed with GATK-toolkit and annotated with [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [Exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html) which will include prediction of effect and inheritance mode.
 
@@ -52,6 +53,7 @@ Genomic Data Analysis:
     <summary>Required information for service request</summary>
 
     - **targeted_regions.bed:** a file with targeted genomic coordinates during sequencing protocol in [BED format](https://www.ensembl.org/info/website/upload/bed.html), consists of one line per feature.
+
     ```
     chrom - name of the chromosome or scaffold. Any valid seq_region_name can be used, and chromosome names can be given with or without the 'chr' prefix.
     chromStart - Start position of the feature in standard chromosomal coordinates (i.e. first base is 0).
@@ -65,6 +67,7 @@ Genomic Data Analysis:
     ```
 
     - **family.ped:** A pedigree file following [PED format](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
+
     ```
     family.ped
 
@@ -72,9 +75,10 @@ Genomic Data Analysis:
     group   samplemother_samplemother   0       0       2       1
     group   samplechildren_samplechildren   samplefather_samplefather   samplemother_samplemother   1       2
     ```
+
     </details>
 
-  - Human: Whole genome sequencing for SNPs variant calling, annotation and  inheritance filtering (e.g.WGS of a human trio )  ([wgstrio](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/wgstrio))
+  - Human: Whole genome sequencing for SNPs variant calling, annotation and  inheritance filtering (e.g.WGS of a human trio )  ([wgstrio](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/wgstrio))
 
     WGStrio service uses nextflow's pipeline sarek to detect variants on whole genome or targeted sequencing data, in this case Whole genome for multiple related samples, ussually relatives. The output is then processed with GATK-toolkit and annotated with [Ensembl's Variant Effect Predictor (VEP)](https://www.ensembl.org/info/docs/tools/vep/index.html) and [Exomiser](https://exomiser.readthedocs.io/en/latest/advanced_analysis.html) which will include prediction of effect and inheritance mode.
 
@@ -84,6 +88,7 @@ Genomic Data Analysis:
     <summary>Required information for service request</summary>
 
     - **family.ped:** A pedigree file following [PED format](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
+
     ```
     family.ped
 
@@ -91,13 +96,14 @@ Genomic Data Analysis:
     group   samplemother_samplemother   0       0       2       1
     group   samplechildren_samplechildren   samplefather_samplefather   samplemother_samplemother   1       2
     ```
+
     </details>
 
-  - Fungal / bacteria / virus : Variant calling, annotation and SNP-based outbreak analysis (e.g. haploid fungal outbreak) ([snippy](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/snippy))
-  - Bacteria: _De novo_ genome assembly and annotation ([Assembly](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/assembly))
-  - Bacteria:  In-depth analysis of Mycobacterium species genomes (e.g. _M. tuberculosis_. _M. bovis_) ([MTBSeq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/mtbseq))
-  - Bacteria: Plasmid analysis and characterization ([PlasmidID](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/plasmidid))
-  
+  - Fungal / bacteria / virus : Variant calling, annotation and SNP-based outbreak analysis (e.g. haploid fungal outbreak) ([snippy](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/snippy))
+  - Bacteria: _De novo_ genome assembly and annotation ([Assembly](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/assembly))
+  - Bacteria:  In-depth analysis of Mycobacterium species genomes (e.g. _M. tuberculosis_. _M. bovis_) ([MTBSeq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/mtbseq))
+  - Bacteria: Plasmid analysis and characterization ([PlasmidID](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/plasmidid))
+
     PlasmidID is a mapping-based, assembly-assisted plasmid identification tool that analyzes and gives graphic solution for plasmid identification.
 
     PlasmidID is a computational pipeline that maps Illumina reads over plasmid database sequences. The k-mer filtered, most covered sequences are clustered by identity to avoid redundancy and the longest are used as scaffold for plasmid reconstruction. Reads are assembled and annotated by automatic and specific annotation. All information generated from mapping, assembly, annotation and local alignment analyses is gathered and accurately represented in a circular image which allow user to determine plasmidic composition in any bacterial sample.
@@ -115,7 +121,7 @@ Genomic Data Analysis:
     - If you want a specific database you need to provide a multifasta with the sequence features you want to annotate, or indicate a url where we can download the resource.
     </details>
 
-  - Bacteria: Multi-Locus Sequence Typing (MLST), analysis of virulence factors, antimicrobial resistance, and plasmids characterization ([characterization](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/characterization))
+  - Bacteria: Multi-Locus Sequence Typing (MLST), analysis of virulence factors, antimicrobial resistance, and plasmids characterization ([characterization](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/characterization))
 
     MLST service performs Multi-Locus Sequence Typing of the samples with the _de novo_ assembly genomes of the samples. It uses [ChewBBACA](https://chewbbaca.readthedocs.io/en/latest/index.html) to generate the schemas (if necessary) and perform the allele calling, and GrapeTree to generate the minimun spanning tree. You can ask for:
 
@@ -131,8 +137,8 @@ Genomic Data Analysis:
     </details>
 
   - Bacteria: Core genome or whole genome Multi-Locus Sequence Typing analysis (cg/wgMLST) (TODO wgmlst_chewbbaca)
-  - Viral: Genomic reconstruction, variant calling and _de novo_ assembly ([viralrecon](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/viralrecon))
-    
+  - Viral: Genomic reconstruction, variant calling and _de novo_ assembly ([viralrecon](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/viralrecon))
+
     Viralrecon is a bioinformatics analysis pipeline used to perform assembly and intrahost/low-frequency variant calling for viral samples. The pipeline supports both Illumina and Nanopore sequencing data. For Illumina short-reads the pipeline is able to analyse metagenomics data typically obtained from shotgun sequencing (e.g. directly from clinical samples) and enrichment-based library preparation methods (e.g. amplicon-based: ARTIC SARS-CoV-2 enrichment protocol; or probe-capture-based). For Nanopore data the pipeline only supports amplicon-based analysis obtained from primer sets created and maintained by the ARTIC Network. Some examples of viruses analyzed with this pipeline are SARS-CoV-2, mumps virus, monkeypox virus, West Nile virus, etc.
 
     <details>
@@ -140,16 +146,13 @@ Genomic Data Analysis:
     <br>
     For the correct performance of the pipeline, it is necessary to provide some input documents:
 
-
-    * **Primers bed file**.
+    - **Primers bed file**.
     In case of amplicon-based method, we need to provide a BED file with primer coordinates for the mapping step.
 
-
-    * **Primers fasta file**.
+    - **Primers fasta file**.
     Additionally, a fasta file will be necessary if de novo assembly is requested.
 
-
-    * **[viralrecon_input.xlsx](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/assets/input_datasets/viralrecon/viralrecon_input.xlsx)**
+    - **[viralrecon_input.xlsx](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/assets/input_datasets/viralrecon/viralrecon_input.xlsx)**
 
       This document contains 3 different columns:
 
@@ -163,53 +166,53 @@ Genomic Data Analysis:
       - For multifasta documents (e.g. fragmented genomes or custom documents) containing several references, their name should be specified in the Reference column.
 
     </details>
-    
-  - Viral Flu: Influenza fragment reconstruction and variant detection ([IRMA](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/IRMA))
-- mRNAseq: Transcriptome sequencing  ([mrnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
-  - Differential Gene Expression (DEG) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
+
+  - Viral Flu: Influenza fragment reconstruction and variant detection ([IRMA](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/IRMA))
+- mRNAseq: Transcriptome sequencing  ([mrnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/rnaseq))
+  - Differential Gene Expression (DEG) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/rnaseq))
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
   After quantification, differntial expression analysis is carried out with [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
   Below are the files that **researchers NEED to provide** when requesting the RNA-seq service.
 
     <details markdown="1">
     <summary>Required information for service request (genes)</summary>
-      **Service Notes Description** 
+      **Service Notes Description**
       When requesting a service in iskylims, researchers are required to provide pertinent details, including the type of NGS data intended for analysis. Please be specific when requesting the mRNA-seq service by indicating something like: 'mRNAseq for genes'.
-  
-      **[comparatives.txt](./assets/input_datasets/rnaseq/comparatives.txt)** 
-  
+
+      **[comparatives.txt](./assets/input_datasets/rnaseq/comparatives.txt)**
+
       The `comparatives.txt`([link to access](./assets/input_datasets/rnaseq/comparatives.txt)) file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
-  
+
       1. Incremental index representing each comparison.
       2. Treatment group/s.
       3. Control group.
-  
+
       Example:
-  
+
       ```Bash
       1 Treatment Control
       2 Treatment       Control
       3 Treatment       Control
       4 Treatment1-Treatment2       Control1-Control2
       ```
-  
+
       **[clinical_data.txt](./assets/input_datasets/rnaseq/clinical_data.txt)**
-  
+
       The `clinical_data.txt` ([link to access](./assets/input_datasets/rnaseq/clinical_data.txt)) file is necessary for categorizing the names of samples into comparison groups. This file comprises two columns:
-  
+
     - **Name:** Sample name.
     - **Group:** Group to which the sample belongs.
     - **Batch** Label that groups samples according to their batch.
-  
+
       Example:
-  
+
       ```Bash
          Name    Group  Batch
       ```
-  
+
     </details>
 
-  - Differential transcript expression (DET) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/rnaseq))
+  - Differential transcript expression (DET) ([rnaseq](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/rnaseq))
   The RNAseq service performs a quality control (QC), trimming and alignment followed by quantification with [Star](https://github.com/alexdobin/STAR) and [Salmon](https://combine-lab.github.io/salmon/), respectively.
   After quantification, differntial expression analysis is carried out with [fishpond](https://www.bioconductor.org/packages/release/bioc/html/fishpond.html).
   Below are the files that researchers need to provide when requesting the RNA-seq service.
@@ -219,7 +222,7 @@ Genomic Data Analysis:
       **Service Notes Description**
       When requesting a service in iskylims, researchers are required to provide pertinent details, including the type of NGS data intended for analysis. Please be specific when requesting the mRNA-seq service by indicating something like: 'mRNAseq for transcripts'.
 
-      **[comparatives.txt](./assets/input_datasets/rnaseq/comparatives.txt)** 
+      **[comparatives.txt](./assets/input_datasets/rnaseq/comparatives.txt)**
 
       The `comparatives.txt` ([link to access](./assets/input_datasets/rnaseq/comparatives.txt)) file defines the experimental design for the analysis. It specifies the comparison order, sense, and direction between sample groups. Each comparison requested should have a corresponding line in this file. The file format consists of three columns without headings:
 
@@ -249,6 +252,7 @@ Genomic Data Analysis:
       ```Bash
          Name    Group  Batch
       ```
+
     </details>
 
   - Differential miRNA expression (DEM) (TODO mirnaseq)
@@ -258,9 +262,9 @@ Genomic Data Analysis:
   Below are the files that researchers need to provide when requesting the RNA-seq service.
 - Metagenomics and targeted metagenomics
   - Taxonomic based Identification and classification of organisms in complex communities (TODO mag_met)
-  - _De novo_ assembly contigs' alignment to database [BLAST](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/blast_nt)(TODO blast_nt)
+  - _De novo_ assembly contigs' alignment to database [BLAST](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/blast_nt)(TODO blast_nt)
   - Bacteria: 16S rRNA gene analysis to assess bacterial diversity (TODO 16s_metagenomics)
-  - Viral:  Detection and characterization of viral genomes within metagenomic data ([pikavirus](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/bu_isciii/templates/pikavirus))
+  - Viral:  Detection and characterization of viral genomes within metagenomic data ([pikavirus](https://github.com/BU-ISCIII/buisciii-tools/tree/develop/buisciii/templates/pikavirus))
 
 - **Bioinformatics consulting and training**
   - Bioinformatics analysis consulting
