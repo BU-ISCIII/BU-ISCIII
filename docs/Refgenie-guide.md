@@ -67,7 +67,7 @@ Refgenie assets are referred to using “**asset registry paths**”, which are 
 
 Let's have a look at what this YAML file looks like, and you'll understand better the meaning of "**genome**", "**asset**", "**tag**" and "**key**".
 
-![alt text](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/conf-file.png)
+![conf-file](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/conf-file.png)
 
 This YAML file, as you can see, has several attributes (all required):
 * **genome_folder**: Path to parent folder refgenie-managed assets.
