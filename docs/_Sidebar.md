@@ -51,3 +51,4 @@
 - Useful resources
   - [[ROG and PR Curves]]
 - [[FAQs]]
+- [[Refgenie guide]]
