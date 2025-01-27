@@ -39,7 +39,7 @@ The columns are spaced with a tabulation (this is critical for the proper functi
  
 Once the `samples_ref.txt` file is set up , check the `lablog_viralrecon` and execute it.
 
-This script is used to configure the viralrecon service according to the nature of the sequencing data (AMPLICONS or METAGENOMICS), the analysis method to be used (mapping, de novo assembly) and, when necessary, the kind of virus contained in the samples (SARS-CoV-2, RSV, etc.). Depending on this information, running this lablog sets up the configuration files in the `../DOC` folder and creates a folder for each host specified in samples_ref.txt (usually only 1).
+This script shall configure the viralrecon service according to the nature of the sequencing data (AMPLICONS or METAGENOMICS), the analysis method to be used (mapping, de novo assembly) and, when necessary, the kind of virus contained in the samples (SARS-CoV-2, RSV, etc.). Depending on this information, running this lablog sets up the configuration files in the `../DOC` folder and creates a folder for each host specified in samples_ref.txt (usually only 1).
 
 If this script is run without specifying any arguments, it will be executed interactively, querying the user for the necessary information for the configuration of the service through prompts in the terminal. Alternatively, it is possible to run the script in a non-interactive way, adding specific arguments that directly provide the necessary information (if a critical argument for the configuration of the service is omitted, the user will still be prompted by the terminal for the necessary information). To find out about the available options, please refer to the help menu by using `bash lablog_viralrecon -h`.
 
