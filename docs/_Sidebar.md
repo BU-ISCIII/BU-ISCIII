@@ -22,6 +22,7 @@
    5. [[Delivery methods]]
    6. [[Service reports]]
    7. [[Update policy (DB and software)]]
+      - [[Refgenie guide]]
    8. How to: guides for BU-ISCIII members
       - [[How to manage services in iSkyLims]]
       - [[Handle sample resequencing]]
@@ -51,4 +52,3 @@
 - Useful resources
   - [[ROG and PR Curves]]
 - [[FAQs]]
-- [[Refgenie guide]]
