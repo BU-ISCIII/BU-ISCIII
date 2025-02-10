@@ -209,6 +209,8 @@ If everything is OK, we can then get into the `ANALYSIS` folder and we'll find t
     > **After running `lablog`, run `_00_snippy.sh`, `_01_snippy_core.sh`, `_02_phylo_aln.sh` and `_03_run_gubbins.sh` sequentially.**
   
   * `05-iqtree`: this folder contains a `lablog` file that does the following:
+      > Note: This lablog must be run twice. The first time this lablog is run, only the uncommented lines will be executed. After the _00_iqtreemfp.sh has finished its execution, the uncommented lines must be commented out, and vice versa. Then run the lablog a second time.
+
     * Creates a subfolder called `logs`.
   
     * Creates a script called `_00_iqtreemfp.sh` which will run iqtree on the `phylo.aln` file from the `04-snippy` folder. Since we are not sure which model is appropriate for our data, we use **ModelFinder** to determine the best-fit model (by means of the `-m MFP` option).
