@@ -110,7 +110,7 @@ cd /data/ucct/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_CHARACTERIZATIONXXX_researche
 > [!WARNING]
 > Please note that the PlasmidID service is usually performed along with the [**Assembly service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Assembly-service), the [**Characterization service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Characterization-service) and the [**Snippy service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Snippy-service); that's why this folder is called `ANALYSIS03`.
 > <br><br>During the assembly service, **we should have saved the trimmed sequences**, since **they will be needed** during the PlasmidID procedure.
-><br><br>Please remember to **unzip** the **assemblies** obtained after running **unicycler**, since these assemblies will be used by PlasmidID so that assembly of the reads is not done again unnecessarily, by running `gzip -dk *.fastq.gz`.
+><br><br>Please remember to **unzip** the **assemblies** obtained after running **unicycler**, since these assemblies will be used by PlasmidID so that assembly of the reads is not done again unnecessarily, by running `gzip -dk *.fasta.gz`.
 
 Once we're at this point, and before executing anything else, we should load all the necessary dependencies:
 
