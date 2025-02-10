@@ -135,7 +135,7 @@ If everything is OK, we can then get into the `ANALYSIS` folder and we'll find t
           > [!WARNING]
           > Before running this lablog file, we should:
           > 1. Check whether the species being analysed for this service have an MLST schema in the PubMLST database.
-          > 2. If so, we should download this schema and store it in `REFERENCES`. How? In `REFERENCES`, you should find a script called `lablog`. If you launch this script, you will be asked to select a genome from PubMLST, given a list of available genomes. Write the number associated to your genome of interest, and press Enter.
+          > 2. If so, we should download this schema and store it in `REFERENCES`. How? In `REFERENCES`, you should find a script called `lablog_pubmlst`. If you launch this script, you will be asked to select a genome from PubMLST, given a list of available genomes. Write the number associated to your genome of interest, and press Enter.
           > 3. After that, you'll find a script called `_01_download_pubmlst.sh`. Run this script, and you'll then find a folder, named after today's date, in which there'll be a subfolder called `ref_db`. This is the folder that will be used by ARIBA when running `run/lablog`.
         * Then, it creates a file called `sample_database.txt`, which will have two columns: one for the sample name and the other one for the corresponding database being used by ARIBA. Each sample name will therefore appear as many times as databases are written in `databases.txt`.
         * Then, it creates the following scripts, that should be run sequentially:
