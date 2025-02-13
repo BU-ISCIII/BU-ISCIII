@@ -67,7 +67,7 @@ While picard runs, you can keep going with the rest of the service.
   - `_02_filter.sh` uses `gatk VariantFiltration` to apply several filters to process the vcf files.
   - `_03_merge_vcfs.sh` uses `gatk MergeVcfs` to merge the two previous vcf files.
   - `_04_gzip.sh` uses gzip to decompress the merged vcf file.
-- If everything went well, you should find a file named `variants_fil.vcf.gz`, which contains the merged filtered variants. You can then go to the `03-annotation` folder.
+- If everything went well, you should find a file named `variants_fil.vcf`, which contains the merged filtered variants. You can then go to the `03-annotation` folder.
 
 ### 4. Annotation.
 
