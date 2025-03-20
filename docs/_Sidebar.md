@@ -50,8 +50,7 @@
     - [[R]]
     - [[Bash]]
 - Hackathon events
-   - [[nf-core hackathon]]
-     - [[nf-core-hackathon-linux-setup-guide]]
+   - [[nf-core hackathon setup guide]]
 - Useful resources
   - [[ROG and PR Curves]]
 - [[FAQs]]
