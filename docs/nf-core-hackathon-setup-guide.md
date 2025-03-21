@@ -139,7 +139,7 @@ Once VScode extension is installed you can supercharge it with the nf-core exten
 - [VSCode Documentation](https://code.visualstudio.com/docs)  
 
 
-## Windows Setup Guide [:warning: Not tested]
+## Windows Setup Guide
 
 To run nf-core pipelines on Windows, it is **highly recommended** to use **Windows Subsystem for Linux (WSL2)** to enable a Linux-like environment.
 
@@ -165,33 +165,47 @@ To run nf-core pipelines on Windows, it is **highly recommended** to use **Windo
 
 Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environment.
 
-### 3. Install Docker Desktop (for Windows)
+### 3. Configure Docker to Work with WSL2
+
+There are two main approaches for using Docker within WSL2:
+
+#### **Option A: Docker Desktop** (Official)
 
 1. Download and install **Docker Desktop** from:  
    [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
-2. Enable [WSL2 Backend](https://docs.docker.com/desktop/features/wsl/) in Docker settings.
+2. Enable the [WSL2 Backend](https://docs.docker.com/desktop/features/wsl/) in Docker settings.
 3. Verify installation by running inside WSL:
    ```bash
    docker --version
    ```
 
-### 4. Install Visual Studio Code
+#### **Option B: Native Docker Integration in WSL2**
+
+For a lightweight, Docker-Engine-only setup directly inside WSL2 without Docker Desktop, follow this external guide:
+- 📘 [Step-by-step guide: Installing Docker in Windows 11 with WSL2](https://www.linkedin.com/pulse/installing-docker-windows-11-using-wsl-2-step-by-step-ankit-lodaf/)
+
+> ⚠️ **Note:** This option requires additional configuration and may vary depending on your Windows version.
+
+### 4. Alternative to Docker: Using Singularity in WSL2
+
+If you prefer Singularity over Docker, you can install it **inside your WSL2 Ubuntu environment**. Follow the instructions provided in the [Linux Setup Guide – Option B](#option-b-install-singularity-system-wide).
+
+### 5. Install Visual Studio Code
 
 1. Download and install **VSCode** from:  
    [VSCode for Windows](https://code.visualstudio.com/download)
-
 2. Install the **Remote - WSL** extension:  
    - [Remote - WSL Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
 3. Open a WSL session inside VSCode:
    ```powershell
    code .
    ```
-4. Install the [nf-core/vscode-extensionpack](https://marketplace.visualstudio.com/items?itemName=nf-core.nf-core-extensionpack) in your VSCode.
 
-### 5. Verify the Setup with a Test Pipeline
+### 6. Verify the Setup with a Test Pipeline
 
-Inside WSL, follow the [Run a Test Pipeline](#4-run-a-test-pipeline) section from the Linux setup guide.
+Inside WSL, follow the [**Run a Test Pipeline**](#4-run-a-test-pipeline) section from the Linux setup guide.
 
+---
 
 **References:**  
 - [nf-core Documentation](https://nf-co.re/)  
@@ -199,4 +213,3 @@ Inside WSL, follow the [Run a Test Pipeline](#4-run-a-test-pipeline) section fro
 - [Singularity Documentation](https://sylabs.io/guides/3.0/user-guide/installation.html)  
 - [Docker Documentation](https://docs.docker.com/get-docker/)  
 - [VSCode Documentation](https://code.visualstudio.com/docs)
-
