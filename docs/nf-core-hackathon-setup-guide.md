@@ -205,13 +205,7 @@ Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environ
 1. Download and install **Docker Desktop** from:  
    [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
 2. Enable the [WSL2 Backend](https://docs.docker.com/desktop/features/wsl/) in Docker settings.
-3. Verify installation by running inside WSL:
-
-   ```bash
-   docker --version
-   ```
-
-4. Make WS2 and docker desktop to work together.
+3. Make WS2 and docker desktop to work together.
 
 - Open Docker Desktop on Windows.
 - Go to Settings → Resources → WSL Integration.
@@ -221,13 +215,19 @@ Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environ
 
 ![WSL2-Docker](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/wsl2_integration_dockerdesktop.png)
 
-5. Add user to docker group
+4. Add user to docker group
 
 ```
 sudo usermod -aG docker $USER
 ```
 
-6. Close WSL2 terminal and open again. You are ready to go!
+5. Close WSL2 terminal and open again. You are ready to go!
+
+6. Verify installation by running inside WSL:
+
+   ```bash
+   docker --version
+   ```
 
 > You also have this extended guide:
 >
