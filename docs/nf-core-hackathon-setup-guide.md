@@ -221,6 +221,14 @@ Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environ
 
 ![WSL2-Docker](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/wsl2_integration_dockerdesktop.png)
 
+5. Add user to docker group
+
+```
+sudo usermod -aG docker $USER
+```
+
+6. Close WSL2 terminal and open again. You are ready to go!
+
 > You also have this extended guide:
 >
 > - 📘 [Step-by-step guide: Installing Docker in Windows 11 with WSL2](https://www.linkedin.com/pulse/installing-docker-windows-11-using-wsl-2-step-by-step-ankit-lodaf/)
