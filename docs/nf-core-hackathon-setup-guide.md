@@ -100,13 +100,19 @@ To ensure that everything is correctly installed and working, run the following 
 
 **Steps:**
 
-1. **Execute the following command:**  
+1. **Create a dir to test nextflow:**
+
+   ```bash
+   mkdir nf-core-tests ; cd nf-core-tests
+   ```
+
+2. **Execute the following command:**  
    ```bash
    nextflow run nf-core/testpipeline -profile test,docker --outdir results
    ```
    *(If using Singularity, replace `docker` with `singularity` in the command.)*  
 
-2. **Expected Output:**  
+3. **Expected Output:**  
    ```bash
    executor >  local (4)
    [5a/b1987b] NFCORE_TESTPIPELINE:TESTPIPELINE:FASTQC (SAMPLE1_PE) [100%] 3 of 3 ✔
