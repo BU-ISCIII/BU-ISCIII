@@ -13,15 +13,20 @@ Miniconda is a minimal installer for conda, a package manager that simplifies pa
 #### **Steps:**
 
 1. **Download Miniconda Installer:**  
+
    ```bash
    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
    ```
-2. **Run Installer:**  
+
+2. **Run Installer:**
+
    ```bash
    bash Miniconda3-latest-Linux-x86_64.sh
    ```
+
    - Follow the on-screen instructions.  
 3. **Initialize Conda:**  
+
    ```bash
    source ~/.bashrc
    ```
@@ -33,16 +38,21 @@ It's recommended to create a dedicated conda environment for Nextflow and nf-cor
 #### **Steps:**
 
 1. **Add Bioconda and Conda-Forge Channels:**  
+
    ```bash
    conda config --add channels bioconda
    conda config --add channels conda-forge
    ```
+
 2. **Create and Activate Environment:**  
+
    ```bash
    conda create --name nf-core-env nextflow nf-core
    conda activate nf-core-env
    ```
+
 3. **Verify Installations:**  
+
    ```bash
    nextflow -version
    nf-core --version
@@ -57,22 +67,31 @@ Nextflow pipelines utilize containerization tools to manage dependencies. You ca
 **Steps:**
 
 1. **Update Package List:**  
+
    ```bash
    sudo apt update
    ```
+
 2. **Install Docker:**  
+
    ```bash
    sudo apt install -y docker.io
    ```
+
 3. **Add User to Docker Group:**  
+
    ```bash
    sudo usermod -aG docker $USER
    ```
+
 4. **Apply Group Changes:**  
+
    ```bash
    newgrp docker
    ```
+
 5. **Verify Installation:**  
+
    ```bash
    docker --version
    ```
@@ -82,14 +101,19 @@ Nextflow pipelines utilize containerization tools to manage dependencies. You ca
 **Steps:**
 
 1. **Update Package List:**  
+
    ```bash
    sudo apt update
    ```
+
 2. **Install Singularity:**  
+
    ```bash
    sudo apt install -y singularity-container
    ```
+
 3. **Verify Installation:**  
+
    ```bash
    singularity --version
    ```
@@ -107,12 +131,15 @@ To ensure that everything is correctly installed and working, run the following 
    ```
 
 2. **Execute the following command:**  
+
    ```bash
    nextflow run nf-core/testpipeline -profile test,docker --outdir results
    ```
+
    *(If using Singularity, replace `docker` with `singularity` in the command.)*  
 
 3. **Expected Output:**  
+
    ```bash
    executor >  local (4)
    [5a/b1987b] NFCORE_TESTPIPELINE:TESTPIPELINE:FASTQC (SAMPLE1_PE) [100%] 3 of 3 ✔
@@ -124,17 +151,14 @@ To ensure that everything is correctly installed and working, run the following 
    Succeeded   : 4
    ```
 
-
 ## 5. Install Visual Studio Code (VSCode)  
 
-To install VSCode is your linux system, please follow the vscode installation guide: [ the recommended code editor for the hackathon.  ](https://code.visualstudio.com/docs/setup/linux)
-
+To install VSCode is your linux system, please follow the vscode installation guide: [the recommended code editor for the hackathon.](https://code.visualstudio.com/docs/setup/linux)
 
 **Recommended VSCode Extensions:**  
-Once VScode extension is installed you can supercharge it with the nf-core extensions pack: 
+Once VScode extension is installed you can supercharge it with the nf-core extensions pack:
 
 - [nf-core/vscode-extensionpack](https://marketplace.visualstudio.com/items?itemName=nf-core.nf-core-extensionpack)
-
 
 **References:**  
 
@@ -144,7 +168,6 @@ Once VScode extension is installed you can supercharge it with the nf-core exten
 - [Docker Documentation](https://docs.docker.com/get-docker/)  
 - [VSCode Documentation](https://code.visualstudio.com/docs)  
 
-
 ## Windows Setup Guide
 
 To run nf-core pipelines on Windows, it is **highly recommended** to use **Windows Subsystem for Linux (WSL2)** to enable a Linux-like environment.
@@ -153,48 +176,60 @@ To run nf-core pipelines on Windows, it is **highly recommended** to use **Windo
 
 1. **Enable WSL2:**  
    Open PowerShell as Administrator and run:
+
    ```powershell
    wsl --install
    ```
+
 2. **Restart your computer** when/if prompted.
 3. **Verify Installation:**  
+
    ```powershell
    wsl --list --verbose
    ```
+
 4. **Set WSL2 as Default:**  
+
    ```powershell
    wsl --set-default-version 2
    ```
+
 5. **Install Ubuntu from the Microsoft Store.**
 
 ### 2. Install Miniconda, Nextflow, and nf-core inside WSL
 
-Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environment.
+Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environment. DO NOT INSTALL singularity nor docker.
 
 ### 3. Configure Docker to Work with WSL2
-
-There are two main approaches for using Docker within WSL2:
-
-#### **Option A: Docker Desktop** (Official)
 
 1. Download and install **Docker Desktop** from:  
    [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/)
 2. Enable the [WSL2 Backend](https://docs.docker.com/desktop/features/wsl/) in Docker settings.
 3. Verify installation by running inside WSL:
+
    ```bash
    docker --version
    ```
 
-#### **Option B: Native Docker Integration in WSL2**
+4. Make WS2 and docker desktop to work together.
 
-For a lightweight, Docker-Engine-only setup directly inside WSL2 without Docker Desktop, follow this external guide:
-- 📘 [Step-by-step guide: Installing Docker in Windows 11 with WSL2](https://www.linkedin.com/pulse/installing-docker-windows-11-using-wsl-2-step-by-step-ankit-lodaf/)
+- Open Docker Desktop on Windows.
+- Go to Settings → Resources → WSL Integration.
+- You’ll see a list of your installed WSL2 distros (like Ubuntu, Ubuntu-18.04, etc).
+- 👉 Turn ON integration for the distro you're using (probably Ubuntu).
+- Click "Apply & Restart" at the bottom.
 
-> ⚠️ **Note:** This option requires additional configuration and may vary depending on your Windows version.
+![WSL2-Docker](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/images/wsl2_integration_dockerdesktop.png)
+
+> You also have this extended guide:
+>
+> - 📘 [Step-by-step guide: Installing Docker in Windows 11 with WSL2](https://www.linkedin.com/pulse/installing-docker-windows-11-using-wsl-2-step-by-step-ankit-lodaf/)
 
 ### 4. Alternative to Docker: Using Singularity in WSL2
 
 If you prefer Singularity over Docker, you can install it **inside your WSL2 Ubuntu environment**. Follow the instructions provided in the [Linux Setup Guide – Option B](#option-b-install-singularity-system-wide).
+
+> ⚠️ **Note:** This option requires additional configuration, and it's not tested. We recommend sticking to docker if you are using Windows!
 
 ### 5. Install Visual Studio Code
 
@@ -203,6 +238,7 @@ If you prefer Singularity over Docker, you can install it **inside your WSL2 Ubu
 2. Install the **Remote - WSL** extension:  
    - [Remote - WSL Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
 3. Open a WSL session inside VSCode:
+
    ```powershell
    code .
    ```
@@ -211,9 +247,25 @@ If you prefer Singularity over Docker, you can install it **inside your WSL2 Ubu
 
 Inside WSL, follow the [**Run a Test Pipeline**](#4-run-a-test-pipeline) section from the Linux setup guide.
 
+> Note: a minimum of 15gb is required by default for running the test pipeline. If you don't have so much RAM available you can create a test.config file like this:
+```
+process {
+    resourceLimits = [
+        cpus: 1,
+        memory: '4.GB',
+        time: '1.h'
+    ]
+}
+```
+> and run the test command like this 
+```
+nextflow run nf-core/testpipeline -c test_min.config -profile test,docker --outdir results
+```
+
 ---
 
 **References:**  
+
 - [nf-core Documentation](https://nf-co.re/)  
 - [Nextflow Documentation](https://www.nextflow.io/docs/latest/index.html)  
 - [Singularity Documentation](https://sylabs.io/guides/3.0/user-guide/installation.html)  
