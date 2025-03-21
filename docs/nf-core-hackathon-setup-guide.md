@@ -208,7 +208,7 @@ Follow the [Linux Setup Guide](#linux-setup-guide) above within your WSL environ
 3. Make WS2 and docker desktop to work together.
 
 - Open Docker Desktop on Windows.
-- Go to Settings → Resources → WSL Integration.
+- Go to Settings → Resources → WSL2 Integration.
 - You’ll see a list of your installed WSL2 distros (like Ubuntu, Ubuntu-18.04, etc).
 - 👉 Turn ON integration for the distro you're using (probably Ubuntu).
 - Click "Apply & Restart" at the bottom.
@@ -223,7 +223,7 @@ sudo usermod -aG docker $USER
 
 5. Close WSL2 terminal and open again. You are ready to go!
 
-6. Verify installation by running inside WSL:
+6. Verify installation by running inside WSL2:
 
    ```bash
    docker --version
