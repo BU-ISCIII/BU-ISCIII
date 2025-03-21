@@ -81,13 +81,13 @@ Nextflow pipelines utilize containerization tools to manage dependencies. You ca
 
 **Steps:**
 
-1. **Activate the nf-core Environment:**  
+1. **Update Package List:**  
    ```bash
-   conda activate nf-core-env
+   sudo apt update
    ```
 2. **Install Singularity:**  
    ```bash
-   conda install -c conda-forge singularity
+   sudo apt install -y singularity-container
    ```
 3. **Verify Installation:**  
    ```bash
