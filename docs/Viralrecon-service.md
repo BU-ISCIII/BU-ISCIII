@@ -68,7 +68,7 @@ This script generates different scripts that must be executed in an orderly mann
 
     $ bash _01_run_<reference1>.sh
 
-In case there are several references to analize and, therefore, several `_01_run_<reference1>.sh.` files to run, you can alternatively run the `_00_autorun.sh script`. This script automates the sequential execution of all `_01_run_<reference1>.sh.` files, and stores information about the status of the process in a log file.
+In case there are several references to analize and, therefore, several `_01_run_<reference1>.sh.` files to run, you can alternatively run the `_00_autorun.sh script`. This script automates the sequential execution of all `_01_run_<reference1>.sh.` files, and stores information about the status of the process in a log file. When the execution of the script is finished, it is recommended to check the logs of each reference individually, in order to verify that every process was completed properly, or, if not, to troubleshoot any problems that may have occurred.
 
 ---
 
