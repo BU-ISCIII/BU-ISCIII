@@ -63,8 +63,9 @@ Once checked everything has finished OK in the `DATE_pikavirus01.log`, within th
 The file `all_samples_virus_table.tsv` usually contains some duplicated reads and phages. In order to clean the results in this table we should run:
 
 ```bash
-grep -v 'genome' all_samples_virus_table.tsv | grep -v 'phage' > all_samples_virus_table_filtered.tsv
+bash _02_filter_results.sh
 ```
+After running this script, you will get a new file named all_samples_virus_table_filtered.tsv, where the results will be filtered.
 
 Then convert this table to `.xlsx` if this process is not included in the `RESULTS`'s `lablog`.
 
