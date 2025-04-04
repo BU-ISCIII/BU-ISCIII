@@ -94,7 +94,7 @@ sudo sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,allow_other
 ```
 3. Now, mount `/data/ucct/bioinfo_doc/` in your WS
 ```
-sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.isciii.es/bioinfo_doc /data/ucct/bioinfo_doc
+sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.isciii.es/bioinfo_doc /data/bioinfo_doc
 ```
 
 >[!NOTE]
