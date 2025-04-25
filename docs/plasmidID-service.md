@@ -257,6 +257,65 @@ Además, en la carpeta RESULTS, encontrarás todos los resultados que están pre
 ```
 ---
 
+## Toxins analysis
+
+For some outbreak services, and in specific for ***Clostridium perfringens***, the researcher might ask for the analysis of toxins. In this case, we'll have to do the following in relation to the PlasmidID service.
+>[!WARNING]
+>Apart from what is explained in this document, there is another procedure you must perform in relation to the [**Characterization service**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/Characterization-service.md). Please have a look at its Wiki page in order to know what to do for the analysis of toxins.
+
+After running ariba with the set of virulence genes that was provided by the researcher, it can be useful to check the results of BLAST for these genes and the samples that are being analysed. This can be done directly with PlasmidID.
+
+Within the `XXXXXXXX_ANALYSISXX_PLASMIDID folder`, if you remember, there is a file called `plasmidID_annotation_config_file.txt`. This file should be edited manually, in this particular case, in order to contain the following line in the end:
+
+```
+# Custom toxins
+/data/ucct/bi/references/ariba/20241205/cperfringens_toxin/CP_toxins_rep_plasmid_protein_BLAST_searches_Gulliver2023.faa,toxins,90,90,_,l,y,-,prot,lblue
+```
+
+The above line indicates that, for the annotation, the .faa file will be used, assigning the name "toxins" to it, and keeping only those hits with an alignment %identity and %length greater or equal than 90. 
+
+What is this file called `CP_toxins_rep_plasmid_protein_BLAST_searches_Gulliver2023.faa`? It contains the aminoacid sequence for several genes related to **virulence factors** and **toxins**. This file is provided by the researchers themselves when requesting the service via iSkyLIMS, but currently the file being used is the one stored in the route indicated above.
+
+This file will be used by PlasmidID to run BLAST on the contigs generated during the assembly step of the pipeline. After the execution, inside the `NO_GROUP` folder of the PlasmidID service, and for each sample analysed, you'll find a subfolder called `data`. Inside this subfolder, you'll find a .txt file called `SAMPLEID.toxins.blast`. This file will have the following structure, for example:
+
+```
+plc	gnl|BU-ISCIII|20250045_11	99.749	398	1	0	1	398	46766	47959	0.0	824	398	70846
+pfo	gnl|BU-ISCIII|20250045_8	100.000	500	0	0	2	501	35620	37119	0.0	1021	501	82799
+cpb2_1	gnl|BU-ISCIII|20250045_12	96.241	266	10	0	1	266	26202	25405	9.92e-176	534	266	70011
+```
+
+>[!NOTE]
+>This .blast file, as you can tell, has no header. These are the columns being shown on the file:
+>* Sample
+>* Query label
+>* Target or subject
+>* Percent identity
+>* Alignment length
+>* Number of mismatches
+>* Number of gap opens
+>* Start position in query
+>* End position in query
+>* Start position in target
+>* End position in target
+>* E-value
+>* Bit score
+>* Length of query
+>* Length of target
+
+Once you have generated this .blast file for all samples, you should create a new sheet in the `summary_outbreak_XXXX.xlsx` file called **Toxins**, in which you will create a header first, with the columns indicated above.
+
+>[!IMPORTANT]
+>Apart from the aforementioned columns, you must add a final column in this sheet, called **%Query_cov**. This column is calculated like this:
+>```
+>(Alignment lenght - Number of mismatches) * 100 / Length of query 
+>```
+
+Finally, once you have added the content of all the .blast files, you must apply these filters on the table:
+1. Percent identity greater or equal than 90.
+2. %Query_cov greater or equal than 90.
+
+And you'll be done with the analysis of toxins! :D
+
 ## Troubleshooting
 
 ### I got an error message saying `KeyError: 'images'` when running `_02_summary_table.sh`, what should I do?
