@@ -245,6 +245,27 @@ Fill in the Excel template following the previous instructions, name it accordin
 
 Once the Excel file has been completed with all the necessary information and has been updated into the corresponding Drive folder, **save a copy of this Excel file** both inside the `RESULTS/DATE_entrega01` folder and the `ANALYSIS` folder of the service. You can then proceed with the copy of the service to `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/` and `/data/ucct/bi/sftp`.
 
+## Toxins analysis
+For some outbreak services, and in specific for ***Clostridium perfringens***, the researcher might ask for the analysis of toxins. In this case, we'll have to do the following in relation to the Characterization service.
+>[!WARNING]
+>Apart from what is explained in this document, there is another procedure you must perform in relation to the [**PlasmidID service**](https://github.com/BU-ISCIII/BU-ISCIII/blob/main/docs/plasmidID-service.md). Please have a look at its Wiki page in order to know what to do for the analysis of toxins.
+
+Within the `ANALYSIS02_CHARACTERIZATION` folder, you should create a new subfolder that we usually call `04-cperfringens_custom`. You can copy this folder from `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/SRVCNM1324_20250305_WGSCPERFRINGENS03_svaldezate_S/ANALYSIS/20250305_ANALYSIS02_CHARACTERIZATION` for example.
+
+Within this folder, you'll find:
+* `lablog`: it simply creates the `run` and `summary` subfolders.
+* `databases.txt`: this file contains the two databases that will be used for this analysis: `cperfringens_virulence` and `cperfringens_toxin`.
+* `run`: contains a lablog file that will execute `ariba run` with the databases indicated above, using the `.prepareref` folder that is stored in `/data/ucct/bi/references/ariba/20241205`, the same folder that stores the .faa and .fas files supplied by the researcher usually when requesting the service. This .faa file is used by PlasmidID, as you'll find out later. After executing all the scripts that this lablog creates, you'll get a subfolder for each sample, each one containing, among other stuff, a .tsv with the results from ariba, both for the analysis of toxins and virulences.
+* `summary`: contains a lablog file that will run `ariba summary` for all individual reports from ariba obtained previously for each sample. Two .csv files of relevance will be obtained:
+  * `out_summary_cperfringens_toxin.csv`
+  * `out_summary_cperfringens_virulence.csv`
+
+**After these two files are created, please do not forget to create a symbolic link to each one of them in the corresponding RESULTS folder of the service**.
+
+Besides, in the `summary_outbreak_XXXX.xlsx` file, you should create a new sheet called **Virulence Custom**, which should reflect all the virulence genes identified for each sample, given the list of genes supplied by the researcher. To fill in this table, you have to read the file called `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/SRVCNM1324_20250305_WGSCPERFRINGENS03_svaldezate_S/ANALYSIS/20250305_ANALYSIS02_CHARACTERIZATION/04-cperfringens_custom/summary/out_summary_cperfringens_virulence.csv` and add the genes for which there are matches.
+
+Once you're finished with this, **do not forget to do what needs to be done regarding the PlasmidID service, since this is essential for the completion of the summary table that is delivered to the researchers**.
+
 ---
 
 If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools.
@@ -327,4 +348,10 @@ Además, en la carpeta RESULTS, encontrarás todos los resultados que están pre
 │   ├── predicted-pcr-size-table-assemblies.csv: tabla que contiene los tamaños de PCR predichos.
 └── summary_outbreak_XXXX.xlsx: Tabla resumen adjunta en el correo.
 ```
+
+**Do not forget to add these two lines into the email delivery text if you carried out the analysis of toxins!** Add them within the characterization part of the template:
+```
+│   ├── out_summary_cperfringens_toxin.csv: resultados de identificación de toxinas con ariba.
+│   ├── out_summary_cperfringens_virulence.csv: resultados de identificación de genes de virulencia con ariba.
+
 ---
