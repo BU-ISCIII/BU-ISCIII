@@ -142,7 +142,7 @@ If everything is OK, we can then get into the `ANALYSIS` folder and we'll find t
   * `02-preprocessing`: this folder contains a `lablog` file that creates a subfolder for each sample, inside of which there will be symlinks to the fastp processed and compressed .fastq files for the corresponding samples linked to the service. The user will be asked whether these trimmed reads were saved previously (since this Snippy service is usually performed along with the Assembly service, **these trimmed reads should have already been saved when performing this procedure**). If the user says yes, these symbolic links are created; otherwise, a `_01_fastp.sh` script will be created, which will have to be launched in order to obtain the trimmed sequences from the raw reads, which will be stored within this `02-preprocessing` folder.
   * `03-preprocQC`: this folder contains a `lablog` file that runs FASTQC on the processed reads obtained from fastp. Usually, this lablog is not run, since this procedure has already been done as part of the Assembly service.
   * `04-kmerfinder`: this folder contains a `lablog` file that runs KMERFINDER on the processed reads obtained from fastp. In the same way as in the previous point, this step is usually already done in the Assembly service.
-  * `04-snippy`: this folder contains a `lablog` file that does the following:
+  * `05-snippy`: this folder contains a `lablog` file that does the following:
     * Creates a subfolder called `logs`.
   
     * Creates a file called `input.tab` that, for each sample, lists the .fastq files that are linked to that sample, separated by tabs (there will be, therefore, three columns for each sample). These .fastq files are fetched from the `02-preprocessing` folder.
@@ -209,7 +209,7 @@ If everything is OK, we can then get into the `ANALYSIS` folder and we'll find t
 
     > **After running `lablog`, run `_00_snippy.sh`, `_01_snippy_core.sh`, `_02_phylo_aln.sh` and `_03_run_gubbins.sh` sequentially.**
   
-  * `05-iqtree`: this folder contains a `lablog` file that does the following:
+  * `06-iqtree`: this folder contains a `lablog` file that does the following:
       > Note: This lablog must be run twice. The first time this lablog is run, only the uncommented lines will be executed. After the _00_iqtreemfp.sh has finished its execution, the uncommented lines must be commented out, and vice versa. Then run the lablog a second time.
 
     * Creates a subfolder called `logs`.
