@@ -220,7 +220,7 @@ If everything is OK, we can then get into the `ANALYSIS` folder and we'll find t
 
 > **Ignore this if you DID NOT remove recombinant sites from the initial SNP alignment from snippy**:<br><br>
 > After running the `_03_run_gubbins.sh` script, you'll get a file called `clean.core.aln`, equivalent to `phylo.aln` but with no recombinant sites this time. You'll have to repeat the previous procedure in order to obtain the best phylogenetic tree from this file.
-> * Create a new folder called `06-iqtree-gubbins` using `mkdir`.
+> * Create a new folder called `07-iqtree-gubbins` using `mkdir`.
 > * Copy the `lablog` file from 05-iqtree into this new subfolder using `cp`.
 > * Modify this `lablog` file so that the input used for `_00_iqtreemfp.sh` and `_01_iqtreeall.sh` is not `phylo.aln`, but `clean.core.aln`.
 > * Run this `lablog` file: `bash lablog`.
@@ -279,7 +279,7 @@ Once you have gone through all these folders and run all the required scripts, y
     * `mapping_stats_summary.txt` from `99-stats`.
     * `wgs_metrics_all_filtered.txt` from `99-stats`.
 
-> If you generated another .treefile file from `clean.core.aln`, please create the corresponding symlink from the `06-iqtree-gubbins` folder.
+> If you generated another .treefile file from `clean.core.aln`, please create the corresponding symlink from the `07-iqtree-gubbins` folder.
 
 ## What should I do after I've run all the necessary scripts?
 
