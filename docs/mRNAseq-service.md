@@ -55,17 +55,18 @@ If so, you are ready to proceed.
 
 After the process is completed, a new folder named `01-${DATE}_rnaseq` is generated. This folder contains the results of the mRNAseq analysis. Among the most relevant files to check and review are:
 
-- `multiqc/star_salmon/multiqc_report.html`: An HTML report displaying quality control metrics for raw reads alignment, transcript expression quantification, strand-specificity checks, and more. Here are the key sections in the report to focus on:
+- `multiqc/star_salmon/multiqc_report.html`: An HTML report displaying quality control metrics for raw reads alignment, transcript expression quantification, strand-specificity checks, and more. Here are the **key sections** in the report to focus on:
 
-  - FASTQC: Assess the quality of reads in the FastQC section, which presents the mean quality value across each base position in the read.
+  - **FASTQC**: Assess the quality of reads in the FastQC section, which presents the mean quality value across each base position in the read.
 
-  - STAR: Review the percentage of uniquely mapped reads mapping.
+  - **STAR**: Review the percentage of uniquely mapped reads mapping.
   
-  - `salmon.merged.gene_counts.tsv`: This file contains the merged counts data.
+  - **`salmon.merged.gene_counts.tsv`**: This file contains the merged counts data.
 
-  - RSeQC: Check the predominant strandedness value within the Infer experiment section and ensure it matches the information in the samplesheet (SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS/${DATE}_ANALYSIS01_RNASEQ/samplesheet.csv). 
+  - **RSeQC**: Check the predominant **strandedness** value within the Infer experiment section and ensure it matches the information in the samplesheet (`SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS/${DATE}_ANALYSIS01_RNASEQ/samplesheet.csv`).
 
-[!WARNING]: If the strandedness value does not match, then update the value in the samplesheet.csv file and re-deploy the mRNAseq analysis.
+>[!WARNING]
+>**If the strandedness value does not match, then update the value in the `samplesheet.csv` file and re-deploy the mRNAseq analysis.**
 
 
 ### Differential Expression Analysis
@@ -133,21 +134,23 @@ Once the process is finished, within the differential expression directory (reme
 
 ### mRNAseq REPORT TEMPLATE (TEAM STANDUP)
 
-Once you have finished the analysis and analyzed the results you need to report to the rest of the members. Use this template to do it:
+Once you have finished the analysis and analyzed the results **you need to report to the rest of the members**. Use this **template** to do it:
 
 **SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S**
-* Servicio: [service name]
-* Carrera: [WGS run name / WGS project name]
-* Muestras: [number of samples analyzed in the service]
-* Solicitante: [name of the person who requested the service]
-* Laboratorio: [laboratory alias of the requester]
-* Estado: [status of the service]
-* Cantidad de lecturas: [the median amount of reads]
-* Calidad de las lecturas: [quality of reads]
-* Resultados generales:
-    * Porcentaje de mapping [mapping percentage in the multiqc report]
-    * Análisis de expresión diferencial: 
-      * Number of differentially expressed genes/transcripts.
-    * Análisis de datos exploratorio:
-      * Relevant notes regarding sample groups and outliers in the PCA plot.
+* **Servicio**: [service name]
+* **Carrera**: [WGS run name / WGS project name]
+* **Strandness**: Sense/Antisense/No strand-specific
+* **Muestras**: [number of samples analyzed in the service]
+* **Solicitante**: [name of the person who requested the service]
+* **Laboratorio**: [laboratory alias of the requester]
+* **Estado**: [status of the service]
+* **Cantidad de lecturas**: [the median amount of reads]
+* **Calidad de las lecturas**: [quality of reads]
+* **Resultados generales**:
+  * Porcentaje de mapping: [mapping percentage in the multiqc report]
+  * RSeQC infer experiment: [is the strandedness what should be expected?]
+* **Análisis de expresión diferencial**:
+  * Number of differentially expressed genes/transcripts.
+* **Análisis de datos exploratorio**:
+  * Relevant notes regarding sample groups and outliers in the PCA plot.
 
