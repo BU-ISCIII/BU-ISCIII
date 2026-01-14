@@ -183,7 +183,7 @@ To make this possible, in **`06-variant-calling`** we can find several files:
 >**Pay special attention to the content of the .sh scripts, since you'll have to activate certain micromamba environments so that they can work correctly. Check which env you have to activate before running each script!**
 
 This is the final part of this analysis, since nf-core/taxprofiler can be run in parallel, but that pipeline has to have finished before the execution of the scripts of this subfolder. Here, we'll find the following items:
-- `lablog`: **when running this script, make sure the refgenie micromamba environment has been activated!** This script, when run, generates several subscripts that should be launched sequentially:
+- `lablog`: **when running this script, make sure the refgenie micromamba environment has been activated!** This script, when run, generates several subscripts that should be launched sequentially. **They should be run by means of their corresponding `run` scripts, if that's the case**:
   - `_01_create_consensus_files.sh`: this script takes all consensus sequences from a sample and concatenates them in a single FASTA file for each sample.
   - `_02_create_variants_long_table.sh`: given the auxiliary script called `create_variants_long_table.py`, this script launches such Python script, using the annotated VCF files as input, so that a single CSV file is created, containing relevant information regarding all the variants detected in all samples.
   - `_03_run_percentage_Ns.sh`: this script uses the auxiliary script called percentajeNs.py to determine the percentage of Ns present in each consensus for each sample.
