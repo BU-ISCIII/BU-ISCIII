@@ -30,6 +30,7 @@
       - [[Characterization service]]
       - [[Viralrecon service]]
       - [[ExomeEB ExomeTrio WGSTrio service]]
+      - [[Lowfreq panel service]]
       - [[Taxprofiler service]]
       - [[IRMA service]]
       - [[PlasmidID service]]
