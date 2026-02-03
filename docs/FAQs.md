@@ -5,8 +5,8 @@
   - [I can't copy data from the HPC to my workstation](#i-cant-copy-data-from-the-hpc-to-my-workstation)
   - [What if a certain run is not stored in `srv/fastq_repo` anymore?](#what-if-a-certain-run-is-not-stored-in-srvfastq_repo-anymore)
   - [What if the HPC is not working or it is working very slowly?](#what-if-the-hpc-is-not-working-or-it-is-working-very-slowly)
-  - [How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?](#how-to-mount-dataucctbi-and-dataucctbioinfo_doc)
-  - [What if `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` unmount for any reason?](#what-if-dataucctbi-and-dataucctbioinfo_doc-unmount-for-any-reason)
+  - [How to mount `/data/ucct/bi/` and `/data/bioinfo_doc/`?](#how-to-mount-dataucctbi-and-databioinfo_doc)
+  - [What if `/data/ucct/bi/` and `/data/bioinfo_doc/` unmount for any reason?](#what-if-dataucctbi-and-databioinfo_doc-unmount-for-any-reason)
   - [How can I install a new release of the BU-ISCIII tools in the HPC?](#how-can-i-install-a-new-release-of-the-bu-isciii-tools-in-the-hpc)
   - [How can I install a new version of a Singularity image in the HPC?](#how-can-i-install-a-new-version-of-a-singularity-image-in-the-hpc)
   - [How can I install a new version of an nf-core pipeline in the HPC?](#how-can-i-install-a-new-version-of-an-nf-core-pipeline-in-the-hpc)
@@ -75,24 +75,24 @@ There may be occasions in which you cannot log in the HPC or it works very slowl
 
 If you or any of the members of the Unit believe that the SAU should be aware of this, please submit a petition on [**sau.isciii.es**](https://sau.isciii.es/).
 
-## How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?
+## How to mount `/data/ucct/bi/` and `/data/bioinfo_doc/`?
 
 The **`/data/ucct/bi/`** resource is essential for the correct usage of the BU-ISCIII tools, since everything that is needed for the proper development of the services that are requested via [**iSkyLIMS**](https://iskylims.isciii.es/) is stored in `/data/ucct/bi/`.
 
-Furthermore, all the information regarding the delivery of previous services, among other relevant stuff for the Unit, is stored in **`/data/ucct/bioinfo_doc/`**. Having access to this folder is also fundamental to be able to deliver finished services.
+Furthermore, all the information regarding the delivery of previous services, among other relevant stuff for the Unit, is stored in **`/data/bioinfo_doc/`**. Having access to this folder is also fundamental to be able to deliver finished services.
 
-Once you are assigned a WS and a local user, you shouldn't have access to /data/ucct/bi/ and /data/ucct/bioinfo_doc/. You'll have to mount these folders in your WS. To do so, follow these steps:
+Once you are assigned a WS and a local user, you shouldn't have access to /data/ucct/bi/ and /data/bioinfo_doc/. You'll have to mount these folders in your WS. To do so, follow these steps:
 
-1. Open a new terminal and lauch these commands. You'll be creating the `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` folders locally:
+1. Open a new terminal and lauch these commands. You'll be creating the `/data/ucct/bi/` and `/data/bioinfo_doc/` folders locally:
 ```
 sudo mkdir -p /data/ucct/bi/
-sudo mkdir /data/ucct/bioinfo_doc/
+sudo mkdir /data/bioinfo_doc/
 ```
 2. Mount `/data/ucct/bi/` in your WS
 ```
 sudo sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,allow_other,default_permissions -p 32122 <user>@portutatis.isciii.es:/data/ucct/bi /data/ucct/bi/
 ```
-3. Now, mount `/data/ucct/bioinfo_doc/` in your WS
+3. Now, mount `/data/bioinfo_doc/` in your WS
 ```
 sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.isciii.es/bioinfo_doc /data/bioinfo_doc
 ```
@@ -105,13 +105,13 @@ sudo mount -t cifs -o username=<user>,domain=ISCIII,uid=XXXX,gid=XXXX //neptuno.
 > ```
 > id
 > ```
-> You'll see two variables, called uid and gid, which will have associated a number. This number is the one you have to indicate when mounting `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`.
+> You'll see two variables, called uid and gid, which will have associated a number. This number is the one you have to indicate when mounting `/data/ucct/bi/` and `/data/bioinfo_doc/`.
 
-## What if `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/` unmount for any reason?
+## What if `/data/ucct/bi/` and `/data/bioinfo_doc/` unmount for any reason?
 
-It is pretty common that these resources unmount for some reason, mainly because the power shut down at some point. In these cases, you'll have to mount them again running the commands from [How to mount `/data/ucct/bi/` and `/data/ucct/bioinfo_doc/`?](#how-to-mount-databi-and-databioinfo_doc).
+It is pretty common that these resources unmount for some reason, mainly because the power shut down at some point. In these cases, you'll have to mount them again running the commands from [How to mount `/data/ucct/bi/` and `/data/bioinfo_doc/`?](#how-to-mount-databi-and-databioinfo_doc).
 
-If you need to unmount manually any of these folders (maybe because you mounted them wrong), run the following (notice this is for `/data/ucct/bi/`, but it can be done also for `/data/ucct/bioinfo_doc/`):
+If you need to unmount manually any of these folders (maybe because you mounted them wrong), run the following (notice this is for `/data/ucct/bi/`, but it can be done also for `/data/bioinfo_doc/`):
 
 ```
 sudo fusermount -uz /data/ucct/bi
