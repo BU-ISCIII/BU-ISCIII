@@ -40,9 +40,15 @@ All these services use [**nf-core/sarek**](https://nf-co.re/sarek/), a pipeline 
 - Execute the `lablog` file stored inside `DATE_ANALYSIS01_SERVICE`. This `lablog` will:
   - Make symbolic links to the `00-reads` folder and the file called `samples_id.txt`.
   - Create `samplesheet.csv`, containing the sample names necessary for sarek execution. Please make sure this file follows the [**required structure**](https://nf-co.re/sarek/3.5.0/docs/usage/#input-sample-sheet-configurations), since this is the input file used by sarek.
+    - **Don't worry if sex and status in the samplesheet are the same for all samples, sex is only used for Copy-Number Variation analysis in a tumor/pair analysis, and status indicates 0 (normal) or 1 (tumor), but in our case we are analysing germinal mutations, so all samples will be 0**.
   - Create `sarek.sbatch`, the script with default configuration to run sarek, which is launched with `_01_run_sarek.sh`. Make sure everything looks correct, and check that you have `samplesheet.csv` and the corresponding .config file in `DOC`.
-  - Create `../../DOC/family.ped` a file containing the pedigree of the samples in [PED format](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
-     - **You should check the `family.ped` file when there are more than 3 samples in the case of trios, as it might need some editing.**
+  - Create `../../DOC/family.ped` a file containing the pedigree of the samples in [**PED format**](https://gatk.broadinstitute.org/hc/en-us/articles/360035531972-PED-Pedigree-format).
+  
+>[!WARNING]
+>**You should check the `family.ped` file when there are more than 3 samples in the case of trios, as it might need some editing.**
+
+>[!NOTE]
+>Even though the sex of all individuals should be indicated in the .ped file, by default the proband's sex is 1 (male, even though we don't know the real proband's sex), but don't worry, **this will not affect the analysis** since in our case we do not perform sex-based mutational studies.
 
 - As indicated in the `lablog` file, before running `_01_run_sarek.sh`, you need to load the required modules: `module load Nextflow singularity`
 - Then, you can run `bash _01_run_sarek`.
