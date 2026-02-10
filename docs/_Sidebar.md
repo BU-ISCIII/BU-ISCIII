@@ -39,6 +39,7 @@
       - [[mRNAseq service]]
       - [[Pikavirus service]]
       - [[MTBSeq service]]
+      - [[TBProfiler service]]
       - [[Lineage specific variants from outbreakinfo]]
       - [[IRMA code explanation]]
 - [[Github and development]]
