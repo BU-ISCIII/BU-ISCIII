@@ -25,17 +25,23 @@ ll -tr
 Now, let's execute the first BU-ISCIII tool: `new-service`, where you'll need to specify the resolution ID associated to this service.
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+buisciii new-service SRVCNMXXX.X
 ```
 
-The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).  
+By default, **a `.log` file from this module's execution will be saved for tracking purposes in the service folder that will be created within `services_and_colaborations`**. This log file will have the following structure: `SRVCNMXXX.X.tool.log`, where `tool` is the name of the buisciii-tools module being launched. For instance, the log file will be named `SRVCNMXXX.X.new-service.log` if the module you are launching is `new-service`.
+
+>[!NOTE]
+>If you need the `.log` file to be saved in your PWD for any reason, or you want it to have a different name, use the option `--log-file` and indicate the name of your log file, for example:
+>```
+>buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+>```
 
 Once `new-service` is executed, you'll be asked:
 
 * `Do you want to skip folder creation?`: Unless it is not the first resolution associated with the service, answer **NO**, because the folder corresponding to the service has not yet been created in the `services_and_collaborations` folder.
 * Next, specify `assembly_annot`, since this is the service we're running.
 
-Once the `new-service` tool is finished, you'll have a new folder in `services_and_colaborations` with the following structure: `SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S`. Your service will now appear within the _**In progress**_ tab in [iskyLIMS](https://iskylims.isciii.es/)
+Once the `new-service` tool is finished, you'll have a new folder in `services_and_colaborations` with the following structure: `SRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S`. Your service will now appear within the _**In progress**_ tab in [iSkyLIMS](https://iskylims.isciii.es/).
 
 If we get into this folder, we'll find 6 folders: `ANALYSIS`, `DOC`, `RAW`, `REFERENCES`, `RESULTS` and `TMP`. We should check, before going any further, that the number of files contained within the `RAW` folder is equal to the number of samples specified in [iskyLIMS](https://iskylims.isciii.es/) x 2, since these are paired-end reads.
 
@@ -53,10 +59,8 @@ bash lablog_assembly
 After executing this file, if everything is OK, we can now proceed with the new BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/ucct/bi`, since this `scratch_tmp` folder will be the one used for the assembly analysis.
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
+buisciii scratch SRVCNMXXX.X
 ```
-
-Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
 
 Once `scratch` is executed, you'll be asked:
 
@@ -122,16 +126,17 @@ multiqc_report.html     quast_global_report.html
 If everything is correct and all the files have the expected content, we can proceed to copy the content of the `RESULTS` folder to the researcher's SFTP. To do this, we should now execute the next BU-ISCIII tool: `finish`, which will delete temporary files, copy the results from scratch back to the `services_and_colaborations` folder, rename those folders that should not be copied into the researcher's SFTP and copy those that are of interest to this SFTP:
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
+buisciii finish SRVCNMXXX.X
 ```
 
-It is possible that the following warning appears while transferring data to the researcher's SFTP:
-
-```shell
-rsync: failed to set permissions on "/data/ucct/bi/sftp/Lab_Folder/SSRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS/YYYYMMDD_entrega01/*": Operation not permitted (1)
-```
-
-It is just a warning. Please check that everything has been copied correctly and continue with the protocol as usual.
+>[!NOTE]
+>It is possible that the following warning appears while transferring data to the researcher's SFTP:
+>
+>```shell
+>rsync: failed to set permissions on "/data/ucct/bi/sftp/Lab_Folder/SSRVCNMXXX_YYYYMMDD_ASSEMBLYXXX_researcher_S/RESULTS/YYYYMMDD_entrega01/*": Operation not permitted (1)
+>```
+>
+>**This is just a warning**. Please check that everything has been copied correctly and continue with the protocol as usual.
 
 After executing `finish`, you'll have to specify again that we are performing an assembly analysis (`assembly_annot`) and allow for this tools to rename (`RAW` and `TMP` will be renamed as `RAW_NC` and `TMP_NC`) and delete some folders (`work` will be deleted).
 
@@ -140,10 +145,8 @@ Once `finish` is done, the results will be now at the researcher's SFTP and we c
 To execute `bioinfo_doc`, we have to **go back to our WS user**, in which we should already have mounted the `bioinfo_doc` folder. If this is the case, we can do the following, **always after having checked the kmerfinder, quast and multiqc reports and looking for any remarkable aspects that the researcher should be informed about**:
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X > service_info
+buisciii bioinfo-doc SRVCNMXXX.X > service_info
 ```
-
-Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service_info.log` or `SRVCNMXXX.X.delivery.log`).
 
 Once you've specified the `service_info` option, you should execute the `bioinfo-doc` BU-ISCIII tool again indicating the `delivery` option this time. Please note that the program will ask you to create the markdown files associated to this specific delivery, apart from whether we want to add some notes. If there is something we want to inform the researcher about, we can create a `delivery_notes.txt` with this information, by executing the following commands, **before executing `buisciii bioinfo-doc SRVCNMXXX.X > delivery`**:
 
@@ -154,10 +157,15 @@ nano delivery_notes.txt #Create and edit the .txt file with notes. Press Crtl + 
 
 Once this has been done, execute `buisciii bioinfo-doc SRVCNMXXX.X > delivery`, agree in the fact that you want to create markdown files, indicate the absolute path to the `delivery_notes.txt` file and agree to send an email with the results automatically to the researcher. `Bioinfo-doc` will have finished and a report with the results and your notes will have been sent to the researcher directly. The service is now delivered and finished.
 
+>[!WARNING]
+>When running the `delivery` mode of the `bioinfo_doc` module, you will be asked for **delivery notes** and **email notes**. **THESE ARE NOT THE SAME THING**. After running the `service_info` mode of this module, you'll see a folder for the service will have been created in `bioinfo_doc`. There, you can for example create two files: `delivery_notes.txt` and `email_notes.txt`. Edit these two files, and add the following information in each one of them:
+>* `delivery_notes.txt`: `Results were delivered in the SFTP.` (literally)
+>* `email_notes.txt`: everything you want the researcher to be aware of.
+
 Lastly, remember to remove all the files related to this service from `scratch_tmp`:
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X > remove_scratch
+buisciii scratch SRVCNMXXX.X > remove_scratch
 ```
 
 ## ASSEMBLY REPORT TEMPLATE (TEAM STANDUP)
