@@ -31,16 +31,23 @@ If so, you are ready to proceed.
     ```
 
   - Copy files in the folder service from `services_and_colaborations` to `scratch_tmp/`.
-    ```bash
-    buisciii --log-file SRVXXXYYYY.1.tool.log scratch --direction service_to_scratch SRVXXXYYYY.1
+    ```shell
+    buisciii scratch --direction service_to_scratch SRVCNMXXX.X
     ```
-    The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service.
+
+    By default, **a `.log` file from this module's execution will be saved for tracking purposes in the service folder that will be created within `services_and_colaborations`**. This log file will have the following structure: `SRVCNMXXX.X.tool.log`, where `tool` is the name of the buisciii-tools module being launched. For instance, the log file will be named `SRVCNMXXX.X.new-service.log` if the module you are launching is `new-service`.
+
+    >[!NOTE]
+    >If you need the `.log` file to be saved in your PWD for any reason, or you want it to have a different name, use the option `--log-file` and indicate the name of your log file, for example:
+    >```
+    >buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+    >```
 
 2. Go to `ANALYSIS/${DATE}_ANALYSIS01_RNASEQ` in the service folder copied to `scratch_tmp/` and execute the `lablog`.
-  ```bash
-  cd /data/ucct/bi/scratch_tmp/bi/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS/${DATE}_ANALYSIS01_RNASEQ
-  bash lablog
-  ```
+    ```bash
+    cd /data/ucct/bi/scratch_tmp/bi/SRVXXXYYYY_YYYYMMDD_RNASEQZZZ_researcher_S/ANALYSIS/${DATE}_ANALYSIS01_RNASEQ
+    bash lablog
+    ```
 
 3. Run the analysis:
   - Load dependencies:
