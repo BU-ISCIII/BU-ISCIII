@@ -32,6 +32,7 @@ Since the cg/wgMLST definition is usually done along with the construction of a 
 >[!WARNING]
 >As stated before, this cg/wgMLST service is usually not done alone, but along with *de novo* assembly, characterization, snippy and PlasmidID. Therefore, you'll most likely already have created the service folder, which will still have the acronym associated to the **Characterization** service, as indicated below.
 
+>[!NOTE]
 > **Ignore the following if the service folder has already been created** (which is the most probable thing):<br><br>
 >Taking the previous information into account, the first thing we need to do is take the service and click on _**Add resolution**_ in **[iSkyLIMS](https://iskylims.isciii.es/)** after logging in with your user and password. For this to happen, you need to specify the estimated delivery date, your user and a service acronym.
 >
@@ -63,10 +64,16 @@ ll -tr
 Now, let's execute the first BU-ISCIII tool: `new-service`, where you'll need to specify the resolution ID associated to this service.
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+buisciii new-service SRVCNMXXX.X
 ```
 
-The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).  
+By default, **a `.log` file from this module's execution will be saved for tracking purposes in the service folder that will be created within `services_and_colaborations`**. This log file will have the following structure: `SRVCNMXXX.X.tool.log`, where `tool` is the name of the buisciii-tools module being launched. For instance, the log file will be named `SRVCNMXXX.X.new-service.log` if the module you are launching is `new-service`.
+
+>[!NOTE]
+>If you need the `.log` file to be saved in your PWD for any reason, or you want it to have a different name, use the option `--log-file` and indicate the name of your log file, for example:
+>```
+>buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+>```  
 
 Once `new-service` is executed, you'll be asked:
 
@@ -101,10 +108,8 @@ Once this file has been executed, please take into consideration that this servi
 After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/ucct/bi`, since this `scratch_tmp` folder will be the one used for the analysis. Please make sure the .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
+buisciii scratch SRVCNMXXX.X
 ```
-
-Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
 
 Once `scratch` is executed, you'll be asked:
 
@@ -403,30 +408,27 @@ Once the whole process is finished, within the `DATE_ANALYSIS01_CHEWBBACA` folde
 
 If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools. Please make sure the .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
 
-    $ buisciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
+    $ buisciii finish SRVCNMXXX.X
 
 This module will do several things. First, it cleans up the service folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space (no folders or files are deleted in this case). Then, it copies all the service files back to its `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/` folder, and also copies the content of this service to the researcher's sftp repository.
 
-In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
+In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/bioinfo_doc/` folder.
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
-
-Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service_info.log` or `SRVCNMXXX.X.delivery.log`).
+    $ buisciii bioinfo-doc SRVCNMXXX.X
 
 This module will be executed twice. The first time, select the **service_info** option, and the next time select the **delivery** option. There is the option to add delivery notes (by prompt or by providing a file) during its execution.
 
 >[!WARNING]
-> If chewBBACA is run as part of an **outbreak** service (as mentioned before, this service is usually not done alone), the delivery message is in general too long to be included as a .txt file during the delivery procedure (check [Outbreak report template](#outbreak-report-template)). Therefore, for this kind of services, reply the following when these questions are asked on the terminal:
->1. Do you wish to provide a text file for delivery notes?: type n.
->2. Write some delivery notes: leave it blank, by pressing Enter.
->3. Do you want to add some delivery notes to the e-mail?: type n.
->4. Do you want to send e-mail automatically?: type n.
->
->The service_info and delivery .pdf files will have been created but the e-mail won't have been sent. This will be done manually by sending the service report that you can see in the last section of this manual.
+>When running the `delivery` mode of the `bioinfo_doc` module, you will be asked for **delivery notes** and **email notes**. **THESE ARE NOT THE SAME THING**. After running the `service_info` mode of this module, you'll see a folder for the service will have been created in `bioinfo_doc`. There, you can for example create two files: `delivery_notes.txt` and `email_notes.txt`. Edit these two files, and add the following information in each one of them:
+>* `delivery_notes.txt`: `Results were delivered in the SFTP.` (literally)
+>* `email_notes.txt`: everything you want the researcher to be aware of.
+
+>[!WARNING]
+> If chewBBACA is run as part of an **outbreak** service (as mentioned before, this service is usually not done alone), you will have generated a **summary table** with all the main results from the service. When running the `delivery` mode of `bioinfo_doc`, the last question **you will be asked will be whether you want to attach any files**. **Say yes, and paste the path to the XLSX summary table you created.**
 
 Lastly, once the service has been delivered and the e-mail has been sent, remember to remove all the files related to this service from `scratch_tmp`:
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
+    $ buisciii scratch SRVCNMXXX.X
     $ remove_scratch
 
 ## Outbreak report template
