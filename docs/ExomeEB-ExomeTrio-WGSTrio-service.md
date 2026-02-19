@@ -9,15 +9,17 @@ All these services use [**nf-core/sarek**](https://nf-co.re/sarek/), a pipeline 
 
 ## Step-by-step guide
 
-### 1. Create the service using the [buisciii tools](https://github.com/BU-ISCIII/buisciii-tools).
+### 1. Create the service using the [buisciii-tools](https://github.com/BU-ISCIII/buisciii-tools).
 
-- Create the service from the local terminal using the corresponding [**iSkyLIMS**](https://iskylims.isciii.es/) Resolution ID (e.g. `buisciii --log-file SRVIIERXXX.X.tool.log new-service SRVIIERXXX.X`).
+- Create the service from the local terminal using the corresponding [**iSkyLIMS**](https://iskylims.isciii.es/) Resolution ID (e.g. `buisciii new-service SRVIIERXXX.X`).
+
+  By default, **a `.log` file from this module's execution will be saved for tracking purposes in the service folder that will be created within `services_and_colaborations`**. This log file will have the following structure: `SRVCNMXXX.X.tool.log`, where `tool` is the name of the buisciii-tools module being launched. For instance, the log file will be named `SRVCNMXXX.X.new-service.log` if the module you are launching is `new-service`.
 
   >[!NOTE]
-  >The option `--log-file` will save a log file for tracking purposes in a specific location. **This option should be used every time the BU-ISCIII tool is used for the service**. For instance, you may want to name the log as `SRVIIERXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVIIERXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVIIERXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results) file.
-  >
-  >Please make sure this .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
-  >
+  >If you need the `.log` file to be saved in your PWD for any reason, or you want it to have a different name, use the option `--log-file` and indicate the name of your log file, for example:
+  >```
+  >buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+  >```
   > When being asked whether you want to skip or not the service folder creation, type `N` to create the template folder, and then select the corresponding template folder (either `exometrio`, `exomeeb` or `wgstrio`).
 
 - A folder will be created within `/data/ucct/bi/services_and_colaborations/IIER/human_genetics` with the full name of the service, with the following format (YYYYMMDD = YearMonthDay):
@@ -32,7 +34,7 @@ All these services use [**nf-core/sarek**](https://nf-co.re/sarek/), a pipeline 
 - For **exome** services, the `REFERENCES` folder should include BED files with coordinates for the targeted regions, exons and/or genes during sequencing.
 - If everything is alright, move to the `ANALYSIS` folder and execute the `lablog` file (this `lablog` might be named after the name of the template e.g. `lablog_exometrio`).
   - This first `lablog` will rename the main ANALYSIS folder (`DATE_ANALYSIS01`) to the current date and create the folder `00-reads` with symlinks to the .fastq files stored in `RAW`.
-- Finally, move the folder to the computing resource using `buisciii --log-file SRVIIERXXX.X.tool.log scratch --direction service_to_scratch SRVIIERXXX.X`. Use the specific option you are using to name the log (i.e. `SRVIIERXXX.X.service_to_scratch.log`).
+- Finally, move the folder to the computing resource using `buisciii scratch --direction service_to_scratch SRVIIERXXX.X`.
 - From now on, all the analyses must be executed from the folder located within `scratch`.
 
 ### 2. Analysis starts: Sarek
@@ -145,7 +147,7 @@ Once the service is finished, you should go to `RESULTS` and execute the corresp
 
 If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools. Please make sure the .log file is saved within the **`DOC`** folder of the service. If this is not the case, please move this file into this folder manually.
 
-    $ buisciii --log-file SRVIIERXXX.X.finish.log finish SRVIIERXXX.X
+    $ buisciii finish SRVIIERXXX.X
 
 >[!WARNING]
 >When running the `finish` and the `bioinfo-doc` modules, you'll be asked which SFTP folder to copy the data to. This depends on the situation:
@@ -170,15 +172,18 @@ Then, it copies all the service files back to its `/data/ucct/bi/services_and_co
 
 In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
 
-    $ buisciii --log-file SRVIIERXXX.X.tool.log bioinfo-doc SRVIIERXXX.X
-
-Remember to save the logs with the corresponding name (i.e. `SRVIIERXXX.X.service_info.log` or `SRVIIERXXX.X.delivery.log`).
+    $ buisciii bioinfo-doc SRVIIERXXX.X
 
 This module will be executed twice. The first time, select the **service_info** option, and the next time select the **delivery** option. There is the option to add delivery notes (by prompt or by providing a file) during its execution.
 
+>[!WARNING]
+>When running the `delivery` mode of the `bioinfo_doc` module, you will be asked for **delivery notes** and **email notes**. **THESE ARE NOT THE SAME THING**. After running the `service_info` mode of this module, you'll see a folder for the service will have been created in `bioinfo_doc`. There, you can for example create two files: `delivery_notes.txt` and `email_notes.txt`. Edit these two files, and add the following information in each one of them:
+>* `delivery_notes.txt`: `Results were delivered in the SFTP.` (literally)
+>* `email_notes.txt`: everything you want the researcher to be aware of.
+
 Lastly, once the service has been delivered and the e-mail has been sent, remember to remove all the files related to this service from `scratch_tmp`:
 
-    $ buisciii --log-file SRVIIERXXX.X.tool.log scratch SRVIIERXXX.X
+    $ buisciii scratch SRVIIERXXX.X
     $ remove_scratch
 
 ## ExomeEB-ExomeTrio-WGSTrio report template
