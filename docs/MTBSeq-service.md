@@ -27,10 +27,16 @@ ll -tr
 Now, let's execute the first BU-ISCIII tool: `new-service`, where you'll need to specify the resolution ID associated to this service.
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+buisciii new-service SRVCNMXXX.X
 ```
 
-The option `--log-file` will save a .log file for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).  
+By default, **a `.log` file from this module's execution will be saved for tracking purposes in the service folder that will be created within `services_and_colaborations`**. This log file will have the following structure: `SRVCNMXXX.X.tool.log`, where `tool` is the name of the buisciii-tools module being launched. For instance, the log file will be named `SRVCNMXXX.X.new-service.log` if the module you are launching is `new-service`.
+
+>[!NOTE]
+>If you need the `.log` file to be saved in your PWD for any reason, or you want it to have a different name, use the option `--log-file` and indicate the name of your log file, for example:
+>```
+>buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+>```
 
 Once `new-service` is executed, you'll be asked:
 
@@ -55,10 +61,8 @@ bash lablog_mtbseq
 After executing this file, if everything is OK, we can now proceed with the next BU-ISCIII tool: `scratch`. This tool will copy the content from `services_and_colaborations` to the `scratch_tmp` folder contained within `/data/ucct/bi`, since this `scratch_tmp` folder will be the one used for the MTBSeq analysis.
 
 ```shell
-buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
+buisciii scratch SRVCNMXXX.X
 ```
-
-Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
 
 Once `scratch` is executed, you'll be asked:
 
@@ -168,21 +172,24 @@ Before we deliver the service, we should check the files that we have inside the
 
 If everything is correct and all the necessary files and links have indeed been generated, you can proceed with the service completion. To do this, execute the **finish** module of buisciii-tools.
 
-    $ buisciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
+    $ buisciii finish SRVCNMXXX.X
 
 This module will do several things. First, it cleans up the service folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space (in **MTBSeq**, these folders are `Bam`, `Mpileup` and `GATK_Bam`, along with the .fastq.gz files from `01-processing/fastp`). Then, it copies all the service files back to its `/data/ucct/bi/services_and_colaborations/CNM/bacteriology/` folder, and also copies the content of this service to the researcher's sftp repository.
 
 In order to complete the delivery of results to the researcher, you need to run the **bioinfo-doc** module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
-
-Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service_info.log` or `SRVCNMXXX.X.delivery.log`).
+    $ buisciii bioinfo-doc SRVCNMXXX.X
 
 This module will be executed twice. The first time, select the **service_info** option, and the next time select the **delivery** option. There is the option to add delivery notes (by prompt or by providing a file) during its execution. **Please indicate any incidences you might have found during the analysis in these notes**.
 
+>[!WARNING]
+>When running the `delivery` mode of the `bioinfo_doc` module, you will be asked for **delivery notes** and **email notes**. **THESE ARE NOT THE SAME THING**. After running the `service_info` mode of this module, you'll see a folder for the service will have been created in `bioinfo_doc`. There, you can for example create two files: `delivery_notes.txt` and `email_notes.txt`. Edit these two files, and add the following information in each one of them:
+>* `delivery_notes.txt`: `Results were delivered in the SFTP.` (literally)
+>* `email_notes.txt`: everything you want the researcher to be aware of.
+
 Lastly, remember to remove all the files related to this service from `scratch_tmp`:
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
+    $ buisciii scratch SRVCNMXXX.X
     $ remove_scratch
 
 ---
