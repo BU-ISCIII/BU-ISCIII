@@ -2,7 +2,7 @@
 
 This is a brief tutorial on how to perform a Pikavirus Service as a member of the ISCIII's Bioinformatics Unit! PikaVirus is a associated with _Viral: Detection and characterization of viral genomes within metagenomic data_ service from service catalog.
 
-[PikaVirus](https://github.com/BU-ISCIII/PikaVirus) is a bioinformatics best-practise analysis pipeline for metagenomic analysis following a new approach, based on eliminatory k-mer analysis, followed by assembly and posterior contig-binning. This service will allow us to identify the viral species present in a sample.
+[**PikaVirus**](https://github.com/BU-ISCIII/PikaVirus) is a bioinformatics best-practise analysis pipeline for metagenomic analysis following a new approach, based on eliminatory k-mer analysis, followed by assembly and posterior contig-binning. This service will allow us to identify the viral species present in a sample.
 
 Let's get started with the service. When performing a PikaVirus service, remember that the typical acronym is `VIRAL-DISCOVERY`, but this may differ depending on the service.
 
@@ -74,9 +74,14 @@ In this service we should check:
 - `01-PikaVirus-results/multiqc_report.html`: FastQC/fastp reports to assess the good/bad quality of the reads, the presence of adaptaers, etc...
 - `all_samples_virus_table.tsv`: Check that the species are the spected and that they contain enough coverage. Those virus covered to >50% at a depth of 10X, can be used as reference genome for `nf-core/viralrecon` for further analysis.
 
-Once all the service results are revised in the `scratch_tmp` folder, you can continue with the next BU-ISCIII tool: `finish` as explained [here](/link/to/tools/and/iskylims/TODO).
+Once all the service results are revised in the `scratch_tmp` folder, you can continue with the next BU-ISCIII tool: `finish`. Finally, deliver the results using the `bioinfo_doc` module from the `buisciii-tools`.
 
-When everything is propperly coppied into the SFTP folder, you can put the update in the `update_servicios` channel's _Team Standup Bot_, with the following template:
+>[!WARNING]
+>When running the `delivery` mode of the `bioinfo_doc` module, you will be asked for **delivery notes** and **email notes**. **THESE ARE NOT THE SAME THING**. After running the `service_info` mode of this module, you'll see a folder for the service will have been created in `bioinfo_doc`. There, you can for example create two files: `delivery_notes.txt` and `email_notes.txt`. Edit these two files, and add the following information in each one of them:
+>* `delivery_notes.txt`: `Results were delivered in the SFTP.` (literally)
+>* `email_notes.txt`: everything you want the researcher to be aware of.
+
+When everything is propperly copied into the SFTP folder, you can put the update in the `update_servicios` channel's _Team Standup Bot_, with the following template:
 
 - _**SRVXXXXXX - VIRAL-DISCOVERYXXX**_ :no_entry: = No empezado, parado o esperando   :running: = Corriendo   :mag: = En revisión   :clipboard: = Finalizado copiandose a SFTP   :white_check_mark: = Finalizado y copiado a sftp
   - **Servicio**: Viral: Detection and characterization of viral genomes within metagenomic data (PikaVirus)
