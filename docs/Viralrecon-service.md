@@ -11,10 +11,16 @@ Load the buisciii-tools environment (select the environment with the most recent
 
 Create the service and the needed folder structure. Run the "new-service" module, selecting **ALL** option in order to add **Viralrecon** and **Taxprofiler** templates to the folder structure.
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+    $ buisciii new-service SRVCNMXXX.X
     > Viralrecon
 
-> Note: If the resolution ID is not specified, it will be requested via the prompt. The option `--log-file` will save a log for tracking purposes in a specific location. This option should be used every time the BU-ISCIII tool is used for the service. For instance, you may want to name the log as `SRVCNMXXX.X.new-service.log` if the function you are using is `new-service`. In other cases in which the tool has different options (i.e `scratch`, `bioinfo-doc`), you may want to use the name of the specific function you are about to use to save the log (i.e. `SRVCNMXXX.X.service_to_scratch.log` for tool `scratch` if you transfer data from service to scratch or `SRVCNMXXX.X.delivery.log` for `bioinfo-doc` if you are about to deliver the results).
+By default, **a `.log` file from this module's execution will be saved for tracking purposes in the service folder that will be created within `services_and_colaborations`**. This log file will have the following structure: `SRVCNMXXX.X.tool.log`, where `tool` is the name of the buisciii-tools module being launched. For instance, the log file will be named `SRVCNMXXX.X.new-service.log` if the module you are launching is `new-service`.
+
+>[!NOTE]
+>If you need the `.log` file to be saved in your PWD for any reason, or you want it to have a different name, use the option `--log-file` and indicate the name of your log file, for example:
+>```
+>buisciii --log-file SRVCNMXXX.X.tool.log new-service SRVCNMXXX.X
+>```
 
 If the service configuration is correct and the sequences are located in `/srv/fastq_repo`, copy de log inside the newly created folder at `/data/ucct/bi/services_and_colaborations/CNM/virology/` and move in. Check the `/RAW` folder to verify that symbolic links have been correctly created for all service samples.
 
@@ -39,7 +45,7 @@ The columns are spaced with a tabulation (this is critical for the proper functi
  
 Once the `samples_ref.txt` file is set up , check the `lablog_viralrecon` and execute it.
 
-This script shall configure the viralrecon service according to the nature of the sequencing data (AMPLICONS or METAGENOMICS), the analysis method to be used (mapping, de novo assembly) and, when necessary, the kind of virus contained in the samples (SARS-CoV-2, RSV, etc.). Depending on this information, running this lablog sets up the configuration files in the `../DOC` folder and creates a folder for each host specified in samples_ref.txt (usually only 1).
+This script shall configure the viralrecon service according to the nature of the sequencing data (**AMPLICONS** or **METAGENOMICS**), the analysis method to be used (mapping, de novo assembly) and, when necessary, the kind of virus contained in the samples (SARS-CoV-2, RSV, etc.). Depending on this information, running this lablog sets up the configuration files in the `../DOC` folder and creates a folder for each host specified in samples_ref.txt (usually only 1).
 
 If this script is run without specifying any arguments, it will be executed interactively, querying the user for the necessary information for the configuration of the service through prompts in the terminal. Alternatively, it is possible to run the script in a non-interactive way, adding specific arguments that directly provide the necessary information (if a critical argument for the configuration of the service is omitted, the user will still be prompted by the terminal for the necessary information). To find out about the available options, please refer to the help menu by using `bash lablog_viralrecon -h`.
 
@@ -52,9 +58,7 @@ Check the `lablog_taxprofiler` and execute it. Edit the folder name `YYMMDD_ANAL
 
 Copy the contents of the service folders to scratch. To do this, run the **scratch** tool from buisciii-tools.
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log scratch --direction service_to_scratch SRVCNMXXX.X
-
-Use the specific option you are using to name the log (i.e. `SRVCNMXXX.X.service_to_scratch.log`).
+    $ buisciii scratch --direction service_to_scratch SRVCNMXXX.X
 
 Once finished, move to the newly copied service folder in scratch (its mounted path in scratch_tmp) `/data/ucct/bi/scratch_tmp/bi/`. Access the `ANALYSIS` folder and at this point, you will need to launch the pipeline once for each host successively. Access the folder of the first existing host (e.g., `YYYYMMDD_ANALYSIS01_METAGENOMIC_HUMAN`).
 
@@ -132,21 +136,24 @@ This lablog (and the scripts inside the new folder) gathers all the files contai
 
 If everything is correct and the necessary files and links have been generated, you can proceed with the service completion. To do this, execute the finish module of buisciii-tools.
 
-    $ buisciii --log-file SRVCNMXXX.X.finish.log finish SRVCNMXXX.X
+    $ buisciii finish SRVCNMXXX.X
 
 This module will do several things. First, it cleans up the folder, removing all the folders and files than are not longer needed and take up a considerable amount of storage space. Then it copies all the service files back to its `/data/ucct/bi/services_and_colaborations/CNM/virology/` folder, and also copies the content of this service to the researcher's sftp repository.
 
 In order to complete the delivery of results to the researcher, you need to run the bioinfo-doc module of the buisciii-tools. To do so, you have to unlogin your HPC user and run it directly from your WS, where you have mounted the `/data/ucct/bioinfo_doc/` folder.
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log bioinfo-doc SRVCNMXXX.X
+    $ buisciii bioinfo-doc SRVCNMXXX.X
 
-Remember to save the logs with the corresponding name (i.e. `SRVCNMXXX.X.service_info.log` or `SRVCNMXXX.X.delivery.log`).
+This module will be executed twice. First time select the `service_info` option, and the next time select the `delivery` option. There is the option to add delivery notes (by prompt or by providing a file) during its execution.
 
-This module will be executed twice. First time select the service_info option, and the next time select the delivery option. There is the option to add delivery notes (by prompt or by providing a file) during its execution.
+>[!WARNING]
+>When running the `delivery` mode of the `bioinfo_doc` module, you will be asked for **delivery notes** and **email notes**. **THESE ARE NOT THE SAME THING**. After running the `service_info` mode of this module, you'll see a folder for the service will have been created in `bioinfo_doc`. There, you can for example create two files: `delivery_notes.txt` and `email_notes.txt`. Edit these two files, and add the following information in each one of them:
+>* `delivery_notes.txt`: `Results were delivered in the SFTP.` (literally)
+>* `email_notes.txt`: everything you want the researcher to be aware of.
 
 Lastly, remember to remove all the files related to this service from `scratch_tmp`:
 
-    $ buisciii --log-file SRVCNMXXX.X.tool.log scratch SRVCNMXXX.X
+    $ buisciii scratch SRVCNMXXX.X
     > remove_scratch
 
 ---
@@ -233,6 +240,4 @@ The no host reads will be inside **`/*_mapping/kraken2/`** for each host and eac
 - **Calidad general**: Buena
 - **Incidencia muestras individuales**:
     - 2 muestras no consiguen mapear (CONTROLNEGATIVO y POSUL54). Tienen muy pocas lecturas, baja calidad y elevado porcentaje de secuencias sobrerrepresentadas.
-  
-
 ---
