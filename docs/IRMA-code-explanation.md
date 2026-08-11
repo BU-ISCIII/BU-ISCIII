@@ -1181,9 +1181,93 @@ Depending on the number of variants in the `-variants.txt` file, it performs mor
 
 Afterwards, it moves the files to folders and reorganizes, cleans up, etc.
 
-### 3. Residual assembly
+### 3. Residual and secondary assembly
+Influenza samples can contain genomic segments from different subtypes, which can indicate a possible co-infection (a) or a very likely contamination (b). Monitor potential co-infections is crucial for the detection of events of segment reorganisation (reassortments) that can create a new genetic combination of segments in a leading to a potential pandemic influenza virus.      
+```
+a)
+A-ComunidadValenciana-2690-2025/tables/READ_COUNTS.txt
+Record	Reads	Patterns	PairsAndWidows
+0-R1	188933	NA	NA
+0-R2	188933	NA	NA
+1-initial	377866	NA	NA
+2-failQC	123635	NA	NA
+2-passQC	254231	130279	NA
+3-chimeric	179	174	NA
+3-nomatch	171272	96747	NA
+3-match	77958	30629	39579
+3-altmatch	4822	2729	NA
+4-A_HA_H1	6838	2741	3450
+4-A_MP	24531	7575	12397
+4-A_NA_N1	6630	2497	3340
+4-A_NP	9182	3811	4733
+4-A_NS	15209	5133	7717
+4-A_PA	4815	2954	2469
+4-A_PB1	3120	2091	1581
+4-A_PB2	7633	3827	3892
+5-A_HA_H3	2841	1557	NA
+5-A_NA_N2	1981	1172	NA
 
-If the residual assembly .fasta file exists, perform a residual assembly, overwrite some variables, and rerun doRound and Post-processing.
-
-### 4. Secondary assembly
-If the DO_ASSEMBLY variable is ON, it performs these steps, which include another doRound and another post-processing.
+b)
+A-PaisVasco-2685-2025/tables/READ_COUNTS.txt
+Record	Reads	Patterns	PairsAndWidows
+0-R1	195737	NA	NA
+0-R2	195737	NA	NA
+1-initial	391474	NA	NA
+2-failQC	127811	NA	NA
+2-passQC	263663	117490	NA
+3-chimeric	145	137	NA
+3-nomatch	237455	104319	NA
+3-match	25934	12916	13144
+3-altmatch	129	118	NA
+4-A_HA_H1	3104	1726	1581
+4-A_MP	9766	4025	4939
+4-A_NA_N1	2092	1183	1062
+4-A_NP	1774	1094	899
+4-A_NS	6063	2651	3071
+4-A_PA	677	590	351
+4-A_PB1	1399	883	706
+4-A_PB2	1059	764	535
+5-A_HA_H3	117	106	NA
+5-A_NA_N2	12	12	NA
+```
+When the parameter `DO_SECONDARY` is set to 0, reads not matching to the main reference sequence (primary data) are not taken into account and not used for the primary assembly. Instead, they are stored with unmatched reads in the directory `secondary`. However, a secondary assembly with that data can be attempt but firstly a **residual assembly** must be created. To control the creation of the latter assembly, three parameters have to be considered:
+- `RESIDUAL_ASSEMBLY_FACTOR`: this factor compares the read pattern count from primary to those from the secondary, providing a measure of how many secondary read patterns are present relative to the primary data. This factor can be calculated by dividing the primary read pattern count by the secondary ones (i.e. A_HA_H1 and A_HA_H3: 2741/1557=1.7). If the resulting value is lower than the threshold defined in the config file, the residual assembly is triggered.    
+- `MIN_RP_RESIDUAL`:  minimum number of read patterns to attempt residual assembly per gene segment.
+- `MIN_RC_RESIDUAL`:  minimum number of read count to attempt residual assembly per gene segment.
+If a sample passes those criteria a directory called `residual_assembly` is created in the main directory. This will contain the results for the secondary data and a subdirectory `amended_consensus` with the final consensus fasta sequences generated with the residual assembly.
+```
+ls residual_assembly/
+A_HA_H3.bam      A_HA_H3.fasta  amended_consensus  A_NA_N2.bam.bai  A_NA_N2.vcf  intermediate  matrices   tables
+A_HA_H3.bam.bai  A_HA_H3.vcf    A_NA_N2.bam        A_NA_N2.fasta    figures      logs          secondary
+```
+```
+ls residual_assembly/amended_consensus/
+A-ComunidadValenciana-2690-2025-residual_4-A_HA_H3.fa  A-ComunidadValenciana-2690-2025-residual_6-A_NA_N2.fa
+```
+If a sample does **NOT** meet the criteria the `residual_assembly` will contain the results of failure attempting the the residual assembly.
+```
+ls residual_assembly/
+low_abundance  other_data  READ_COUNTS.txt.prim  read_QC_filtering.txt  sorted_read_stats.txt
+```
+```
+$ cat residual_assembly/sorted_read_stats.txt 
+Gene	Read Patterns	Read Count
+A_HA_H3	106	106
+A_NA_N2	12	12
+```
+If a residual assembly exists, setting `DO_SECONDARY=1` in the config file will be triggered the **secondary assembly** and a subdirectory `secondary_assembly` will be generated within the main directory with the following data:
+```
+ls secondary_assembly/
+A_HA_H1.bam      A_HA_H3.bam      amended_consensus  A_MP.vcf         A_NA_N1.vcf      A_NA_N2.vcf   A_NP.vcf      A_NS.vcf      A_PA.vcf       A_PB1.vcf      A_PB2.vcf     matrices
+A_HA_H1.bam.bai  A_HA_H3.bam.bai  A_MP.bam           A_NA_N1.bam      A_NA_N2.bam      A_NP.bam      A_NS.bam      A_PA.bam      A_PB1.bam      A_PB2.bam      figures       secondary
+A_HA_H1.fasta    A_HA_H3.fasta    A_MP.bam.bai       A_NA_N1.bam.bai  A_NA_N2.bam.bai  A_NP.bam.bai  A_NS.bam.bai  A_PA.bam.bai  A_PB1.bam.bai  A_PB2.bam.bai  intermediate  tables
+A_HA_H1.vcf      A_HA_H3.vcf      A_MP.fasta         A_NA_N1.fasta    A_NA_N2.fasta    A_NP.fasta    A_NS.fasta    A_PA.fasta    A_PB1.fasta    A_PB2.fasta    logs
+```
+The `amended_consensus` within the `secondary_assembly` will include the **final consensus** obtained with the primary and residual assemblies. 
+```
+ls secondary_assembly/amended_consensus/
+A-ComunidadValenciana-2690-2025-secondary_1-A_PB2.fa    A-ComunidadValenciana-2690-2025-secondary_4-A_HA_H3.fa  A-ComunidadValenciana-2690-2025-secondary_7-A_MP.fa
+A-ComunidadValenciana-2690-2025-secondary_2-A_PB1.fa    A-ComunidadValenciana-2690-2025-secondary_5-A_NP.fa     A-ComunidadValenciana-2690-2025-secondary_8-A_NS.fa
+A-ComunidadValenciana-2690-2025-secondary_3-A_PA.fa     A-ComunidadValenciana-2690-2025-secondary_6-A_NA_N1.fa
+A-ComunidadValenciana-2690-2025-secondary_4-A_HA_H1.fa  A-ComunidadValenciana-2690-2025-secondary_6-A_NA_N2.fa
+```
