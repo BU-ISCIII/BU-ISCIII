@@ -276,13 +276,13 @@ BU-ISCIII is focus on the analysis of high throughput data (NGS) inside Computat
 
     The Influenza Fragment Reconstruction and Variant Detection Service focuses on clustering, mapping, and variant calling to generate consensus genomes for viral pathogens, such as Influenza (FLU), RSV, EBOLA, or SARS-CoV-2, using the CDC's IRMA software. This service is designed to handle sequencing data generated from both direct sequencing and amplicon-based approaches, ensuring accurate reconstruction of viral genomes.
 
-    Below are the files and information that researchers NEED to provide when requesting this service.
+    Below are the files and information that researchers might have to provide when requesting this service, even though a standardized procedure is used at the moment so this information is not necessary unless a change is applied.
 
-    <details markdown="1"> <summary>Required information for service request</summary> <b>Service Notes Description</b>
-    When requesting this service in iskylims, researchers must provide the following:
+    <details markdown="1"> <summary>Useful information for this service request (not mandatory)</summary> <b>Service Notes Description</b>:
+    When requesting this service in iSkyLIMS, researchers could provide the following (only if methodology changes in relation to what's being done currently):
 
-    - **Sequencing approach:** Specify whether the data was generated using a direct sequencing approach or through an amplicon-based method.
-    - **Primers file (if amplicons):** In the case of amplicon-based sequencing, provide a multi-FASTA file containing the primer sequences used for generating the amplicons. This is necessary for removing primers during preprocessing to ensure accurate downstream analysis.
+    - **Sequencing approach:** Specify whether the data was generated using a direct sequencing approach or through an amplicon-based method (**Flu samples are generally sequenced using an amplicon-based approach**)
+    - **Primers file (if amplicons):** In the case of amplicon-based sequencing, a multi-FASTA file containing the primer sequences used for generating the amplicons would be necessary. However, for Flu samples, the [Zhou (2009)](https://pubmed.ncbi.nlm.nih.gov/19605485/) amplicon sequences are employed, plus these primers are outside the coding region and IRMA performs the reconstruction of that region only, so the primer's sequences are not necessary in this case.
 
     </details>
 
