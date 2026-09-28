@@ -79,7 +79,7 @@ cd /data/ucct/bi/scratch_tmp/bi/SRVCNMXXX_YYYYMMDD_MTUBERCULOSISXXX_researcher_S
 ```
 
 > [!WARNING]
-> Please note that the TBProfiler service is usually performed along with the [**Assembly service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Assembly-service); that's why this folder is called `ANALYSIS02`. During this assembly service, **we should have saved the trimmed sequences**, since **they will be needed** during the TBProfiler analysis.
+> Please note that the TBProfiler service is usually performed along with the [**Assembly service**](https://github.com/BU-ISCIII/BU-ISCIII/wiki/Assembly-service); that's why this folder is called `ANALYSIS02`. It is not necessary to save the trimmed reads from the assembly service, since TBProfiler uses the raw reads directly as input.
 
 Once we're there, and before executing anything else, we should load all the necessary dependencies:
 
@@ -108,7 +108,7 @@ This pipeline will generate three output folders:
 
 * `bam`: BAM and BAI files for each sample.
 * `vcf`: VCF.gz files for each sample.
-* `results`: TBProfiler results for each sample in csv and json format.
+* `results`: TBProfiler results for each sample in csv, json and docx format.
 
 Once all the jobs are completed, you can proceed to execute the second script:
 
