@@ -35,6 +35,7 @@
       - [[IRMA service]]
       - [[PlasmidID service]]
       - [[Snippy service]]
+      - [[Diploid outbreak service]]
       - [[cgMLST wgMLST service]]
       - [[mRNAseq service]]
       - [[Pikavirus service]]
